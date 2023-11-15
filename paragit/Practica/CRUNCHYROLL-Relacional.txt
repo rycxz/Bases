@@ -2,7 +2,7 @@ plan mensual(#id,anuncios,descargas,fecha_final,final_inicio,precios,descuento_e
 	fan(#id_fan,-id_plan_mensual,episodios_diarios)
 	mega_fan(#id_mega_fan,-id_plan_mensual,acceso_anticipado)
 	super_fan(#id_super_fan,-id_plan_mensual,acceso_anticipado,preview)
-usuario(#id_usuario,-id_plan_mensual,nickname,correo,contraseña,numero de cuenta bancaria,imagen de perfil,tiempo de uso,fecha de naciemneto,banner,direccion)
+usuario(#id_usuario,-id_plan_mensual,nickname,correo,contraseña,estado_de_animo,numero de cuenta bancaria,imagen de perfil,tiempo de uso,fecha de naciemneto,banner,direccion)
 plan_menusal_usuario(#(-id_plan_menusal,-id_usuario))
 
 metodo de pago(#id,factura,numeor_de_cuenta_bancaria)
@@ -29,7 +29,7 @@ traducion(#id,subtitulos)
 	idiomas(#id,-id_traduccion,idioma)
 	traduccion_manga(#(-id_traduccion,-id_manga))
 personaje(#id,-id_manga,nombre,numero_de_seguidores,estatura,sexo)
-compañia_de_envio(#id,rastreo,metodo,codigo_del_paquete,tiempo_estimado_de_entrega,nombre,nombre_del_reoartidor)
+compañia_de_envio(#id,rastreo,metodo,estado_de_trafico,codigo_del_paquete,tiempo_estimado_de_entrega,nombre,nombre_del_reoartidor)
 producto(#id,-id_tienda,-id_compañia_de_envio,-id_personaje,nombre,tamaño,destino,peso)
 color(#id,-id_producto,color)
 

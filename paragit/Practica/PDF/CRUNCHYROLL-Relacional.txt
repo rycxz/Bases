@@ -1,0 +1,42 @@
+plan mensual(#id,anuncios,descargas,fecha_final,final_inicio,precios,descuento_en_tienda)
+	fan(#id_fan,-id_plan_mensual,episodios_diarios)
+	mega_fan(#id_mega_fan,-id_plan_mensual,acceso_anticipado)
+	super_fan(#id_super_fan,-id_plan_mensual,acceso_anticipado,preview)
+usuario(#id_usuario,-id_plan_mensual,nickname,correo,contraseña,estado_de_animo,numero de cuenta bancaria,imagen de perfil,tiempo de uso,fecha de naciemneto,banner,direccion)
+plan_menusal_usuario(#(-id_plan_menusal,-id_usuario))
+
+metodo de pago(#id,factura,numeor_de_cuenta_bancaria)
+	banco(#id,banco,-id_metodo_de_pago)
+		tarjeta(#id,-id_metodo_de_pago,numero_asociado,fecha_de_expiracion)
+		transferencia(#id,-id_metodo _de_pago,tiempo_que_tarda)
+		bizum(#id,-id_metodo_de_pago,numero_de_telefono)
+usuario_usuario(#(-id_usuario_agregado,-id_usuario_agrega))
+
+imagen_de_perfil(#id,-id_usuario,imagen_de_perfil)
+lista(#id,-id_usuario,fecha_de_creacion,nombre)
+animes(#id-id_genero,compañia_animadora,episodios_vistos,mas_gustados,mas_vistos,nombre)
+	lista_anime(#(-id_lista,-id_anime)
+tienda(#id,-id_usuario,direccion_de_correo,nº_de_factura,categoria,precio,indicaciones_del_usuario)
+
+genero(#id,usuario,numero_de_animes_y/o_mangas_vistos,mas_vistos,breve_descripcion,mas_gustados)
+
+animes_tienda(#(-id_animes,-id_tienda))
+usuario_anime(#(-id_usuario,-id_anime))
+mangas(#id,-id_genero,emison,nombre,mangaka,paginas)
+usuario_mangas(#(-id_mangas,-id_usuarios)fecha_final_del_usuario,fecha_de_inicio)
+
+traducion(#id,subtitulos)
+	idiomas(#id,-id_traduccion,idioma)
+	traduccion_manga(#(-id_traduccion,-id_manga))
+personaje(#id,-id_manga,nombre,numero_de_seguidores,estatura,sexo)
+compañia_de_envio(#id,rastreo,metodo,estado_de_trafico,codigo_del_paquete,tiempo_estimado_de_entrega,nombre,nombre_del_reoartidor)
+producto(#id,-id_tienda,-id_compañia_de_envio,-id_personaje,nombre,tamaño,destino,peso)
+color(#id,-id_producto,color)
+
+
+
+
+	
+
+
+	
