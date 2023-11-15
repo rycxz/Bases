@@ -1,0 +1,9 @@
+Sucursal(#id,N°_sucursal, dirección)
+
+Cuenta(#id,-N°_Sucursal,n°_cuenta,cantidad_dinero)
+
+Transacción (#id,-id_cuenta,-id_cliente,cantidad ,n°_Transacción, fecha)
+
+clientes(#id, -id_cuenta, dni, apellidos, nombre)
+clientes-cuentas(#(-id_clientes,-Id_cuentas))
+cuentas_transaacciones(#(-id_cuentas,-id_transacciones))

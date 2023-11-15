@@ -1,0 +1,16 @@
+ciudadano(#id,-id_edificio(num de puerta,puerta),-id_gremio,edad,estatura,nombre)
+ciudadano_ciudadano(#id(-ciudadano,-ciudadano)factura,cometido)
+
+gremio(#id_gremio,nombre)
+gremio-calle(#(-id_calle,-id_gremio))
+calle(#id_calle,nombre,tipo)
+calle_barrio(#(-id_calle,-id_barrio))
+barrio(#id_barrio,nombre, postal)
+
+edificio(#id_edificio,-id_gremio,incendios_sobrevividos)
+calle_edificio(#(-id_edificio,-id_calle)portal)
+
+monumento(#id_monumento,-id_edificio,descripcion,nombre,fecha)
+publico(#id_publico,-id_publico,nombre,servicios)
+servicios(#id_servicio,-id_publico,servicio)
+

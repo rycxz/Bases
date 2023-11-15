@@ -1,0 +1,9 @@
+almuno(#id,correo,nombre_apellidos,dni,nº_expediente,domicilio,-id_almuno)
+
+
+almuno-asignaturas(#(-id_almuno,-id_asignaturas)evaluacion,nota,observaciones)
+
+asignatura(#id,-id_profesor,-id_curso,horas_semanales,nombre)
+profesor(#id,email,domicilio,nombre)
+
+curso(#id_curso,-id_profesor,codigo,aula,nombre)

@@ -1,0 +1,12 @@
+bicileta(#id,marca,modelo,estado)
+ciclista(#id,-id_bicileta,-fecha,nacionalidad,nombre-apellidos,dorsal,nacimento)
+equipo(#id,nombre,marca,nacionalidad,prespuesto)
+ciclista-equipo(#(-id_ciclista,-id_equipo)
+etapa-ciclista(#(-id_ciclista,-id_etapa)tiempo,puesto)
+
+etapa(#id,km,origen,tipo,nº_etapa,destino)
+
+montaña(#id,pendiente,puesto,-id_etapa,km,origen,tipo,nº_etapa,destino)
+puestos(#id,-id_montaña)
+contrareloj(#id,km_intermedio,-id_etapa,km,origen,tipo,nº_etapa,destino)
+km_intermedios(#id,-contrarreloj)

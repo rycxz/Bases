@@ -1,0 +1,12 @@
+jugador(#id,correo,alias)
+especie(#id,-id_especie_tipo,nombre,movimientos,habitat)
+especie_tipo(#id,-id-especie,tipo)
+pokimon(#id, -id_jugador,-id_especie,nombre,peso,ataque,defensa,nivel,especie)
+intercambio(#id,-id_jugador_rec,id_jugador_of,-id_pokimon_of,-id_pokimon_intc,fecha)
+movimeinto(#id,descipcion,atributo_especial)
+	naturales(#id,-id_movimeinto,nivel)
+	entrenados(#id,-id_movimentos,x,y)
+pokimon_movimento(#(-id_pokimon,-id_movimento))
+movimiento_especie(#(-id_movimento,-id_especie))
+
+

@@ -1,0 +1,19 @@
+monstruo(#id, -id_mapa, -id_especie, tamano, color, coordenada_x, coordenada_y, coordenada_z)
+mision(#id, nombre, moneda)
+mapa(#id, nombre, lvl_dificultad)
+especie(#id, comportamiento, tamano_minimo, maximo, nombre, debilidad)
+material(#id, nombre, tipo, precio, rareza)
+objeto(#id, nombre, descripcion, suma_ingresos_totales)
+arma(#id, -id_objeto, valor_ataque, elemento, alcance)
+armadura(#id, -id_objeto, valor_defensa, parte_cuerpo)
+consumible(#id, -id_objeto, duracion)
+
+efecto(#id, -id_consumible, efecto)
+clima(#id, -id_mapa, clima)
+monstruo_mision(#(-id_monstruo, -id_mision))
+especie_material(#(-id_especie, -id_material))
+especie_depreda_especie(#(-id_especies_presa, -id_especie_depredadora))
+misiones_objeto(#(-id_misiones, -id_objeto))
+material_objeto(#(-id_material, -id_objeto)cantidad)
+
+	

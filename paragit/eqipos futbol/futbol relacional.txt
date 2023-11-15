@@ -1,0 +1,2 @@
+equipo (#id,color camiseta , patrocinador , nombre, categoria , color 2ª camiseta)
+jugador (#id,nombre,apellidos,edad,direccion,telefono)

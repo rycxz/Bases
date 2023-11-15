@@ -1,0 +1,17 @@
+becarios(#id,nombres,apellidos,especialidad,direccion_de_correo,tiempo_de_beca_restante)
+
+baños(#id,codigo_picina,temperatura_del_agua,temperatura_ambiente,fecha,salinidad)
+baños_becarios(#(-id_baños,-id_becarios))
+doctores(#id,titulos_de_los_articulos,años_de_experiencia)
+informes(#id,conclusiones,nivel_de_felicidad,observaciones_relevantes,-id_baños,-id_doctores)
+capibaras(#id,sexo,edad,nombre,peso)
+capibaras_baños(#(-id_capibaras,-id_baños))
+capibaras_capibaras(#(-id_capibaras_ascendente,-id_capibaras_descendiente))
+lote_de_frutas(#id,peso_total)
+citricos(#id,tipo,cantidad,nombre,color,peso_unidad)
+
+citricos_lote_de_frutas(#(-id_citricos,_id_lote_de_frutas))
+proveedores(#id,nombre,teléfono,calle,numero,codigo_postal)
+
+proveedores_lote_de_frutas(#(-id_proveedores,-id_lote_de_frutas)fecha)
+

@@ -1,0 +1,9 @@
+usuario_registrado(#id,dni,email,fecha_nacimiento,telefono,apellidos,nombre)
+reserva(#id,-id_usuario_registrado,fecha_reserva,fecha_utilizacion,precio)
+
+pistas(#id,-id_centro_deportivo, fecha_ultima_reserva,operativa,tipo,codigo,precio)
+centro_deportivo(#id,nombre,direccion,superficie_m^2)
+
+
+
+reserva-pistas(#(-id_pistas,-id_reservas))
