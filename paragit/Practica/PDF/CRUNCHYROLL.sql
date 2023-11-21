@@ -2,6 +2,10 @@ drop database if exists crunchy;
 create database if not exists crunchy;
 use crunchy;
 
+CREATE USER IF NOT EXISTS  'administrador'@'localhost' IDENTIFIED BY 'administrador';
+GRANT ALL PRIVILEGES ON crunchy.* TO 'administrador'@'localhost' WITH GRANT OPTION;
+
+
 create table plan_mensual(
 id int unsigned primary key auto_increment,
 anuncion tinyint(1),
@@ -38,9 +42,9 @@ nickname varchar(20),
 correo varchar (20),
 contraseña varchar(20),
 estado_animo enum ('feliz', 'triste', 'enfadado','aburrido'),
-numero_de_cuenta_bancaria int unsigned,
+numero_de_cuenta_bancaria int unsigned not null,
 imagen_de_perfil varchar (30),
-tiempo_de_uso int unsigned,
+tiempo_de_uso float unsigned,
 banner varchar (30),
 direccion varchar (30)
 );
@@ -101,7 +105,7 @@ numero_de_telefono int unsigned
   create table lista(
     id int unsigned primary key auto_increment,
     id_usuario int unsigned,
-    fecha_de_creacion time,
+    fecha_de_creacion datetime,
     nombre varchar(20)
     );
     
@@ -134,9 +138,9 @@ create table genero(
     id int unsigned primary key auto_increment,
     id_usuario int unsigned,
     direccion_de_correo varchar(30),
-    nº_de_factura int unsigned,
+    nº_de_factura int unsigned not null,
     categoria varchar(30),
-    precio int unsigned,
+    precio double unsigned,
     indicaciones_del_usuario varchar(80)
     );
     
