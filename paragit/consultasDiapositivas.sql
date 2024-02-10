@@ -502,4 +502,30 @@ from cuerpo_celeste
 join persona on persona.id_cuerpo_celeste =cuerpo_celeste.id
 group by persona.id_cuerpo_celeste) as consulta);
 
+/*58 join lef y right */
+use stellar;
+select cuerpo_celeste.nombre as 'cuerpo celeste',persona.nombre as 'nombre persona'
+from persona
+right join cuerpo_celeste on  cuerpo_celeste.id = persona.id_cuerpo_celeste;
 
+/*58 la segunda consulta*/
+
+select cuerpo_celeste.nombre as 'cuerpo celeste', count(persona.id_cuerpo_celeste) as 'personas_nacidas'
+from persona
+right join cuerpo_celeste on  cuerpo_celeste.id = persona.id_cuerpo_celeste
+group by cuerpo_celeste.id;
+/*
+select cuerpo_celeste.nombre as 'nombre del cuerpo celeste', especie.nombre as 'nombre especie' ,  especie.reino as 'reino especie',
+especie.tipo_alimentacion as 'especie alimentacion'
+from  cuerpo_celeste
+right join especie_cuerpo_celeste on especie_cuerpo_celeste.id_cuerpo_celeste = cuerpo_celeste.id
+ join especie on especie.id=especie_cuerpo_celeste.id_especie;
+*/
+
+
+/*cuerpos celestes totales y especies que hay en ellos */
+select cuerpo_celeste.nombre, especie.nombre, especie.reino, especie.tipo_alimentacion
+from (select especie.tipo_alimentacion,especie.id from especie where tipo_alimentacion = 'carnivoro')carnivoro
+join especie on especie.id = carnivoro.id
+join especie_cuerpo_celeste on especie_cuerpo_celeste.id_especie=especie.id
+right join cuerpo_celeste on especie_cuerpo_celeste.id_cuerpo_celeste=cuerpo_celeste.id;
