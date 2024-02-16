@@ -63,10 +63,20 @@ foreign key ( id_plan_mensual) references plan_mensual(id),
 foreign key ( id_usuario) references usuario(id),
 primary key(id_plan_mensual, id_usuario)
 );
+create table usuario_comparte_plan_mensual(
+id_plan_mensual  int unsigned,
+id_usuario_paga  int unsigned,
+id_usuario_ratea  int unsigned,
+foreign key ( id_plan_mensual) references plan_mensual(id),
+foreign key ( id_usuario_paga) references usuario(id),
+foreign key ( id_usuario_ratea) references usuario(id),
+primary key(id_plan_mensual, id_usuario_paga,id_usuario_ratea)
+);
 
 
 create table metodo_de_pago(
 id int unsigned primary key auto_increment,
+id_plan_mensual int unsigned,
 factura varchar(30),
 numero_de_cuenta_bancaria varchar(30)
 );
@@ -156,8 +166,8 @@ create table genero(
          id int unsigned primary key auto_increment,
          id_genero int unsigned,
          emision tinyint(1) unsigned,
-         nombre varchar(20),
-         mangaka varchar(20),
+         nombre varchar(50),
+         mangaka varchar(50),
          paginas int unsigned
          );
          
@@ -170,12 +180,14 @@ create table genero(
          
          create table traducion(
          id int unsigned primary key auto_increment,
+         id_mangas int unsigned,
          subtitulos tinyint(1) unsigned
          );
          
-         create table 	idiomas(
+         create table idiomas(
          id int unsigned primary key auto_increment,
-         idioma varchar(20)
+		 id_mangas int unsigned,
+         idioma varchar(50)
          );
          
          create table traduccion_manga(
@@ -194,28 +206,26 @@ create table genero(
          
          create table compañia_de_envio(
          id int unsigned primary key auto_increment,
-         rastreo int unsigned,
-             indicaciones_del_usuario varchar(80),
-         metodo varchar(20),
-         codigo_del_paquete int unsigned,
+         codigo_rastreo varchar(50),
+		 indicaciones_del_usuario varchar(80),
+         metodo varchar(80),
+         codigo_del_paquete varchar(50),
          estado_del_trafico enum('libre', 'concurrido','atasco'),
-         tiempo_estimado_de_entrega varchar(20),
-		destino varchar(20),
-         nombre varchar(20),
-         nombre_del_repartidor varchar(20)
+         tiempo_estimado_de_entrega/*en dias*/int unsigned,
+		destino varchar(70),
+         nombre varchar(70),
+         nombre_del_repartidor varchar(70)
          );
          
          create table producto(
          id int unsigned primary key auto_increment,
-         id_tienda int unsigned,
          id_compañia_de_envio int unsigned,
-         id_personaje int unsigned,
-         nombre varchar(20),
-		nº_de_factura int unsigned not null,
+         id_personaje varchar(60) ,
+		nº_de_factura varchar(60) not null,
 		categoria varchar(30),
-		precio double unsigned,
-         tamanio float unsigned,
-         peso float unsigned
+		precio int unsigned,
+         tamaño int unsigned,
+         peso int unsigned
          );
          
          create table color(
@@ -950,126 +960,8 @@ VALUES
   (147,147),
   (148,148),
   (150,150);
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (1,"OYCFQFG533HSKD","DO85807506745150221564351468"),
-  (2,"MWMVUYF876JSKS","AD8753677061711512343984"),
-  (3,"ISVJNPK956RVTT","AZ71612052555625687467612740"),
-  (4,"NXLGGRT198RNDB","TR636913923848741371162171"),
-  (5,"UAMPJJU125PYBP","AE336269274871644163685"),
-  (6,"LOKDHDN675DTAQ","CR7022253154762275036"),
-  (7,"GNZDGEI685QLEM","FO2834715685642214"),
-  (8,"BUTRXTW367USQG","SM7183223225956935777607761"),
-  (9,"JHOBTYV025ELJH","SE0544084861331791586787"),
-  (10,"BYSYHKB856QDGP","IL722522887925688551263");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (11,"OWPJBSH523PFBE","GE08558952957675912796"),
-  (12,"TMNDKYX773NXCY","AZ58134616737538276671435224"),
-  (13,"FTIBMDY418LBSS","NO0487384116234"),
-  (14,"HSDRFQQ433UKIJ","AL71421445573567647865741402"),
-  (15,"JLXGEDI876NVLM","NL20UUEE1102438418"),
-  (16,"HIDVGER722MVEY","CR7378888046204087372"),
-  (17,"VZPRZWT518GJMX","LB92453881760733912586322351"),
-  (18,"RNBREEV764RLQC","LU417972674193495433"),
-  (19,"LDQAHXS417DLVX","LT091360827544254428"),
-  (20,"RFJYGUB859PLFF","GL2509706828657617");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (21,"VOQTWPV300YZCN","FO9660311728673993"),
-  (22,"PUPQACM197EKVO","SK5774686663242816515832"),
-  (23,"BALVBKQ757TGXE","FI8847598079099615"),
-  (24,"IWBMCZT054HWRW","RS04515688938682168158"),
-  (25,"TFCJSIJ924IMNQ","IL914841334635266642328"),
-  (26,"OJQFQRE308YVRF","SI87117335409734162"),
-  (27,"QLGCVPL560TVYK","RS16950831538028127564"),
-  (28,"WDGPCNJ882YYCP","SM7314367318866147746734721"),
-  (29,"TZUXGJY667BWDO","FO1836398153005120"),
-  (30,"YBKIWKF844GJSJ","DO35560728198148239844310146");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (31,"MOUCNWW505NJFN","HR3338435333226240672"),
-  (32,"SHMPDZL277MTIK","LU421022284578135255"),
-  (33,"NLCEEEO514KWKU","CZ1568688265170766522142"),
-  (34,"OTYXQHF766KNDC","HU96804857142378267808645925"),
-  (35,"VFHUCSX146CORV","MC9247584782199682157550284"),
-  (36,"WFLUEOJ671WRIL","LB63279585488314651858705733"),
-  (37,"DYCUTKT036NOUD","NL42ZZIJ3351725770"),
-  (38,"GBYEQOC546XJBV","SM6687654811603714120281823"),
-  (39,"WIOQBRF644CNSW","MK50421433821134124"),
-  (40,"IFISSTZ597KYDV","PK5115631470613747125254");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (41,"VDKNURI378JYYT","GT92763711751154336312522182"),
-  (42,"FJUKBUB276FEBW","HR8267169841777992629"),
-  (43,"RYSKRXX163KGTE","BH83215282680055452426"),
-  (44,"CRVVKLA686XYUO","GI66JTBC458711786464452"),
-  (45,"XLLEPGU326RDGE","CH4802711382416183685"),
-  (46,"KBVNBKU154YHJM","IS857567790959807278262072"),
-  (47,"NLGWQMC316BCVP","GT13892755777546824281234181"),
-  (48,"YHNAUES648EAZV","MR8167767136685836699325205"),
-  (49,"YNTWWHL677MZIH","BH26110532825486427558"),
-  (50,"TPHHYQN535MBFC","LB97378512799785729857413423");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (51,"QENQGHG718HIPJ","ME92334242237257509374"),
-  (52,"YTSFYSF156ODPL","NO7423478167671"),
-  (53,"MTFCGDJ870ZRSW","HU59731117913943731371786410"),
-  (54,"EENQVES835RONQ","VG7163165584410461263638"),
-  (55,"EMWAVZM316VZGV","IL354172619434363665055"),
-  (56,"UEUXSVF707RFCA","CR2915609874742787540"),
-  (57,"KXDUGDK327SRDF","BH02772262246795817639"),
-  (58,"YFTTSRX806HFEJ","GT60782869963660222711475593"),
-  (59,"RGHYHZK557AHJC","AD1656125664882290556175"),
-  (60,"VJDZROF368XQGB","RO75LMKR1405516218732007");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (61,"HJGILAU138ZFWF","LT264112138386821856"),
-  (62,"EOOJVTT915PGCX","IE82BLUI65751756778947"),
-  (63,"EZKYNTX386RREI","SK7310455651578396581427"),
-  (64,"NARRKMK387TYJD","LV43CMAK4763045577285"),
-  (65,"SYFWYIH272QNRH","GE21627225740530173146"),
-  (66,"NWBRHUP092ANBM","ME73050817699857768261"),
-  (67,"UIIISNN541UKKQ","SK8667149293324202983183"),
-  (68,"TLFZRBF480HJTV","TN3171693332698586145466"),
-  (69,"LGGJSQT540QTCU","LT043065276884146327"),
-  (70,"HKMJECQ438HIVM","AL50238471789163711861511122");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (71,"TOIKSIL642PYNN","AL84548392214372583432710892"),
-  (72,"DTVEVYQ348IIEV","MU2875314912395548635940688383"),
-  (73,"NHKSHLN867IIEL","SE6862313882158457466443"),
-  (74,"WCWQCKZ178UFIJ","RS06242156811346136007"),
-  (75,"PXZSOJM371OKST","IT021NHCDI55124235639639274"),
-  (76,"WLSHEUB575JTLN","LV09CWPX5358476902807"),
-  (77,"GJUJHHS125SHSF","LI6188092856284275522"),
-  (78,"QOFOPDR282YNBF","PS357298617659447385226622173"),
-  (79,"UACLWST566RWAR","AE327079250331573832774"),
-  (80,"KPTDRLR833YFAM","LV16DONR8969836382266");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (81,"SNOPQCG747MRLF","AZ16142285120663267767952673"),
-  (82,"GFXMBLT698CBPE","BH75309145100527943674"),
-  (83,"CLDLUDO428QFVI","FO3537267247684613"),
-  (84,"GLRZEWK314HQXP","AZ55808943927269481127136875"),
-  (85,"LOXQVRW195WOQE","BE72368927462267"),
-  (86,"RVQPTSB613TOAS","BE92484266385018"),
-  (87,"DSXMVNU816SEJS","BH86181313019453381824"),
-  (88,"NLHLMYK888PHZW","GI81OTYM874914217587713"),
-  (89,"SAKOTKT435ACOL","SA6988783137191295287545"),
-  (90,"PLWNRIQ214MVEG","PK7144761335007172154686");
-INSERT INTO `metodo_de_pago` (`id`,`factura`,`numero_de_cuenta_bancaria`)
-VALUES
-  (91,"ZRHUYGX016INOG","SK6029578457736823437448"),
-  (92,"XDCILFO533YMNU","GT68921627997848720467497627"),
-  (93,"SBPOPCP107JHDT","ES0324404418336391274427"),
-  (94,"ULIHLRT308XFTS","MC6852484038485277177183886"),
-  (95,"KJWCSGX668QMHX","AT287786718693451552"),
-  (96,"KFXHSAG243HRID","IT135FTMAI90255456221238033"),
-  (97,"QJECOXX463GHHR","GE03510787387578266586"),
-  (98,"KYDQQWJ754FLYW","DK4824960346228557"),
-  (99,"BIOCMVM161FXPS","TN6137593792266145763655"),
-  (100,"ZPDQLEL990IFAD","MU6836778630670045587237504638");
+
+
 INSERT INTO `banco` (`id`,`id_metodo_de_pago`,`banco`)
 VALUES
   (1,1,"Banco_Ficohsa"),
@@ -1192,220 +1084,101 @@ VALUES
   (100,100,"Caja_Rural_del_Sur");
 INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
 VALUES
-  (1,1,"36340713457","2024-12-25"),
-  (2,2,"21276580681","2022-06-12"),
-  (3,3,"12467482366","2018-11-21"),
-  (4,4,"11356734789","2024-04-25"),
-  (5,5,"08912249025","2018-07-11"),
-  (6,6,"45927446071","2023-03-17"),
-  (7,7,"53821031695","2023-09-14"),
-  (8,8,"54773131280","2019-10-14"),
-  (9,9,"36001203628","2023-07-10"),
-  (10,10,"89282513945","2024-12-14");
+  (1,94,"8619273763938362702336","2016-07-29 08"),
+  (21,90,"1937293085398246983780","2010-01-25 09"),
+  (41,47,"9338385773731894244465","2015-01-03 12"),
+  (61,80,"4335132884658651618614","2011-10-15 23"),
+  (81,71,"8152772681871618247313","2020-07-30 17"),
+  (101,54,"9643879351951935538608","2017-09-02 07"),
+  (121,64,"4428181781466945278215","2010-03-10 02"),
+  (141,84,"2618582967406325211682","2019-04-04 16"),
+  (161,11,"2341612169207245162042","2009-12-16 14"),
+  (181,2,"3164495041128427815365","2015-06-11 18");
 INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
 VALUES
-  (11,11,"48233319697","2018-09-07"),
-  (12,12,"15971461044","2024-09-30"),
-  (13,13,"81851379861","2022-10-14"),
-  (14,14,"88922539546","2019-02-28"),
-  (15,15,"12115148854","2023-12-09"),
-  (16,16,"23774299422","2022-09-21"),
-  (17,17,"68766191159","2018-11-03"),
-  (18,18,"33349222267","2022-05-27"),
-  (19,19,"98773370184","2021-01-14"),
-  (20,20,"86445531686","2018-10-12");
+  (201,89,"3216543010973880436847","2020-05-13 02"),
+  (221,83,"0664224338071834887677","2014-12-22 18"),
+  (241,24,"1617733297741355912279","2016-08-05 05"),
+  (261,70,"5277243896186629238211","2018-03-20 05"),
+  (281,59,"0326861759682940912352","2017-06-17 11"),
+  (301,92,"4744733315888421677676","2018-02-19 05"),
+  (321,41,"8164142168824862893545","2013-01-17 16"),
+  (341,88,"9768420139893571434395","2013-02-26 00"),
+  (361,46,"9644688987857610728588","2010-08-25 16"),
+  (381,48,"2518928140894458857719","2015-03-04 19");
 INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
 VALUES
-  (21,21,"26024554758","2022-04-06"),
-  (22,22,"36872653912","2020-09-01"),
-  (23,23,"30452951442","2019-10-02"),
-  (24,24,"40555669253","2024-08-23"),
-  (25,25,"43376483886","2023-04-07"),
-  (26,26,"03167946819","2019-06-25"),
-  (27,27,"23538583175","2020-12-28"),
-  (28,28,"51643802733","2019-10-10"),
-  (29,29,"86633326514","2024-09-18"),
-  (30,30,"81313546274","2022-03-18");
+  (401,62,"3883779111536712262616","2015-07-19 09"),
+  (421,33,"7267617554187507405384","2016-10-11 02"),
+  (441,6,"7894367417773398375658","2012-09-16 07"),
+  (461,66,"8135901618585573468730","2011-09-13 09"),
+  (481,95,"6513684733034624815814","2015-09-18 21"),
+  (501,63,"9578313857818678352212","2014-10-16 07"),
+  (521,55,"5774325677511086246214","2018-09-01 18"),
+  (541,83,"6786960593937824577843","2012-01-19 14"),
+  (561,62,"5471324469611654373521","2016-12-12 13"),
+  (581,76,"9206293489013668354948","2012-02-29 20");
 INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
 VALUES
-  (31,31,"07315703152","2022-02-21"),
-  (32,32,"07436886044","2024-10-24"),
-  (33,33,"71763553465","2023-08-05"),
-  (34,34,"58897490525","2023-05-15"),
-  (35,35,"71488382886","2023-03-11"),
-  (36,36,"53425242455","2019-09-11"),
-  (37,37,"29502534854","2018-07-18"),
-  (38,38,"71870106673","2024-06-29"),
-  (39,39,"73133248054","2021-02-19"),
-  (40,40,"81761757380","2020-12-19");
+  (601,58,"8223274477654966844688","2010-11-28 11"),
+  (621,72,"2687131194888541727962","2009-09-21 04"),
+  (641,80,"6718728038466622536039","2012-02-04 16"),
+  (661,29,"1506539648768353337864","2024-04-29 15"),
+  (681,21,"3949815254824823408138","2015-06-28 16"),
+  (701,14,"0168641673370625167762","2013-03-30 11"),
+  (721,22,"9739650081684573189487","2019-12-30 10"),
+  (741,93,"7739832618554252375822","2022-08-27 14"),
+  (761,70,"8575237345833234831823","2013-07-17 21"),
+  (781,74,"1874375872756768459465","2011-05-30 21");
 INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
 VALUES
-  (41,41,"20555643213","2021-01-26"),
-  (42,42,"55409787554","2021-03-08"),
-  (43,43,"86615722251","2025-01-01"),
-  (44,44,"58568547768","2023-08-20"),
-  (45,45,"39412233913","2021-09-27"),
-  (46,46,"14643913646","2021-10-27"),
-  (47,47,"47502877376","2021-04-09"),
-  (48,48,"53310781187","2025-01-10"),
-  (49,49,"23277845721","2019-06-12"),
-  (50,50,"46845513314","2021-06-12");
+  (801,45,"7517284232484625567017","2024-12-18 20"),
+  (821,35,"5752224492886324696142","2012-04-02 09"),
+  (841,45,"4814156674153217634177","2013-06-21 17"),
+  (861,59,"5162277931312118535514","2015-08-21 00"),
+  (881,84,"5584163144573085326531","2022-08-01 09"),
+  (901,39,"2568941288554851572784","2021-10-06 23"),
+  (921,33,"4053815517578488735276","2019-03-21 23"),
+  (941,26,"5161144142671775948253","2009-08-03 04"),
+  (961,68,"4770767124713897622815","2019-02-05 13"),
+  (981,31,"2486591145025493985594","2018-11-25 05");
 INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
 VALUES
-  (51,51,"48036237182","2018-01-25"),
-  (52,52,"83346485774","2022-10-10"),
-  (53,53,"56743854341","2022-01-15"),
-  (54,54,"32510459361","2019-02-16"),
-  (55,55,"53725863747","2019-01-03"),
-  (56,56,"33672043045","2022-03-03"),
-  (57,57,"93132983902","2023-12-20"),
-  (58,58,"52845494035","2020-04-06"),
-  (59,59,"69264012328","2022-11-06"),
-  (60,60,"77764402464","2018-06-17");
-INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
-VALUES
-  (61,61,"21763218816","2023-08-12"),
-  (62,62,"86065313251","2019-06-23"),
-  (63,63,"49835816232","2024-06-03"),
-  (64,64,"31838264241","2020-03-22"),
-  (65,65,"25766325739","2020-08-18"),
-  (66,66,"33405181641","2021-05-26"),
-  (67,67,"47240245765","2022-02-12"),
-  (68,68,"35162148766","2022-08-20"),
-  (69,69,"81154318364","2020-12-28"),
-  (70,70,"45652423653","2022-10-27");
-INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
-VALUES
-  (71,71,"75907674982","2020-01-10"),
-  (72,72,"24970484464","2019-05-15"),
-  (73,73,"76408938478","2019-03-19"),
-  (74,74,"57756862505","2021-05-30"),
-  (75,75,"28112386813","2024-08-31"),
-  (76,76,"45644941795","2024-05-26"),
-  (77,77,"37596147810","2020-10-14"),
-  (78,78,"67231222522","2024-06-16"),
-  (79,79,"02442285058","2025-01-01"),
-  (80,80,"56284616148","2023-04-15");
-INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
-VALUES
-  (81,81,"55281176244","2018-12-08"),
-  (82,82,"75422221776","2022-01-30"),
-  (83,83,"59611565471","2022-06-29"),
-  (84,84,"55616386228","2020-01-04"),
-  (85,85,"04432297477","2022-08-07"),
-  (86,86,"42523815376","2023-08-14"),
-  (87,87,"78244368454","2022-09-26"),
-  (88,88,"56829314187","2022-12-11"),
-  (89,89,"51403016574","2020-09-01"),
-  (90,90,"32387317183","2023-01-18");
-INSERT INTO `tarjeta` (`id`,`id_metodo_de_pago`,`numero_asociado`,`fecha_de_expiracion`)
-VALUES
-  (91,91,"83618974452","2021-05-29"),
-  (92,92,"97784157687","2019-10-20"),
-  (93,93,"37108123515","2024-11-19"),
-  (94,94,"66977163855","2023-01-15"),
-  (95,95,"91745615713","2024-08-21"),
-  (96,96,"11736470936","2021-04-24"),
-  (97,97,"57689615737","2019-07-17"),
-  (98,98,"96822781064","2021-02-13"),
-  (99,99,"43169484365","2021-04-21"),
-  (100,100,"42783298326","2019-05-17");
+  (1001,34,"7033476716729303634226","2017-11-02 19"),
+  (1021,2,"1487544837514731562347","2019-10-05 19"),
+  (1041,89,"1935521447533377867239","2023-05-29 12"),
+  (1061,55,"5333323384834651227444","2014-04-02 05"),
+  (1081,21,"5844319821669305237732","2022-01-22 12"),
+  (1101,88,"3112457532944366944226","2025-01-20 17"),
+  (1121,10,"5686193301960722966411","2024-05-05 13"),
+  (1141,27,"6548791677353848911864","2015-12-12 20"),
+  (1161,43,"1175382456775831181701","2011-11-15 13"),
+  (1181,59,"2430767159169135221493","2011-06-25 20");
 INSERT INTO `transferencia` (`id`,`id_metodo_de_pago`,`tiempo_que_tarda`)
 VALUES
-  (1,1,6),
-  (2,2,5),
-  (3,3,4),
-  (4,4,5),
-  (5,5,1),
-  (6,6,3),
-  (7,7,4),
-  (8,8,7),
-  (9,9,2),
-  (10,10,4);
+  (1,79,1),
+  (21,18,7),
+  (41,41,5),
+  (61,51,0),
+  (81,50,0),
+  (101,63,7),
+  (121,32,3),
+  (141,14,6),
+  (161,19,7),
+  (181,93,5);
 INSERT INTO `transferencia` (`id`,`id_metodo_de_pago`,`tiempo_que_tarda`)
 VALUES
-  (11,11,3),
-  (12,12,3),
-  (13,13,1),
-  (14,14,4),
-  (15,15,0),
-  (16,16,2),
-  (17,17,5),
-  (18,18,6),
-  (19,19,6),
-  (20,20,1);
-INSERT INTO `transferencia` (`id`,`id_metodo_de_pago`,`tiempo_que_tarda`)
-VALUES
-  (21,21,7),
-  (22,22,7),
-  (23,23,6),
-  (24,24,6),
-  (25,25,1),
-  (26,26,4),
-  (27,27,1),
-  (28,28,6),
-  (29,29,5),
-  (30,30,1);
-INSERT INTO `transferencia` (`id`,`id_metodo_de_pago`,`tiempo_que_tarda`)
-VALUES
-  (31,31,3),
-  (32,32,5),
-  (33,33,6),
-  (34,34,7),
-  (35,35,4),
-  (36,36,5),
-  (37,37,1),
-  (38,38,5),
-  (39,39,7),
-  (40,40,4);
-INSERT INTO `transferencia` (`id`,`id_metodo_de_pago`,`tiempo_que_tarda`)
-VALUES
-  (41,41,1),
-  (42,42,2),
-  (43,43,6),
-  (44,44,6),
-  (45,45,1),
-  (46,46,3),
-  (47,47,6),
-  (48,48,3),
-  (49,49,4),
-  (50,50,3);
-INSERT INTO `bizum` (`id`,`id_metodo_de_pago`,`numero_de_telefono`)
-VALUES
-  (1,1,"844647732"),
-  (2,2,"919855194"),
-  (3,3,"426758813"),
-  (4,4,"331607688"),
-  (5,5,"716834174"),
-  (6,6,"702769126"),
-  (7,7,"662051670"),
-  (8,8,"762034496"),
-  (9,9,"721044273"),
-  (10,10,"648016318");
-INSERT INTO `bizum` (`id`,`id_metodo_de_pago`,`numero_de_telefono`)
-VALUES
-  (11,11,"163038687"),
-  (12,12,"833882561"),
-  (13,13,"588206705"),
-  (14,14,"681355473"),
-  (15,15,"087996333"),
-  (16,16,"524788498"),
-  (17,17,"447791125"),
-  (18,18,"163257681"),
-  (19,19,"453297858"),
-  (20,20,"216365371");
-INSERT INTO `bizum` (`id`,`id_metodo_de_pago`,`numero_de_telefono`)
-VALUES
-  (21,21,"823126684"),
-  (22,22,"268135636"),
-  (23,23,"225710138"),
-  (24,24,"275989445"),
-  (25,25,"537273157"),
-  (26,26,"179749554"),
-  (27,27,"117156467"),
-  (28,28,"411766806"),
-  (29,29,"782377651"),
-  (30,30,"428081646");
+  (201,41,2),
+  (221,70,1),
+  (241,1,3),
+  (261,11,3),
+  (281,50,1),
+  (301,43,4),
+  (321,64,4),
+  (341,57,1),
+  (361,17,1),
+  (381,43,5);
+
 INSERT INTO `usuario_usuario` (`id_usuario_agregado`,`id_usuario_agrega`,`apodo`)
 VALUES
   (17,14,"Celestial_Champion"),
@@ -1701,7 +1474,7 @@ VALUES
   (103,39,"2020-02-25 13:46:34","Voleyball"),
   (104,86,"2023-03-27 07:24:48","Tenis"),
   (105,128,"2020-01-13 18:19:24","Militar"),
-  (106,107,"2017-02-10 07:24:33","Hentai"),
+  (106,107,"2017-02-10 07:24:33","Hentaib"),
   (107,54,"2019-03-27 03:09:34","Comedia"),
   (108,150,"2015-02-28 23:02:27","Militar"),
   (109,60,"2013-01-06 13:41:09","Cyberpunk"),
@@ -2079,3 +1852,1864 @@ VALUES
   (98,6,98),
   (99,42,99),
   (100,93,100);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (1,89),
+  (2,95),
+  (3,5),
+  (4,1),
+  (5,14),
+  (6,13),
+  (7,61),
+  (8,51),
+  (9,24),
+  (10,88);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (11,39),
+  (12,79),
+  (13,29),
+  (14,29),
+  (15,5),
+  (16,11),
+  (17,4),
+  (18,38),
+  (19,33),
+  (20,4);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (21,52),
+  (22,47),
+  (23,91),
+  (24,75),
+  (25,52),
+  (26,40),
+  (27,59),
+  (28,22),
+  (29,40),
+  (30,41);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (31,16),
+  (32,78),
+  (33,60),
+  (34,61),
+  (35,2),
+  (36,86),
+  (37,20),
+  (38,16),
+  (39,66),
+  (40,73);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (41,83),
+  (42,93),
+  (43,57),
+  (44,41),
+  (45,93),
+  (46,69),
+  (47,57),
+  (48,67),
+  (49,64),
+  (50,12);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (51,50),
+  (52,31),
+  (53,40),
+  (54,68),
+  (55,43),
+  (56,42),
+  (57,4),
+  (58,50),
+  (59,53),
+  (60,83);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (61,37),
+  (62,93),
+  (63,42),
+  (64,51),
+  (65,74),
+  (66,34),
+  (67,69),
+  (68,2),
+  (69,13),
+  (70,48);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (71,98),
+  (72,70),
+  (73,40),
+  (74,59),
+  (75,58),
+  (76,53),
+  (77,84),
+  (78,12),
+  (79,43),
+  (80,64);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (81,27),
+  (82,50),
+  (83,54),
+  (84,84),
+  (85,23),
+  (86,75),
+  (87,94),
+  (88,20),
+  (89,77),
+  (90,24);
+INSERT INTO `usuario_anime` (`id_usuario`,`id_anime`)
+VALUES
+  (91,20),
+  (92,11),
+  (93,17),
+  (94,27),
+  (95,87),
+  (96,32),
+  (97,12),
+  (98,31),
+  (99,1),
+  (100,25);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (1,77,"0","Botchan_(Manga)","Boy's_Abyss",146),
+  (2,94,"0","Haikyuu","Adolf_(Nueva_Edición)",28),
+  (3,7,"0","Ana,_la_de_Avonlea","Children_of_the_Whales",127),
+  (4,5,"1","Hunter_x_Hunter","de",250),
+  (5,109,"1","Bota_Bota","Chitose_etc.",179),
+  (6,68,"0","Agente_de_fútbol","¡¡Amasando!!_Ja-Pan",208),
+  (7,56,"1","Chunyan,_La_Nueva_Leyenda","ChocoMimi",303),
+  (8,55,"0","Mob_Psycho_100","BTOOOM!",102),
+  (9,11,"1","Alabanza","Boku_wa_Mari_no_naka",245),
+  (10,64,"1","K-On","Bota_Bota",274);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (11,73,"1","Candy_Candy_Corazón_(Comic-books_Color)","ACCA_13",89),
+  (12,50,"1","Re_Zero","Abara_(Master_Edition)",61),
+  (13,33,"0","Vinland_Saga","Akane_banashi",201),
+  (14,35,"1","Chicas_de_Instituto","Buscadores_de_cadáveres",22),
+  (15,51,"1","Alicia_en_el_País_de_las_Maravillas_(Jun_Abe)","Chaos_Game",0),
+  (16,42,"1","All_colour_but_the_black","Afro_Samurai",129),
+  (17,51,"0","Adabana","Akame_ga_Kill!_1,5_Historias_del_Night_Raid_y_epílogo",108),
+  (18,71,"1","Fairy_Tail","Chaos_Game",74),
+  (19,52,"1","Acabé_hecha_un_trapo_huyendo_de_la_realidad","Adolf_(Edición_Integral)_(2010)",25),
+  (20,81,"1","Kaguya-sama_Love_is_War","Chainsaw_Man_(Castellano)",127);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (21,105,"1","Casas_con_historias._El_arte_de_Seiji_Yoshida","Boys_Run_the_Riot",128),
+  (22,53,"0","A·I_Revolution","nombres",46),
+  (23,72,"1","Brutal:_confesiones_de_un_detective_de_homicidios","ChatGPT",154),
+  (24,69,"1","Chiikawa","Akumetsu",106),
+  (25,76,"1","Carole_&_Tuesday","All_colour_but_the_black",271),
+  (26,38,"0","CardCaptor_Sakura_(EDT/Glénat)","Cazadores_de_Magos_(3ª_Parte)",110),
+  (27,52,"1","One_Punch_Man","de",265),
+  (28,47,"0","Chico_Secreto,_Futuro_Efímero","CardCaptor_Sakura_-_Art_Book",74),
+  (29,58,"1","Called_Game","Abara",115),
+  (30,102,"1","Carole_&_Tuesday","Capitán_Harlock,El_Pirata_Espacial(EDT/Glénat)",315);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (31,63,"0","The_Promised_Neverland","de",49),
+  (32,6,"1","Slam_Dunk","¡¡Amasando!!_Ja-Pan",22),
+  (33,2,"1","Accel_World_(Manga)","Afro_Samurai_(Edición_Completa)",329),
+  (34,20,"0","Chobits_(Edición_Integral)","tienes",235),
+  (35,31,"0","Chiki_Chiki_Banana","Box._Hay_algo_dentro_de_la_caja",272),
+  (36,70,"1","Change_Up!!","Amor,_devoraré_tu_corazón",190),
+  (37,23,"1","Haikyuu","Chopperman",338),
+  (38,13,"1","Golden_Kamuy","nombres",254),
+  (39,53,"0","Buddy_Cat","Amar_y_ser_Amado,_Dejar_y_ser_Dejado",207),
+  (40,65,"1","BREAK_THE_BORDER","Brain_Powered_(Biblioteca_Manga)",26);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (41,56,"0","A_Silent_Voice","Alita,Ángel_de_Combate(1ª_Parte)",90),
+  (42,97,"1","That_Time_I_Got_Reincarnated_as_a_Slime","Aleluya_Demonio",77),
+  (43,67,"0","Buda_(Nueva_Edición)","Alabaster_(Planeta)",154),
+  (44,1,"1","Hunter_x_Hunter","mangas",111),
+  (45,9,"1","Akira_-_Portfolio","y",25),
+  (46,94,"0","Alice_12","Cappuccino",284),
+  (47,69,"1","Carnaza_humana","Bride_Stories",203),
+  (48,31,"1","Bloom_Into_You","ACCA_13",202),
+  (49,11,"0","Boys_Run_the_Riot","espacio",95),
+  (50,23,"0","Dr_Stone","An_otaku_called_God_(Euskera)",103);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (51,3,"0","Akame_ga_Kill!_Guía_Oficial","Bota_Bota",249),
+  (52,25,"1","Ancient_Magus'_Bride","Chicas_de_Instituto",193),
+  (53,57,"0","A·I_Revolution","150",207),
+  (54,93,"1","Noragami","Capitán_Harlock,_Dimension_Voyage",145),
+  (55,92,"0","A_5_minutos_andando_del_final","¡Ah,Mi_Diosa!(Tomos)",112),
+  (56,39,"0","Akira_(Color)_(Ediciones_B)","Ana,_la_de_la_I",327),
+  (57,95,"0","Akame_ga_Kill!","Bullet_the_Wizard",96),
+  (58,103,"0","Chobits_(Edición_Integral)","Chopperman",228),
+  (59,65,"1","Black_Clover","Candy_Candy_Corazón_(Album_Color)",331),
+  (60,94,"1","Ah!Mi_Diosa(Comic-books_2ª_Parte)","Cat's_Eye_(Complete_Edition)",207);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (61,99,"0","Akane_banashi","User",183),
+  (62,65,"0","The_Ancient_Magus'_Bride","Carole_&_Tuesday",333),
+  (63,32,"0","Akira_Club","Capitán_Tsubasa_(Planeta)",107),
+  (64,47,"0","Botchan_(Manga)","ponle",117),
+  (65,62,"1","My_Hero_Academia","con",310),
+  (66,77,"0","Kuroko_no_Basket","Caramelo,_canela_y_palomitas",140),
+  (67,49,"1","Amor_a_Segunda_Vista","Catarsis",238),
+  (68,47,"0","Along_with_The_Gods","Alita,Ángel_de_Combate(4ª_Parte)",207),
+  (69,20,"1","Alicia_en_el_País_de_las_Maravillas_(Jun_Abe)","Catarsis",281),
+  (70,90,"0","Chobits_(Edición_Integral)","Alabaster_(Astiberri)",337);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (71,34,"0","Buddy_Cat","tengan",170),
+  (72,37,"1","Cells_at_Work!","A_5_minutos_andando_del_final",142),
+  (73,16,"1","One_Piece","Carole_&_Tuesday",266),
+  (74,61,"1","The_Rising_of_the_Shield_Hero","C",106),
+  (75,10,"1","March_Comes_in_Like_a_Lion","Chiikawa",48),
+  (76,35,"0","C","Akumetsu",243),
+  (77,52,"1","Borregos_en_la_Red","Ah!Mi_Diosa(Comic-books_2ª_Parte)",308),
+  (78,56,"0","Bloom_Into_You","Canal_W",258),
+  (79,56,"1","Alas_de_guerra_sobre_el_Japón","Alien_9",193),
+  (80,35,"1","Fire_Force","Cazadora_de_Espíritus",335);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (81,21,"1","Brutal:_confesiones_de_un_detective_de_homicidios","Agente_de_fútbol",271),
+  (82,85,"1","Brutal:_confesiones_de_un_detective_de_homicidios","Canción_de_Navidad,_el_manga",220),
+  (83,94,"0","Vagabond","con",212),
+  (84,85,"1","Chitose_etc.","Ah!Mi_Diosa(Comic-books_2ª_Parte)",134),
+  (85,100,"1","K-On","de",216),
+  (86,54,"1","Alice_19th","Abrázame_con_toda_tu_Alma",24),
+  (87,64,"0","Brave_10","Boys_Run_the_Riot",2),
+  (88,93,"0","Alice_in_Borderland","Casualmente",194),
+  (89,79,"1","Akame_ga_Kill!_1,5_Historias_del_Night_Raid_y_epílogo","Alita,Ángel_de_Combate(1ª_Parte)",302),
+  (90,31,"1","Kaguya-sama_Love_is_War","bajas",291);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (91,51,"1","Buda_(Nueva_Edición)","Chica_Secreta",148),
+  (92,39,"0","Casualmente","Cazadora_de_Espíritus",283),
+  (93,41,"1","Aleluya_Demonio","Adolf_(Biblioteca_Tezuka)",112),
+  (94,87,"1","Choujin_X","Along_with_The_Gods",61),
+  (95,84,"1","Chihayafuru","con",336),
+  (96,20,"1","Buenos_días,_bella_durmiente","¡¡Amasando!!_Ja-Pan",219),
+  (97,30,"1","Cells_at_Work!","Ana,_la_de_Avonlea",115),
+  (98,80,"0","Café_Diabólico,_Amor_Agridulce","Akuma_no_Riddle",17),
+  (99,82,"0","Akane_banashi","Canción_de_Navidad,_el_manga",209),
+  (100,30,"1","BREAK_THE_BORDER","Cazadores_de_Magos_(2ª_Parte)",317);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (101,9,"0","BTOOOM!","BTOOOM!",166),
+  (102,27,"1","Bullet_the_Wizard","Cells_at_Work!",131),
+  (103,78,"0","Hunter_x_Hunter","Ajin_(Semihumano)",92),
+  (104,90,"0","Buda_(Nueva_Edición)","Amar_y_ser_Amado,_Dejar_y_ser_Dejado",349),
+  (105,67,"0","Café_Diabólico,_Amor_Agridulce","Akira_(Color)_(Ediciones_B)",211),
+  (106,2,"1","The_Promised_Neverland","Act-Age",90),
+  (107,65,"1","Boku_to_majo_ni_tsuite_no_bibôroku_(Título_por_determinar)","Caramelo,_canela_y_palomitas",72),
+  (108,91,"0","Air_Gear","ChatGPT",258),
+  (109,99,"0","Bleach","Ana_de_las_Tejas_Verdes",222),
+  (110,83,"0","Jormungand","Afro_Samurai",247);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (111,67,"1","Fullmetal_Alchemist","Bota_Bota",229),
+  (112,41,"0","Brave_10","¡A_los_dieciséis!",192),
+  (113,17,"0","¡A_los_dieciséis!","Akira_(Color)_(Comic-books)",163),
+  (114,67,"0","Golden_Kamuy","Adam_y_Eve",93),
+  (115,67,"0","Akira_(Color)_(Comic-books)","Buscadores_de_cadáveres",285),
+  (116,14,"1","CardCaptor_Sakura_(Norma)","Akame_ga_Kill!",276),
+  (117,25,"1","Great_Pretender","Bungou_Stray_Dogs",327),
+  (118,73,"1","Death_Note","Called_Game",133),
+  (119,11,"0","Mob_Psycho_100","Alabaster_(Planeta)",93),
+  (120,96,"0","Change_Up!!","Adolf_(Biblioteca_Tezuka)",20);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (121,41,"1","Bokko","Cells_at_Work!_CODE_BLACK",205),
+  (122,97,"0","Capitán_Harlock,_Dimension_Voyage","Chaos_Game",75),
+  (123,60,"1","Akira_(Color)_(Comic-books)","Adolf_(Edición_Integral)_(2010)",237),
+  (124,5,"1","Alice_in_Borderland","Air_Gear",286),
+  (125,35,"0","CardCaptor_Sakura_(EDT/Glénat)","All_You_Need_Is_Kill_(Integral)",84),
+  (126,85,"0","The_Promised_Neverland","Catarsis",86),
+  (127,21,"0","Ancient_Magus'_Bride","Cat's_Eye_(Complete_Edition)",261),
+  (128,97,"1","¡Ah,Mi_Diosa!(Tomos)","Chico_Secreto,_Futuro_Efímero",307),
+  (129,100,"1","CardCaptor_Sakura_(EDT/Glénat)","Amor_Programable",339),
+  (130,35,"0","Chunyan,_La_Nueva_Leyenda","Cherry",342);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (131,11,"1","Erased","Choujin_X",296),
+  (132,30,"1","Adolf_(Biblioteca_Tezuka)","Chiikawa",231),
+  (133,57,"0","Tower_of_God","Akira_(Color)_(Ediciones_B)",151),
+  (134,15,"0","Delicious_in_Dungeon","Akame_ga_Kill!_Memorial_FanBook",184),
+  (135,90,"1","Akira_(Color)_(Norma)","Buenos_días,_bella_durmiente",3),
+  (136,57,"1","Promised_Neverland","de",255),
+  (137,13,"1","Capitán_Tsubasa_(Planeta)","Adolf_(Trazado)",245),
+  (138,18,"0","Seraph_of_the_End","Akame_ga_Kill!_Memorial_FanBook",95),
+  (139,94,"1","CardCaptor_Sakura:_Clear_Card_Arc","¡Ah,Mi_Diosa!(Tomos)",85),
+  (140,70,"1","Spy_x_Family","Carole_&_Tuesday",204);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (141,43,"0","Botchan_(Manga)","Akane_banashi",249),
+  (142,101,"1","Alita,Ángel_de_Combate(5ª_Parte)","Amor_al_Desnudo",194),
+  (143,63,"0","Breve_historia_del_Robo_Sapiens","en",12),
+  (144,99,"0","Capitán_Tsubasa_(Planeta)","Alicia_en_el_País_de_las_Maravillas_(Jun_Abe)",225),
+  (145,8,"1","Akame_ga_Kill!_Guía_Oficial","Cappuccino",26),
+  (146,58,"0","Cadenas_de_Pasión","¡Ámame!_La_Princesa_del_Instituto_de_Chicos_y_el_Princes_del_Instituto_de_Chicas",283),
+  (147,58,"1","Bolsa_de_Papel-kun_está_enamorado","Chiki_Chiki_Banana",209),
+  (148,15,"1","Carole_&_Tuesday","Boy's_Abyss",334),
+  (149,88,"0","Cat_Shit_One","ChocoMimi",17),
+  (150,31,"1","Ai_Shite_Knight_(Título_por_determinar)","cuando",60);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (151,70,"1","Tokyo_Ghoul","Amor_Programable",285),
+  (152,56,"1","Dorohedoro","Cherry",143),
+  (153,100,"0","Accel_World_(Manga)","Buscando_al_Hombre_Ideal",147),
+  (154,12,"0","Calling_You","Change_123",97),
+  (155,81,"0","Carnaza_humana","Cat_Street_(Edición_Integral)",184),
+  (156,43,"1","Boruto_-Naruto_Next_Generations-","Akira_(Color)_(Ediciones_B)",314),
+  (157,19,"0","Grand_Blue","Chihayafuru",215),
+  (158,14,"0","Caramelo,_canela_y_palomitas","Chaos_Game",94),
+  (159,34,"0","Great_Pretender","Canal_W",253),
+  (160,42,"1","Abrázame_con_toda_tu_Alma","Chicas_de_Instituto",348);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (161,42,"0","My_Hero_Academia","Caramelo,_canela_y_palomitas",238),
+  (162,26,"1","Adabana","Ah!Mi_Diosa(Comic-books_1ª_Parte)",296),
+  (163,80,"1","Haikyuu","Chainsaw_Man_(Castellano)",323),
+  (164,70,"0","Ah!Mi_Diosa(Comic-books_2ª_Parte)","Café_Diabólico,_Amor_Agridulce",46),
+  (165,7,"0","Capitán_Harlock_(Edición_Integral)_(Norma)","Alien_9",301),
+  (166,37,"1","Cells_at_Work!_CODE_BLACK","Chopperman:_¡Adelante,_Sr._Chopper!",276),
+  (167,16,"1","Ana,_la_de_la_I","Akira_(Color)_(Ediciones_B)",304),
+  (168,99,"1","Chihayafuru","Caramelo,_canela_y_palomitas",3),
+  (169,5,"0","Catarsis","ChocoMimi",184),
+  (170,15,"1","Gurren_Lagann","Cat's_Eye_(Complete_Edition)",2);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (171,27,"0","Canal_W","Brutal:_confesiones_de_un_detective_de_homicidios",197),
+  (172,25,"0","Akira_(Color)_(Comic-books)","Akira_(B/N)_(Ediciones_B)",32),
+  (173,73,"0","Cibercafé_a_la_Deriva_(Drifting_Net_Cafe)","Cadenas_de_Pasión",38),
+  (174,77,"0","To_Your_Eternity","ChatGPT",32),
+  (175,30,"0","Fire_Force","Ana_de_las_Tejas_Verdes",326),
+  (176,58,"0","CardCaptor_Sakura:_Clear_Card_Arc","Capitán_Harlock,El_Pirata_Espacial(EDT/Glénat)",169),
+  (177,98,"0","¡Achís!_Historias_cortas_de_Naoki_Urasawa","Change_the_World_(Euskera)",23),
+  (178,30,"1","Bungou_Stray_Dogs","Café_Diabólico,_Amor_Agridulce",111),
+  (179,71,"0","Cat_Shit_One","Botchan_(Manga)",298),
+  (180,59,"0","Aleluya_Demonio","Alice_19th",310);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (181,67,"0","Nanatsu_no_Taizai","Bullet_the_Wizard",179),
+  (182,4,"1","Chitose_etc.","Buenos_días,_bella_durmiente",287),
+  (183,100,"0","Boruto_-Naruto_Next_Generations-","Brain_Powerd_(Tomos)",193),
+  (184,68,"1","Aleluya_Demonio","Ai_Shite_Knight_(Título_por_determinar)",305),
+  (185,25,"1","Classroom_of_the_Elite","Ambassador_Magma",2),
+  (186,7,"0","Akira_(B/N)_(Ediciones_B)","Chicas_de_Instituto",343),
+  (187,67,"1","Alita,Ángel_de_Combate(1ª_Parte)","User",56),
+  (188,13,"1","Jujutsu_Kaisen","nombres",184),
+  (189,71,"0","Air_Gear","¡Achís!_Historias_cortas_de_Naoki_Urasawa",258),
+  (190,58,"0","Akira_-_Portfolio","mangas",255);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (191,2,"0","Solo_Leveling","Amor_es_cuando_cesa_la_lluvia",129),
+  (192,27,"0","Spy_x_Family","Children_of_the_Whales",286),
+  (193,5,"1","Chiki_Chiki_Banana","Akuma_to_Love_Song",187),
+  (194,96,"1","Alita,Ángel_de_Combate(4ª_Parte)","barrabaja",297),
+  (195,108,"1","Ana,_la_de_la_I","Alabaster_(Planeta)",299),
+  (196,51,"0","Bolsa_de_Papel-kun_está_enamorado","de",241),
+  (197,52,"0","Alita,Ángel_de_Combate(5ª_Parte)","Cat's_Eye_(Complete_Edition)",230),
+  (198,18,"1","Akuma_to_Love_Song","Cherry",137),
+  (199,26,"0","¡¡Amasando!!_Ja-Pan","de",87),
+  (200,39,"0","Bokko","Akuma_no_Riddle",35);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (201,30,"0","Candy_Candy_Corazón_(Comic-books_Color)","Cibercafé_a_la_Deriva_(Drifting_Net_Cafe)",225),
+  (202,71,"0","Toradora","Alita,Ángel_de_Combate(4ª_Parte)",54),
+  (203,2,"0","Afro_Samurai","Caramel_Diary",54),
+  (204,65,"0","Cat_Street","C",169),
+  (205,47,"1","Chainsaw_Man_(Castellano)","A·I_Revolution",320),
+  (206,29,"0","All_You_Need_Is_Kill","Chopperman",82),
+  (207,42,"0","BREAK_THE_BORDER","Chico_Secreto,_Futuro_Efímero",132),
+  (208,42,"1","Adam_y_Eve","Accel_World_(Manga)",161),
+  (209,38,"1","Abara","Akuma_to_Love_Song",316),
+  (210,65,"0","Buddy_Cat","Adolescente_pero_no_inocente",65);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (211,29,"1","Toradora","barrabaja",170),
+  (212,97,"0","Chico_Secreto,_Futuro_Efímero","Alita,Ángel_de_Combate(4ª_Parte)",214),
+  (213,96,"0","The_Ancient_Magus'_Bride","All_colour_but_the_black",233),
+  (214,19,"1","Land_of_the_Lustrous","Akame_ga_Kill!_Zero",135),
+  (215,90,"1","Academia_Neogénesis_Evangelion:_Apocalipsis","Chopperman",178),
+  (216,37,"1","Seraph_of_the_End","Brave_10",348),
+  (217,64,"0","Breakdown","Chobits_(Edición_Integral)",95),
+  (218,106,"1","Akira_(Color)_(Ediciones_B)","Chobits",90),
+  (219,35,"1","Boku_to_majo_ni_tsuite_no_bibôroku_(Título_por_determinar)","Air_Gear",225),
+  (220,56,"1","Anohana","Akebi’s_Sailor_Uniform",2);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (221,25,"1","ChocoMimi","Capitán_Tsubasa_(Planeta)",280),
+  (222,99,"0","ACCA_13","Cadenas_de_Pasión",145),
+  (223,26,"1","The_Promised_Neverland","Cat_Street_(Edición_Integral)",275),
+  (224,48,"1","¡Achís!_Historias_cortas_de_Naoki_Urasawa","Alabaster_(Astiberri)",338),
+  (225,61,"1","Abrázame_con_toda_tu_Alma","nombres",189),
+  (226,76,"1","Carnaza_humana","ponle",14),
+  (227,97,"1","CardCaptor_Sakura_(EDT/Glénat)","Cautivado_por_ti",20),
+  (228,38,"1","Called_Game","Amar_y_ser_Amado,_Dejar_y_ser_Dejado",124),
+  (229,87,"0","Bota_Bota","Alabaster_(Astiberri)",127),
+  (230,52,"1","Ana,_la_de_Avonlea","Alabaster_(Planeta)",5);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (231,4,"0","Afro_Samurai_(Edición_Completa)","Buenas_Noches,_Punpun",148),
+  (232,14,"0","Air_Gear","Abara",24),
+  (233,53,"1","Grand_Blue","Alice_in_Borderland",222),
+  (234,58,"1","Akame_ga_Kill!_Memorial_FanBook","Adolf_(Trazado)",49),
+  (235,34,"1","Boys_Run_the_Riot","Burn_the_Witch",65),
+  (236,80,"1","The_God_of_High_School","Amigos_y_Amantes",61),
+  (237,21,"0","Breakdown","Agharta",137),
+  (238,108,"0","Carole_&_Tuesday","Adolf_(Trazado)",321),
+  (239,58,"1","Acabé_hecha_un_trapo_huyendo_de_la_realidad","Alice,_Escuela_de_Magia",222),
+  (240,13,"1","Naruto","ponle",136);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (241,9,"0","Made_in_Abyss","Children_of_the_Whales",236),
+  (242,53,"0","Candy_Candy_Corazón_(Comic-books_Color)","User",6),
+  (243,9,"0","Buda_(Nueva_Edición)","Akame_ga_Kill!_Memorial_FanBook",158),
+  (244,108,"0","Bleach","Cazadores_de_Magos_(2ª_Parte)",37),
+  (245,69,"1","Cazadores_de_Magos_(2ª_Parte)","Chiikawa",165),
+  (246,68,"1","Burn_the_Witch","Akame_ga_Kill!",270),
+  (247,29,"1","Fairy_Tail","barras",184),
+  (248,94,"1","Toradora","Adabana",29),
+  (249,4,"1","Chainsaw_Man","Brutal:_confesiones_de_un_detective_de_homicidios",32),
+  (250,106,"0","¡Ámame!_La_Princesa_del_Instituto_de_Chicos_y_el_Princes_del_Instituto_de_Chicas","Caramelo,_canela_y_palomitas",117);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (251,104,"1","Aleluya_Demonio","Carta_al_Futuro",79),
+  (252,88,"1","Akane_banashi","Aleluya_Demonio",222),
+  (253,83,"1","Chobits","Brutal:_confesiones_de_un_detective_de_homicidios",65),
+  (254,95,"0","Chopperman:_¡Adelante,_Sr._Chopper!","ACCA_13",275),
+  (255,79,"1","Jujutsu_Kaisen","Abara",191),
+  (256,40,"0","All_You_Need_Is_Kill_(Integral)","Canal_W",316),
+  (257,56,"0","Great_Pretender","Akuma_no_Riddle",291),
+  (258,14,"0","Chicas_de_Instituto","lugar",210),
+  (259,29,"1","Chico_Secreto,_Futuro_Efímero","¡A_los_dieciséis!",102),
+  (260,71,"0","Blue_Period","Alice_19th",5);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (261,34,"0","Made_in_Abyss","Alma",176),
+  (262,97,"1","Casualmente","Boruto_-Naruto_Next_Generations-",183),
+  (263,64,"1","Akame_ga_Kill","Cazadores_de_Magos_(1ª_Parte)",106),
+  (264,17,"0","Along_with_The_Gods","Carole_&_Tuesday",76),
+  (265,36,"1","Acabé_hecha_un_trapo_huyendo_de_la_realidad","Cat's_Eye_(Complete_Edition)",99),
+  (266,80,"1","C","Capitán_Harlock,El_Pirata_Espacial(EDT/Glénat)",89),
+  (267,19,"1","Calm_Breaker:_¡Llega_el_Caos!","Alimañas",274),
+  (268,53,"1","Haikyuu","Buenas_Noches,_Punpun",239),
+  (269,77,"1","Alice_19th","Abara",26),
+  (270,12,"1","Vinland_Saga","¡A_los_dieciséis!",271);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (271,76,"0","Cells_at_Work!_CODE_BLACK","ponle",31),
+  (272,52,"0","Cazadores_de_Magos_(3ª_Parte)","User",47),
+  (273,73,"0","The_Idolmaster_Cinderella_Girls","mangas",102),
+  (274,79,"1","Delicious_in_Dungeon","Cherry",204),
+  (275,95,"1","Solo_Leveling","Alice,_Escuela_de_Magia",12),
+  (276,89,"0","Bride_Stories","Chunyan,_La_Nueva_Leyenda",217),
+  (277,102,"1","A·I_Revolution","Ajin_(Semihumano)",289),
+  (278,61,"1","Acabé_hecha_un_trapo_huyendo_de_la_realidad","con",111),
+  (279,92,"0","Bloom_Into_You","Boku_wa_Mari_no_naka",300),
+  (280,63,"0","Candy_Candy_Corazón_(Album_Color)_(Nueva_Edición)","Akira_(Color)_(Ediciones_B)",167);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (281,90,"1","Vinland_Saga","Adolf_(Edición_Integral)_(2010)",32),
+  (282,31,"0","Children_of_the_Whales","Change_the_World_(Euskera)",3),
+  (283,78,"1","A_Silent_Voice","Amor_al_Desnudo",161),
+  (284,91,"1","Chiki_Chiki_Banana","Cells_at_Work!_CODE_BLACK",196),
+  (285,54,"1","All_World","Adult_Time",123),
+  (286,28,"0","Slam_Dunk","Cherry",323),
+  (287,94,"1","The_God_of_High_School","Buenos_días,_bella_durmiente",49),
+  (288,43,"1","Akuma_to_Love_Song","Amar_y_ser_Amado,_Dejar_y_ser_Dejado",153),
+  (289,42,"1","Grand_Blue","Akira_(Color)_(Comic-books)",75),
+  (290,77,"1","Buenas_Noches,_Punpun","Adolf_(Edición_Integral)_(2013)",282);
+INSERT INTO `mangas` (`id`,`id_genero`,`emision`,`nombre`,`mangaka`,`paginas`)
+VALUES
+  (291,3,"1","Cazadores_de_Magos_(3ª_Parte)","Adam_y_Eve",163),
+  (292,39,"1","Abara","Chiki_Chiki_Banana",237),
+  (293,52,"1","Adam_y_Eve","Cherry",347),
+  (294,21,"1","To_Your_Eternity","Cibercafé_a_la_Deriva_(Drifting_Net_Cafe)",302),
+  (295,44,"1","Dorohedoro","Box._Hay_algo_dentro_de_la_caja",158),
+  (296,67,"1","Akira_(B/N)_(Norma)","Breve_historia_del_Robo_Sapiens",121),
+  (297,81,"0","Slam_Dunk","Chainsaw_Man_(Castellano)",93),
+  (298,20,"0","CardCaptor_Sakura_-_Art_Book","All_colour_but_the_black",72),
+  (299,101,"1","Delicious_in_Dungeon","Amar_y_ser_Amado,_Dejar_y_ser_Dejado",9),
+  (300,88,"1","Café_Diabólico,_Amor_Agridulce","Buenos_días,_bella_durmiente",25);
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (1,10,"2019-08-13 ","2023-06-14 "),
+  (2,275,"2016-10-05 ","2023-09-29 "),
+  (3,3,"2021-12-11 ","2023-02-24 "),
+  (4,8,"2015-10-02 ","2023-12-31 "),
+  (5,122,"2016-03-25 ","2025-01-04 "),
+  (6,82,"2017-10-24 ","2023-08-09 "),
+  (7,115,"2023-12-24 ","2023-05-20 "),
+  (8,153,"2021-06-06 ","2023-07-01 "),
+  (9,239,"2022-04-11 ","2024-10-08 "),
+  (10,64,"2016-06-01 ","2023-08-06 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (11,295,"2022-08-30 ","2024-08-02 "),
+  (12,94,"2021-04-15 ","2023-04-26 "),
+  (13,244,"2016-04-02 ","2024-08-19 "),
+  (14,29,"2021-04-04 ","2023-09-12 "),
+  (15,298,"2021-12-12 ","2023-06-30 "),
+  (16,227,"2020-06-18 ","2023-12-05 "),
+  (17,78,"2019-12-27 ","2023-06-30 "),
+  (18,70,"2021-07-22 ","2023-06-13 "),
+  (19,254,"2022-11-10 ","2024-04-11 "),
+  (20,246,"2016-11-30 ","2023-11-26 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (21,25,"2016-01-25 ","2023-12-18 "),
+  (22,235,"2020-02-14 ","2024-06-20 "),
+  (23,150,"2018-07-16 ","2023-05-26 "),
+  (24,219,"2016-06-18 ","2024-03-14 "),
+  (25,6,"2018-06-17 ","2024-01-06 "),
+  (26,203,"2017-06-01 ","2024-05-01 "),
+  (27,84,"2019-07-30 ","2023-10-29 "),
+  (28,175,"2017-11-20 ","2023-06-12 "),
+  (29,98,"2019-07-13 ","2023-05-04 "),
+  (30,283,"2016-11-25 ","2023-02-19 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (31,158,"2019-11-17 ","2024-06-22 "),
+  (32,84,"2023-10-23 ","2023-05-30 "),
+  (33,51,"2015-02-05 ","2023-08-19 "),
+  (34,236,"2021-04-20 ","2024-07-04 "),
+  (35,34,"2023-05-07 ","2024-06-16 "),
+  (36,38,"2021-07-17 ","2024-12-08 "),
+  (37,176,"2017-06-12 ","2024-04-05 "),
+  (38,183,"2019-04-21 ","2024-07-22 "),
+  (39,133,"2023-10-27 ","2024-11-06 "),
+  (40,173,"2019-05-24 ","2024-06-07 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (41,71,"2021-10-10 ","2023-02-28 "),
+  (42,96,"2017-07-23 ","2024-03-13 "),
+  (43,132,"2015-05-31 ","2023-03-16 "),
+  (44,51,"2024-05-21 ","2024-04-28 "),
+  (45,8,"2024-12-21 ","2024-12-07 "),
+  (46,163,"2015-07-18 ","2023-03-09 "),
+  (47,32,"2021-12-10 ","2024-11-01 "),
+  (48,158,"2018-03-06 ","2023-03-29 "),
+  (49,97,"2017-03-13 ","2024-12-27 "),
+  (50,288,"2016-07-25 ","2023-12-16 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (51,3,"2021-08-02 ","2023-09-26 "),
+  (52,31,"2024-08-29 ","2024-07-18 "),
+  (53,222,"2023-12-30 ","2023-11-21 "),
+  (54,189,"2024-06-25 ","2023-04-18 "),
+  (55,164,"2021-10-23 ","2024-06-10 "),
+  (56,108,"2018-09-13 ","2024-07-21 "),
+  (57,205,"2019-02-21 ","2023-03-09 "),
+  (58,228,"2016-04-02 ","2023-06-28 "),
+  (59,195,"2019-10-26 ","2024-12-28 "),
+  (60,46,"2024-04-23 ","2024-12-11 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (61,22,"2020-12-15 ","2023-08-07 "),
+  (62,37,"2016-03-13 ","2023-08-17 "),
+  (63,158,"2016-08-04 ","2024-12-28 "),
+  (64,266,"2021-09-06 ","2023-01-30 "),
+  (65,146,"2024-01-02 ","2024-05-24 "),
+  (66,142,"2022-07-07 ","2024-02-19 "),
+  (67,95,"2016-06-12 ","2023-09-05 "),
+  (68,183,"2015-05-12 ","2024-01-16 "),
+  (69,106,"2018-10-15 ","2023-05-26 "),
+  (70,286,"2020-10-04 ","2023-09-19 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (71,240,"2019-06-11 ","2024-12-30 "),
+  (72,25,"2015-10-24 ","2024-02-08 "),
+  (73,226,"2019-11-04 ","2024-10-02 "),
+  (74,212,"2021-05-01 ","2024-10-02 "),
+  (75,177,"2015-12-01 ","2023-05-05 "),
+  (76,295,"2018-07-06 ","2023-04-27 "),
+  (77,137,"2019-12-28 ","2024-08-13 "),
+  (78,7,"2020-03-04 ","2024-03-30 "),
+  (79,284,"2015-10-24 ","2023-07-13 "),
+  (80,40,"2015-12-08 ","2023-04-14 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (81,259,"2019-01-02 ","2024-10-31 "),
+  (82,103,"2022-05-31 ","2024-10-22 "),
+  (83,234,"2017-05-25 ","2023-03-18 "),
+  (84,179,"2022-06-12 ","2023-05-31 "),
+  (85,205,"2017-10-28 ","2024-02-21 "),
+  (86,231,"2022-01-09 ","2023-09-02 "),
+  (87,36,"2016-06-27 ","2024-11-14 "),
+  (88,260,"2020-09-07 ","2023-06-14 "),
+  (89,15,"2021-03-15 ","2024-06-13 "),
+  (90,57,"2019-02-21 ","2024-02-03 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (91,289,"2025-01-07 ","2024-08-12 "),
+  (92,21,"2019-11-19 ","2025-01-19 "),
+  (93,89,"2023-06-11 ","2023-11-29 "),
+  (94,80,"2017-09-07 ","2024-12-31 "),
+  (95,102,"2023-06-04 ","2024-04-05 "),
+  (96,17,"2022-11-09 ","2023-05-12 "),
+  (97,61,"2024-09-24 ","2024-03-30 "),
+  (98,103,"2022-05-19 ","2024-01-02 "),
+  (99,103,"2024-12-22 ","2024-05-05 "),
+  (100,278,"2023-03-08 ","2023-06-10 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (101,220,"2018-01-04 ","2023-11-08 "),
+  (102,38,"2022-04-03 ","2023-12-15 "),
+  (103,33,"2020-09-07 ","2024-07-22 "),
+  (104,246,"2019-03-05 ","2024-09-18 "),
+  (105,189,"2016-01-10 ","2024-12-09 "),
+  (106,221,"2015-03-28 ","2023-06-19 "),
+  (107,263,"2016-07-27 ","2023-05-30 "),
+  (108,133,"2024-12-31 ","2023-04-12 "),
+  (109,160,"2020-12-02 ","2025-01-26 "),
+  (110,173,"2019-12-02 ","2024-07-17 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (111,151,"2016-08-07 ","2024-03-19 "),
+  (112,121,"2015-07-22 ","2023-03-20 "),
+  (113,271,"2021-02-15 ","2024-03-06 "),
+  (114,17,"2015-12-12 ","2023-12-20 "),
+  (115,136,"2021-12-12 ","2023-03-19 "),
+  (116,204,"2019-01-24 ","2023-12-26 "),
+  (117,141,"2021-05-23 ","2023-12-19 "),
+  (118,119,"2018-06-30 ","2023-05-25 "),
+  (119,185,"2024-01-08 ","2024-06-11 "),
+  (120,157,"2024-02-01 ","2024-04-24 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (121,18,"2018-05-16 ","2023-03-09 "),
+  (122,107,"2019-09-26 ","2024-01-16 "),
+  (123,237,"2019-09-19 ","2024-01-31 "),
+  (124,237,"2016-09-14 ","2023-12-17 "),
+  (125,167,"2015-09-01 ","2024-11-20 "),
+  (126,232,"2021-11-19 ","2024-08-11 "),
+  (127,81,"2019-04-23 ","2024-05-14 "),
+  (128,23,"2017-12-18 ","2023-03-26 "),
+  (129,97,"2018-04-24 ","2023-05-25 "),
+  (130,63,"2018-12-26 ","2024-04-12 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (131,218,"2022-05-04 ","2024-01-17 "),
+  (132,62,"2024-08-17 ","2023-08-16 "),
+  (133,251,"2018-07-20 ","2023-04-09 "),
+  (134,172,"2022-05-03 ","2023-10-07 "),
+  (135,205,"2015-09-14 ","2024-10-23 "),
+  (136,265,"2023-05-20 ","2023-12-18 "),
+  (137,175,"2016-02-12 ","2024-04-03 "),
+  (138,59,"2022-10-08 ","2024-11-26 "),
+  (139,21,"2022-10-06 ","2023-02-26 "),
+  (140,224,"2023-08-29 ","2024-02-03 ");
+INSERT INTO `usuario_mangas` (`id_usuario`,`id_mangas`,`fecha_final_del_usuario`,`fecha_de_inicio`)
+VALUES
+  (141,135,"2022-07-20 ","2024-11-22 "),
+  (142,248,"2023-05-31 ","2024-05-23 "),
+  (143,207,"2023-08-20 ","2024-07-22 "),
+  (144,34,"2021-11-15 ","2023-08-02 "),
+  (145,255,"2016-04-07 ","2024-01-04 "),
+  (146,133,"2020-06-26 ","2023-06-27 "),
+  (147,263,"2015-12-22 ","2024-08-07 "),
+  (148,66,"2020-11-24 ","2024-09-17 "),
+  (149,22,"2020-05-28 ","2024-12-11 "),
+  (150,183,"2015-11-16 ","2023-09-21 ");
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (1,"1",49),
+  (2,"0",270),
+  (3,"0",245),
+  (4,"0",167),
+  (5,"1",89),
+  (6,"0",289),
+  (7,"0",178),
+  (8,"0",55),
+  (9,"1",32),
+  (10,"0",63);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (11,"0",82),
+  (12,"1",100),
+  (13,"0",200),
+  (14,"1",88),
+  (15,"0",162),
+  (16,"1",40),
+  (17,"1",6),
+  (18,"0",64),
+  (19,"1",68),
+  (20,"0",63);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (21,"1",276),
+  (22,"1",55),
+  (23,"0",247),
+  (24,"1",276),
+  (25,"0",50),
+  (26,"1",28),
+  (27,"0",80),
+  (28,"0",66),
+  (29,"1",187),
+  (30,"1",122);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (31,"0",247),
+  (32,"1",76),
+  (33,"0",272),
+  (34,"1",72),
+  (35,"1",105),
+  (36,"1",202),
+  (37,"1",190),
+  (38,"1",91),
+  (39,"1",269),
+  (40,"0",244);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (41,"0",234),
+  (42,"0",113),
+  (43,"1",23),
+  (44,"0",211),
+  (45,"1",64),
+  (46,"1",150),
+  (47,"1",116),
+  (48,"0",141),
+  (49,"0",187),
+  (50,"1",111);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (51,"0",291),
+  (52,"0",218),
+  (53,"1",33),
+  (54,"1",238),
+  (55,"0",109),
+  (56,"0",296),
+  (57,"0",86),
+  (58,"0",179),
+  (59,"0",140),
+  (60,"1",220);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (61,"1",235),
+  (62,"0",282),
+  (63,"0",20),
+  (64,"1",96),
+  (65,"0",42),
+  (66,"1",142),
+  (67,"0",30),
+  (68,"0",234),
+  (69,"1",160),
+  (70,"1",161);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (71,"0",98),
+  (72,"1",57),
+  (73,"1",288),
+  (74,"0",205),
+  (75,"1",81),
+  (76,"1",127),
+  (77,"1",74),
+  (78,"0",49),
+  (79,"0",211),
+  (80,"0",6);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (81,"1",209),
+  (82,"1",57),
+  (83,"0",174),
+  (84,"0",152),
+  (85,"0",264),
+  (86,"0",226),
+  (87,"0",88),
+  (88,"1",208),
+  (89,"1",56),
+  (90,"0",201);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (91,"0",68),
+  (92,"1",179),
+  (93,"0",129),
+  (94,"0",21),
+  (95,"1",64),
+  (96,"0",81),
+  (97,"1",155),
+  (98,"0",200),
+  (99,"1",174),
+  (100,"0",293);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (101,"1",86),
+  (102,"1",188),
+  (103,"1",1),
+  (104,"1",110),
+  (105,"0",156),
+  (106,"0",241),
+  (107,"0",262),
+  (108,"1",120),
+  (109,"0",297),
+  (110,"1",71);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (111,"0",121),
+  (112,"1",163),
+  (113,"0",284),
+  (114,"1",270),
+  (115,"0",178),
+  (116,"0",261),
+  (117,"0",60),
+  (118,"0",214),
+  (119,"0",90),
+  (120,"1",162);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (121,"0",170),
+  (122,"0",161),
+  (123,"0",61),
+  (124,"0",34),
+  (125,"0",261),
+  (126,"1",19),
+  (127,"1",107),
+  (128,"1",284),
+  (129,"1",16),
+  (130,"0",132);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (131,"0",154),
+  (132,"1",97),
+  (133,"1",258),
+  (134,"1",239),
+  (135,"0",102),
+  (136,"0",211),
+  (137,"0",75),
+  (138,"0",150),
+  (139,"0",215),
+  (140,"0",183);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (141,"0",153),
+  (142,"1",105),
+  (143,"0",104),
+  (144,"0",5),
+  (145,"1",2),
+  (146,"0",137),
+  (147,"0",160),
+  (148,"1",176),
+  (149,"0",254),
+  (150,"0",271);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (151,"1",101),
+  (152,"0",222),
+  (153,"0",168),
+  (154,"1",145),
+  (155,"1",38),
+  (156,"0",155),
+  (157,"1",249),
+  (158,"0",185),
+  (159,"0",272),
+  (160,"1",236);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (161,"1",285),
+  (162,"1",230),
+  (163,"1",173),
+  (164,"0",162),
+  (165,"1",63),
+  (166,"1",279),
+  (167,"1",187),
+  (168,"0",36),
+  (169,"0",180),
+  (170,"1",294);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (171,"0",30),
+  (172,"1",127),
+  (173,"0",59),
+  (174,"0",288),
+  (175,"1",117),
+  (176,"0",225),
+  (177,"1",297),
+  (178,"0",217),
+  (179,"1",171),
+  (180,"0",78);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (181,"0",217),
+  (182,"1",150),
+  (183,"1",242),
+  (184,"0",3),
+  (185,"1",190),
+  (186,"0",270),
+  (187,"0",272),
+  (188,"1",255),
+  (189,"1",70),
+  (190,"0",120);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (191,"1",154),
+  (192,"0",191),
+  (193,"0",166),
+  (194,"1",86),
+  (195,"1",25),
+  (196,"0",162),
+  (197,"1",143),
+  (198,"1",121),
+  (199,"0",231),
+  (200,"0",234);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (201,"1",54),
+  (202,"1",174),
+  (203,"0",168),
+  (204,"0",253),
+  (205,"1",18),
+  (206,"0",245),
+  (207,"1",219),
+  (208,"0",189),
+  (209,"1",203),
+  (210,"1",192);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (211,"0",277),
+  (212,"0",282),
+  (213,"1",216),
+  (214,"0",172),
+  (215,"1",134),
+  (216,"1",241),
+  (217,"0",62),
+  (218,"1",178),
+  (219,"1",287),
+  (220,"1",172);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (221,"1",232),
+  (222,"0",53),
+  (223,"1",235),
+  (224,"1",139),
+  (225,"1",227),
+  (226,"0",279),
+  (227,"1",119),
+  (228,"0",88),
+  (229,"1",41),
+  (230,"0",54);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (231,"0",82),
+  (232,"1",223),
+  (233,"1",270),
+  (234,"0",242),
+  (235,"0",23),
+  (236,"0",184),
+  (237,"0",182),
+  (238,"0",87),
+  (239,"1",83),
+  (240,"0",210);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (241,"0",25),
+  (242,"1",238),
+  (243,"1",81),
+  (244,"0",58),
+  (245,"0",245),
+  (246,"1",234),
+  (247,"0",7),
+  (248,"0",194),
+  (249,"0",120),
+  (250,"1",132);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (251,"1",47),
+  (252,"0",115),
+  (253,"1",298),
+  (254,"1",15),
+  (255,"1",189),
+  (256,"0",50),
+  (257,"0",122),
+  (258,"0",276),
+  (259,"1",144),
+  (260,"0",244);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (261,"0",162),
+  (262,"1",253),
+  (263,"0",299),
+  (264,"0",142),
+  (265,"1",186),
+  (266,"1",113),
+  (267,"1",173),
+  (268,"0",48),
+  (269,"1",20),
+  (270,"0",170);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (271,"1",286),
+  (272,"0",274),
+  (273,"1",80),
+  (274,"0",108),
+  (275,"1",118),
+  (276,"1",168),
+  (277,"0",7),
+  (278,"0",13),
+  (279,"1",17),
+  (280,"1",4);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (281,"1",115),
+  (282,"0",272),
+  (283,"1",70),
+  (284,"0",254),
+  (285,"0",136),
+  (286,"1",143),
+  (287,"0",223),
+  (288,"0",102),
+  (289,"0",133),
+  (290,"0",177);
+INSERT INTO `traducion` (`id`,`subtitulos`,`id_mangas`)
+VALUES
+  (291,"0",101),
+  (292,"1",116),
+  (293,"1",56),
+  (294,"0",282),
+  (295,"1",154),
+  (296,"1",78),
+  (297,"0",11),
+  (298,"0",192),
+  (299,"0",29),
+  (300,"1",111);
+INSERT INTO `idiomas` (`id`,`id_mangas`,`idioma`)
+VALUES
+  (1,297,"Ucraniano Véneto"),
+  (2,126,"Asamés Bavarian Bielorruso"),
+  (3,270,"Malayo Persa"),
+  (4,161,"Lituano Albanés Neerlandés"),
+  (5,78,"Suiza Ladino"),
+  (6,223,"de"),
+  (7,29,"Papiamento Quechua"),
+  (8,82,"Ewe Gallego"),
+  (9,80,"Persa"),
+  (10,245,"Bielorruso Checheno");
+INSERT INTO `idiomas` (`id`,`id_mangas`,`idioma`)
+VALUES
+  (11,267,"Romansh Sardo Tongano"),
+  (12,111,"Bielorruso"),
+  (13,241,"Vietnamita Yídish"),
+  (14,185,"Marwari Xiang Malabar"),
+  (15,165,"Ladino"),
+  (16,267,"Igbo Sami septentrional"),
+  (17,242,"Sami"),
+  (18,282,"mandarín Hindi Árabe"),
+  (19,126,"Vietnamita Yídish"),
+  (20,101,"Vietnamita");
+INSERT INTO `idiomas` (`id`,`id_mangas`,`idioma`)
+VALUES
+  (21,4,"Alemán Japonés"),
+  (22,72,"Ewe Gallego"),
+  (23,252,"Portugués Bengalí Ruso"),
+  (24,174,"(Oriya)"),
+  (25,122,"Portugués"),
+  (26,82,"(Oriya) Maithili"),
+  (27,243,"Tamil Turco"),
+  (28,136,"Igbo Fula"),
+  (29,24,"Odia"),
+  (30,216,"Tongano Ucraniano");
+INSERT INTO `idiomas` (`id`,`id_mangas`,`idioma`)
+VALUES
+  (31,283,"Limburgués"),
+  (32,32,"Pisin Igbo"),
+  (33,249,"Amárico Bhojpuri Odia"),
+  (34,294,"Gujarati"),
+  (35,62,"Ucraniano Malayo"),
+  (36,102,"Kazajo Malaiala Asamés"),
+  (37,22,"Náhuatl Occitano Papiamento"),
+  (38,181,"Bielorruso"),
+  (39,282,"Coreano"),
+  (40,245,"Malayo Persa");
+INSERT INTO `idiomas` (`id`,`id_mangas`,`idioma`)
+VALUES
+  (41,275,"Javanés Tailandés"),
+  (42,25,"Hindi Árabe Portugués"),
+  (43,14,"Javanés Tailandés"),
+  (44,74,"mandarín Hindi Árabe"),
+  (45,19,"Vietnamita Yídish"),
+  (46,30,"Ucraniano Véneto"),
+  (47,138,"Malabar"),
+  (48,266,"Tagalo Kurdo Serbio"),
+  (49,261,"Hakka Inglés antiguo"),
+  (50,150,"Indonesio Francés Alemán");
+INSERT INTO `idiomas` (`id`,`id_mangas`,`idioma`)
+VALUES
+  (51,170,"Neerlandés Yavanés"),
+  (52,126,"Alemán de"),
+  (53,68,"Lituano"),
+  (54,97,"Hindi Árabe"),
+  (55,7,"antiguo"),
+  (56,34,"Lituano"),
+  (57,124,"Bielorruso Checheno Emilian-Romagnol"),
+  (58,129,"Vietnamita Yídish"),
+  (59,279,"Polaco Ucraniano Malayo"),
+  (60,35,"Maithili Hausa Burmés");
+INSERT INTO `idiomas` (`id`,`id_mangas`,`idioma`)
+VALUES
+  (61,152,"Marwari"),
+  (62,150,"Urdu"),
+  (63,52,"Azerbaiyano Igbo Fula"),
+  (64,55,"Pisin Igbo"),
+  (65,207,"Télugu Wu"),
+  (66,229,"Ucraniano"),
+  (67,223,"Yoruba Zapoteco Zulu"),
+  (68,12,"(Shanghainés) Uigur"),
+  (69,129,"Neerlandés Yavanés"),
+  (70,42,"Vietnamita Coreano Javanés");
+INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+VALUES
+  (245,1),
+  (103,2),
+  (234,3),
+  (90,4),
+  (207,5),
+  (198,6),
+  (250,7),
+  (170,8),
+  (74,9),
+  (49,10);
+INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+VALUES
+  (14,11),
+  (217,12),
+  (249,13),
+  (120,14),
+  (99,15),
+  (23,16),
+  (6,17),
+  (39,18),
+  (72,19),
+  (115,20);
+INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+VALUES
+  (186,21),
+  (208,22),
+  (59,23),
+  (240,24),
+  (158,25),
+  (71,26),
+  (231,27),
+  (138,28),
+  (232,29),
+  (286,30);
+INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+VALUES
+  (262,31),
+  (79,32),
+  (206,33),
+  (289,34),
+  (59,35),
+  (224,36),
+  (90,37),
+  (35,38),
+  (129,39),
+  (7,40);
+INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+VALUES
+  (15,41),
+  (300,42),
+  (165,43),
+  (41,44),
+  (205,45),
+  (64,46),
+  (219,47),
+  (266,48),
+  (119,49),
+  (136,50);
+INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+VALUES
+  (168,51),
+  (22,52),
+  (198,53),
+  (48,54),
+  (60,55),
+  (158,56),
+  (265,57),
+  (99,58),
+  (41,59),
+  (219,60);
+INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+VALUES
+  (274,61),
+  (53,62),
+  (1,63),
+  (165,64),
+  (64,65),
+  (129,66),
+  (117,67),
+  (82,68),
+  (259,69),
+  (149,70);
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (1,"337770864","amet ornare lectus justo eu arcu. Morbi sit","Envío de Carga","UWE52XKH","concurrido",0,"Ap #738-6473 Diam Avenue","Nasim Rocha","Cameron Riggs"),
+  (2,"174787942","lacus. Cras interdum. Nunc sollicitudin commodo","Envío de Carga","OOL50OGN","concurrido",0,"364-3051 Justo St.","Grace Weaver","Roth Pickett"),
+  (3,"118161270","ridiculus mus. Donec dignissim","Servicios de Paquetería y Mensajería","RIC33JTS","atasco",13,"400-7488 Posuere Rd.","Harding Berg","Medge Farrell"),
+  (4,"041827916","tincidunt, nunc ac","Envío de Carga","OHT36NPP","concurrido",11,"Ap #611-8621 Cursus Rd.","Molly Shepard","Shelly Chandler"),
+  (5,"585085559","Donec egestas. Aliquam nec enim. Nunc ut erat.","Entrega por Aplicaciones o Plataformas Específicas","LFP31ZFQ","concurrido",19,"Ap #136-1527 Morbi Rd.","Hayes Grant","Lavinia Landry"),
+  (6,"664721243","Cras vehicula aliquet libero. Integer in","Logística Reversa","AZW92GQO","atasco",7,"3605 Eget, Av.","Axel Ellis","Nadine Abbott"),
+  (7,"764596185","massa. Integer vitae nibh. Donec est","Entrega por Aplicaciones o Plataformas Específicas","KIU14XKE","concurrido",10,"Ap #458-9049 Dolor Ave","Sandra Charles","Hadassah Middleton"),
+  (8,"883656481","nec,","Correo Postal","KJZ67MTD","libre",6,"Ap #984-4258 Blandit. Street","Mikayla Dillard","Oliver Rosario"),
+  (9,"361021731","id nunc interdum","Entrega Express","JDG40NAT","libre",4,"136-1131 Inceptos St.","Isabella Burnett","Travis Hickman"),
+  (10,"813404273","ultrices, mauris ipsum porta elit, a feugiat tellus lorem eu","Correo Postal","KMP81WRP","atasco",2,"Ap #202-4224 A Rd.","Lenore Richmond","Wesley Vaughn");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (11,"605365512","Maecenas mi felis, adipiscing fringilla, porttitor vulputate,","Entrega en Punto de Recogida","WSX64IKW","libre",9,"P.O. Box 787, 3228 Praesent St.","Griffin Pruitt","Tanner Patterson"),
+  (12,"534236544","tempus non, lacinia at, iaculis quis, pede.","Envío de Carga","DCX70VJN","atasco",5,"660-3662 Nascetur Rd.","Reed Moreno","Cheyenne Decker"),
+  (13,"148796586","sem ut cursus luctus, ipsum leo elementum sem,","Logística Reversa","HLR23MWF","libre",5,"4885 Faucibus. Road","Laura Haley","Kaye Albert"),
+  (14,"513692722","aliquet diam.","Envío de Carga","LBN54DIA","libre",5,"Ap #625-3485 Cubilia St.","Leah Kline","Keiko Forbes"),
+  (15,"655251735","Nulla facilisi. Sed neque. Sed eget lacus.","Envío de Carga","QHT75LAF","atasco",1,"P.O. Box 260, 3258 Dui. Avenue","Emerson Le","Karleigh Stephens"),
+  (16,"901026035","et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus.","Logística Reversa","DYQ63MCT","concurrido",1,"966-8778 Tristique Av.","Sean Kent","Ross Alexander"),
+  (17,"538507307","id ante dictum cursus. Nunc mauris elit,","Entrega en Punto de Recogida","HJD52USE","libre",1,"5067 Felis Rd.","Ezekiel Gross","Aimee Burns"),
+  (18,"363873694","dictum. Proin eget odio. Aliquam vulputate ullamcorper","Logística Reversa","XPM13KCD","concurrido",3,"P.O. Box 436, 7951 Justo Street","Illana Howe","Vance Mcgowan"),
+  (19,"241236584","rhoncus id, mollis nec, cursus a, enim.","Entrega en Punto de Recogida","FRX86DUF","libre",4,"Ap #846-7862 Sed Rd.","Conan Massey","Marshall Valentine"),
+  (20,"183070744","ac nulla. In tincidunt","Correo Postal","NRP32ONX","atasco",20,"502-2014 Ut, St.","Herman Owen","Vaughan Macias");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (21,"446260520","felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem,","Correo Postal","XTM87WTW","libre",15,"P.O. Box 291, 2172 Vel St.","Amena York","Graiden Garza"),
+  (22,"395543957","mauris elit, dictum eu, eleifend nec, malesuada ut, sem.","Entrega Express","WEV29CVG","libre",6,"303-9965 Id, Av.","Hayes Mendez","Hashim Anderson"),
+  (23,"720693524","vel, convallis in, cursus","Logística Reversa","MWY81KBA","atasco",9,"431-8315 Egestas. St.","Francesca Baxter","April Zamora"),
+  (24,"104615331","ultricies","Correo Postal","EKP86PFH","atasco",9,"Ap #942-7092 Libero. Rd.","Brennan Harvey","Kameko Greer"),
+  (25,"388640581","In scelerisque scelerisque dui. Suspendisse","Entrega Express","ZWW12XHF","atasco",14,"225-5513 Tempus Avenue","Idona Simmons","Alexis Bates"),
+  (26,"887297992","ligula. Aliquam erat volutpat.","Correo Postal","DBV68OFU","atasco",14,"2450 Eu, Rd.","Yen Higgins","Regina Fletcher"),
+  (27,"555112221","in, cursus et, eros. Proin","Envío de Carga","ARP05QFU","concurrido",24,"P.O. Box 589, 2221 Porttitor Ave","Christen Mckenzie","Tallulah Noel"),
+  (28,"223419131","at sem molestie sodales. Mauris blandit enim consequat","Logística Reversa","QNC06LRD","concurrido",4,"921-5338 Dui. Ave","Alfonso Hoffman","Stephen Wells"),
+  (29,"893021686","et, commodo at, libero. Morbi accumsan","Correo Postal","SCJ72UME","libre",14,"343-2317 Mauris Street","Garth Nichols","Maggy Warner"),
+  (30,"751032578","dui augue eu tellus. Phasellus elit pede, malesuada vel, venenatis","Servicios de Mensajería Local","BTX73KEQ","atasco",6,"Ap #279-6827 Nunc St.","Zelda Christian","Murphy Henderson");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (31,"667333718","vehicula aliquet libero.","Servicios de Mensajería Local","UFT20HTG","libre",8,"P.O. Box 580, 7576 Libero St.","Fay Sharpe","Candice Vazquez"),
+  (32,"477148032","quis","Entrega Express","OPK86WFV","libre",9,"239-9143 Lorem Av.","Candace Calhoun","Cadman Schultz"),
+  (33,"581535331","Suspendisse aliquet, sem ut cursus","Servicios de Mensajería Local","CCC71WGB","concurrido",15,"305-1012 Eget Rd.","Kyle Valenzuela","Imani Petersen"),
+  (34,"428814866","vitae, aliquet nec,","Envío de Carga","ZTW34NVE","atasco",3,"P.O. Box 326, 4300 Proin Street","Lane Macdonald","Cheryl Perkins"),
+  (35,"156341798","Phasellus libero mauris, aliquam eu, accumsan","Entrega por Aplicaciones o Plataformas Específicas","GWH67KEK","libre",9,"832-977 Quis Road","Dolan Slater","Ayanna Ratliff"),
+  (36,"549172943","placerat, orci lacus vestibulum lorem, sit amet","Logística Reversa","HCG38TTL","concurrido",12,"Ap #218-4216 Augue St.","George Huff","Stephanie Valentine"),
+  (37,"907515071","eget, venenatis a,","Entrega en Punto de Recogida","QJJ83SCU","atasco",8,"P.O. Box 469, 9747 Adipiscing St.","Hope Everett","Herrod Kirkland"),
+  (38,"588235446","orci sem eget massa. Suspendisse eleifend.","Servicios de Mensajería Local","OFM27OFK","atasco",6,"P.O. Box 683, 5867 Mauris. Avenue","Karly Rojas","Miranda Houston"),
+  (39,"374252677","erat. Vivamus nisi. Mauris nulla.","Servicios de Paquetería y Mensajería","ZBF22GVQ","concurrido",22,"495-9156 Scelerisque St.","Brett Hancock","Mara Chase"),
+  (40,"455780122","quis turpis vitae purus","Servicios de Mensajería Local","UUI93CIX","libre",21,"Ap #929-3756 Lacus. Rd.","Tate Morin","Tobias Mercer");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (41,"139932721","fames ac turpis egestas.","Servicios de Paquetería y Mensajería","APK78MFZ","libre",16,"Ap #610-2135 Duis St.","Emerald Fuentes","Kimberley Thornton"),
+  (42,"422376114","est mauris, rhoncus","Entrega por Aplicaciones o Plataformas Específicas","CEG52NWY","libre",23,"Ap #989-3066 Erat, Avenue","Wynter Jennings","Liberty Johnston"),
+  (43,"788348213","amet, dapibus id, blandit","Servicios de Paquetería y Mensajería","MXY21FRT","concurrido",21,"Ap #354-2354 Pharetra St.","Ferris Alvarado","Wing Cross"),
+  (44,"352376387","commodo at,","Entrega en Punto de Recogida","EWB03TSA","atasco",22,"P.O. Box 378, 928 Hymenaeos. Rd.","Ashely Rivera","Lillian Mccarthy"),
+  (45,"556222467","Curabitur massa. Vestibulum accumsan neque et nunc.","Correo Postal","EKK48RNZ","concurrido",21,"7991 Tincidunt Rd.","Christen Avila","Baker Davenport"),
+  (46,"752619260","Pellentesque habitant","Envío de Carga","WQI36WBT","atasco",1,"Ap #832-7276 Ornare. St.","Thaddeus Dennis","Althea Vega"),
+  (47,"581120584","amet nulla. Donec non justo. Proin","Servicios de Mensajería Local","CNU65SSR","concurrido",1,"Ap #824-3541 Morbi Street","Ira Keller","Sandra Stanton"),
+  (48,"154247321","sed turpis nec mauris blandit mattis.","Entrega por Aplicaciones o Plataformas Específicas","QNQ79HSD","atasco",19,"197-3465 Urna. Street","Vaughan Webb","Nadine Workman"),
+  (49,"211582828","et tristique pellentesque,","Entrega Express","LTG29MWY","concurrido",20,"785-4951 Natoque St.","Keiko Christensen","Vincent Gill"),
+  (50,"263346943","arcu et pede.","Servicios de Mensajería Local","ORT08KBR","concurrido",21,"Ap #820-5629 Magnis Avenue","Signe Heath","Ezekiel Owen");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (51,"635277132","fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit.","Correo Postal","REL11SOW","atasco",1,"P.O. Box 420, 1763 Bibendum Rd.","Reece Berger","Kadeem Powers"),
+  (52,"641561676","mollis. Phasellus libero mauris, aliquam eu, accumsan sed, facilisis","Servicios de Mensajería Local","GYI68CAT","libre",10,"Ap #239-2574 Nisl Rd.","Cameran Sears","Jolene Hernandez"),
+  (53,"133318712","vitae mauris sit amet","Servicios de Paquetería y Mensajería","IGU18IUI","concurrido",1,"Ap #969-5677 Aliquam Ave","Tatiana Casey","Moana Jenkins"),
+  (54,"363028755","Aliquam nisl. Nulla eu neque pellentesque","Logística Reversa","WBB74HRY","atasco",10,"P.O. Box 589, 4028 Id, St.","Yoshio Parker","Kathleen Golden"),
+  (55,"365582797","sem, vitae aliquam eros turpis","Logística Reversa","EGT59TWJ","libre",19,"Ap #423-4344 Tellus. Rd.","Nero Mcguire","Elaine Henderson"),
+  (56,"738264630","dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque","Correo Postal","OLH94BZD","atasco",1,"4653 Tincidunt, Rd.","Jasper Oliver","Vivien Soto"),
+  (57,"712304125","nec ante. Maecenas","Logística Reversa","MME38NML","concurrido",15,"1230 Vestibulum, St.","Ralph Randall","Amela Lloyd"),
+  (58,"278737337","nisi a odio semper cursus. Integer","Correo Postal","LRF34SRB","libre",20,"5603 Iaculis Road","Macey Shaw","Venus Fischer"),
+  (59,"565835743","est ac mattis semper, dui","Entrega en Punto de Recogida","YYO28OQZ","atasco",17,"857-3694 Rutrum, Rd.","Daniel Boyer","Avram Poole"),
+  (60,"227692388","erat. Etiam vestibulum massa","Envío de Carga","SWH42WBY","concurrido",10,"619-815 Diam Rd.","Gay Hansen","Eagan Schroeder");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (61,"944673626","elementum, dui quis accumsan convallis, ante lectus","Servicios de Paquetería y Mensajería","HSV09APV","libre",15,"P.O. Box 648, 6454 In, St.","Marvin Collier","Victoria Shaffer"),
+  (62,"546102424","Integer eu lacus. Quisque imperdiet, erat nonummy ultricies","Correo Postal","RPG16HSB","atasco",13,"Ap #942-9052 Lacinia. Ave","Hamilton Rowe","Prescott Ayers"),
+  (63,"567591027","enim mi tempor lorem, eget mollis lectus pede","Servicios de Paquetería y Mensajería","KJP18BFD","libre",2,"596-343 Turpis. Street","Shelley Hess","Teagan Hopkins"),
+  (64,"237938616","non ante bibendum ullamcorper. Duis cursus, diam at pretium","Entrega por Aplicaciones o Plataformas Específicas","EHH52YRP","atasco",12,"9243 Parturient Ave","Rylee Mccray","Stephen Mitchell"),
+  (65,"867821644","sed consequat","Logística Reversa","VTE14FAO","libre",17,"685-8181 In St.","Callie Mathews","Ivy Mercado"),
+  (66,"131178301","luctus sit amet, faucibus ut, nulla.","Entrega por Aplicaciones o Plataformas Específicas","YLX14OER","atasco",5,"653-5179 Sed Ave","Samson Mcguire","Ralph Baxter"),
+  (67,"766579640","feugiat. Sed nec metus facilisis","Correo Postal","MZY52CKB","libre",21,"Ap #152-1989 Maecenas St.","Libby Booker","Wynne Cohen"),
+  (68,"211494307","lorem ipsum sodales purus, in molestie","Servicios de Mensajería Local","CFY57OTL","atasco",6,"3087 Libero. Ave","Julian Valentine","Wallace Anthony"),
+  (69,"819538833","erat volutpat. Nulla dignissim.","Envío de Carga","NOP33XMK","concurrido",4,"Ap #886-6796 Mollis. St.","Edan Hunt","Price Rivers"),
+  (70,"157874465","sit","Servicios de Mensajería Local","BOH83FYP","libre",20,"P.O. Box 634, 7102 Lorem Avenue","Charles Cox","Quon Cline");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (71,"766792550","arcu. Morbi sit amet","Entrega por Aplicaciones o Plataformas Específicas","OSV47QIA","concurrido",13,"P.O. Box 556, 1124 Neque St.","Yuri Downs","Ivory Nicholson"),
+  (72,"361215987","lorem lorem, luctus ut, pellentesque","Servicios de Paquetería y Mensajería","HRC13FOC","libre",3,"835-156 Iaculis Rd.","Kelly Love","Madeline Chaney"),
+  (73,"072866675","pede. Cum sociis natoque penatibus et magnis dis parturient montes,","Logística Reversa","LUO93DMC","atasco",22,"783-2757 Velit. Rd.","Charles Oneil","Kay Golden"),
+  (74,"137362934","elementum at, egestas a, scelerisque sed, sapien.","Entrega por Aplicaciones o Plataformas Específicas","RJB81DPU","libre",2,"3739 Sit Avenue","Karleigh Stark","Sonya Owens"),
+  (75,"157761994","urna. Vivamus molestie dapibus","Entrega Express","QHH11CXE","atasco",22,"349-8952 Non Road","Hu Gonzales","Denise Lang"),
+  (76,"471745251","urna, nec luctus","Envío de Carga","NMU11DND","libre",2,"8795 At, Road","Colorado Bernard","Velma Sellers"),
+  (77,"642117128","arcu. Aliquam ultrices iaculis odio. Nam interdum enim non nisi.","Entrega Express","NJO56QUL","libre",22,"489-3979 Proin St.","Lucius Everett","Leroy Waller"),
+  (78,"476429097","elit. Nulla facilisi. Sed","Entrega por Aplicaciones o Plataformas Específicas","XDG77OJY","libre",14,"Ap #315-8634 Morbi Av.","Dennis Sexton","Whilemina Cook"),
+  (79,"735535315","ipsum. Suspendisse sagittis.","Logística Reversa","SMA32NTE","libre",22,"P.O. Box 696, 9480 Donec St.","Zeus Garrison","Myra Clark"),
+  (80,"334454908","volutpat. Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla.","Servicios de Paquetería y Mensajería","RTC42OQQ","libre",20,"2021 Nulla. Rd.","Hilel Horton","Samuel Jennings");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (81,"034998185","Donec fringilla. Donec feugiat metus sit amet","Correo Postal","CKB21AVK","atasco",14,"9703 At Rd.","Armando Bass","Callum Solis"),
+  (82,"592451480","ac urna. Ut tincidunt vehicula","Entrega en Punto de Recogida","ITX38EEE","atasco",6,"1054 Id Ave","Brennan Patton","Ciaran Kaufman"),
+  (83,"530974423","tellus. Suspendisse sed","Servicios de Paquetería y Mensajería","TII26QGH","libre",7,"Ap #703-7158 Nostra, St.","Bruno Rush","Hayes Weaver"),
+  (84,"358645258","lorem ac risus.","Servicios de Paquetería y Mensajería","YKU91ZZE","libre",16,"248-7891 Rutrum, Road","Erich Green","Ferris Thomas"),
+  (85,"301614431","egestas. Duis ac arcu. Nunc mauris. Morbi non sapien","Entrega Express","UPA86FVT","libre",5,"Ap #433-7279 Feugiat Avenue","Nicholas Maldonado","Adrian Wilson"),
+  (86,"981388484","eget, ipsum. Donec sollicitudin adipiscing ligula. Aenean gravida","Entrega Express","EOU75AXT","atasco",0,"P.O. Box 319, 9502 Maecenas Av.","Nerea Morris","Mallory Rojas"),
+  (87,"851567552","Donec est. Nunc ullamcorper, velit","Entrega en Punto de Recogida","JJB79WSW","atasco",20,"176-1862 Risus Ave","Kristen Barton","Kellie Buckner"),
+  (88,"146618196","rutrum magna. Cras convallis convallis dolor. Quisque tincidunt pede","Entrega en Punto de Recogida","OTI64ECR","atasco",0,"Ap #888-814 Nostra, Rd.","Haviva Holder","Alden Fields"),
+  (89,"708845631","pretium et, rutrum non, hendrerit id,","Envío de Carga","IRO75EWD","atasco",1,"Ap #268-9663 Lectus Road","Tarik Maynard","Cynthia Jefferson"),
+  (90,"248328381","Mauris quis turpis vitae purus","Correo Postal","RYC34MWX","libre",18,"934-3350 Odio St.","Amery Parrish","Iona Downs");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (91,"755640805","scelerisque neque sed sem egestas","Logística Reversa","XSI02SWO","concurrido",22,"Ap #730-9733 Mauris Avenue","Kylynn Barnett","Allistair Farmer"),
+  (92,"443923875","mus. Donec dignissim magna","Servicios de Mensajería Local","UXN45DLS","libre",1,"Ap #159-5759 Auctor, Street","Madonna Walker","Abdul Barry"),
+  (93,"207217861","pede, malesuada vel, venenatis","Entrega en Punto de Recogida","NNH86UWS","atasco",3,"Ap #762-9678 Arcu. Av.","Liberty Bradford","Octavius Hines"),
+  (94,"864832253","natoque penatibus et magnis","Logística Reversa","TQD16ROG","libre",14,"148-1699 Lorem, Rd.","Jarrod Battle","Frances Collins"),
+  (95,"341688567","aliquet. Proin velit. Sed","Entrega Express","THR12RSK","atasco",20,"2834 Mauris Road","Yvette Bennett","Kathleen Goodman"),
+  (96,"738848476","risus. Morbi metus. Vivamus euismod urna. Nullam lobortis quam","Envío de Carga","MTB27PTJ","libre",11,"3551 Penatibus St.","Sebastian Delacruz","Kelsie Tyson"),
+  (97,"722035934","cursus luctus,","Entrega Express","BOK52BWX","atasco",1,"370-8527 Tempor Rd.","Sonya Foreman","Hunter Kaufman"),
+  (98,"203141728","fermentum","Servicios de Paquetería y Mensajería","BDI77YKI","libre",20,"487 Class Ave","Jameson Herman","Fuller Heath"),
+  (99,"317520561","vehicula aliquet libero. Integer","Correo Postal","YKJ51GNP","atasco",8,"901-4998 Donec Avenue","Summer Walton","Jessamine Mcconnell"),
+  (100,"969437654","arcu. Morbi","Entrega en Punto de Recogida","GDL67PAO","concurrido",24,"Ap #637-5845 Libero Rd.","Branden Abbott","Zenia Cline");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (101,"152172444","vitae mauris sit amet","Logística Reversa","DII75ITU","concurrido",16,"398-3469 Natoque St.","Keelie Noble","Clementine Stanton"),
+  (102,"714731664","Fusce fermentum fermentum arcu. Vestibulum ante ipsum primis in faucibus","Entrega por Aplicaciones o Plataformas Específicas","JHY25UBK","atasco",21,"2571 Velit. Rd.","Hiroko Cortez","Micah Pena"),
+  (103,"611256322","accumsan neque et nunc. Quisque ornare","Servicios de Paquetería y Mensajería","YVS33EIP","concurrido",17,"Ap #167-2653 Adipiscing Ave","Hasad Hopper","Jin Mcintosh"),
+  (104,"873304594","Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam auctor,","Entrega por Aplicaciones o Plataformas Específicas","RJB87IIP","concurrido",1,"992-510 Aliquet. Avenue","Sade Goodwin","Ruth Fleming"),
+  (105,"772214865","Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus","Logística Reversa","CFR60TSV","libre",7,"Ap #253-6711 Nullam Rd.","Mira Moreno","Martena Lowery"),
+  (106,"676816035","aliquet","Logística Reversa","NVV72FBK","atasco",9,"6942 Id Ave","Maia Montgomery","Keefe Singleton"),
+  (107,"494279431","fringilla mi lacinia mattis. Integer eu","Envío de Carga","DRO48TFZ","concurrido",16,"Ap #311-3004 Neque. St.","Aquila Yang","Jael Mcintyre"),
+  (108,"537733834","lectus ante dictum mi, ac mattis velit justo nec ante.","Logística Reversa","LYI46XXL","atasco",0,"817-1449 Consectetuer Street","Brock Barnes","Jaquelyn Nguyen"),
+  (109,"544383319","est ac","Entrega en Punto de Recogida","KNI93QPJ","libre",14,"168-1721 Auctor Av.","Richard Bridges","Vanna Pacheco"),
+  (110,"009087351","tincidunt","Envío de Carga","NIQ18OUP","libre",18,"881-3154 Vivamus Av.","Jenna Webster","Jane Lawson");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (111,"994879933","nascetur ridiculus mus. Proin vel arcu eu odio","Servicios de Mensajería Local","DKQ46JFW","concurrido",7,"P.O. Box 621, 7452 Nonummy St.","Hammett Beard","Maxwell Flowers"),
+  (112,"472878373","convallis dolor. Quisque tincidunt pede ac","Logística Reversa","USA79MDC","concurrido",18,"583-2175 Tempor Ave","Burton Goff","Forrest Hartman"),
+  (113,"352425428","fringilla mi lacinia","Envío de Carga","UWU10YKJ","concurrido",7,"Ap #477-5527 Elementum, Rd.","Alma Dennis","Kylan Kerr"),
+  (114,"157473894","odio semper cursus. Integer mollis. Integer tincidunt aliquam arcu.","Entrega en Punto de Recogida","XWG77DDO","concurrido",1,"P.O. Box 456, 3846 Vel Avenue","Molly Hahn","Desiree Riddle"),
+  (115,"274422789","magna. Nam ligula elit, pretium et, rutrum non, hendrerit id,","Envío de Carga","UIL68PBB","atasco",19,"953-9772 Tincidunt St.","Grady Hendrix","Nero Franco"),
+  (116,"273363540","ac turpis","Correo Postal","ECB36GSQ","libre",24,"P.O. Box 462, 8003 Neque Rd.","Daquan Pennington","Carlos Carr"),
+  (117,"271745027","ipsum. Curabitur consequat, lectus sit","Correo Postal","HID76TOV","libre",5,"Ap #599-9381 Duis Rd.","Slade Sharp","Todd Parker"),
+  (118,"443298895","Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus","Entrega en Punto de Recogida","XRO16MUO","concurrido",24,"9441 Libero Av.","Sade Marsh","Devin Holman"),
+  (119,"837127884","id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor,","Entrega en Punto de Recogida","JSB02ITY","concurrido",16,"P.O. Box 307, 4520 Scelerisque, Av.","Keefe Wright","Quentin Bolton"),
+  (120,"134831341","ultricies sem magna nec quam. Curabitur","Correo Postal","VUD53ECE","atasco",2,"Ap #250-2606 Consequat Ave","Bianca Rivera","Audra Bullock");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (121,"393321446","gravida. Praesent","Entrega por Aplicaciones o Plataformas Específicas","CEE54MGM","atasco",13,"8019 Fringilla Road","Imelda Potts","Eugenia Valdez"),
+  (122,"861465153","urna. Ut tincidunt vehicula","Entrega en Punto de Recogida","LVB49RLY","libre",8,"3165 Nunc Rd.","Katelyn Stout","Kristen Summers"),
+  (123,"952795533","posuere at, velit. Cras lorem","Servicios de Mensajería Local","WPH35RIS","atasco",14,"Ap #496-6402 Duis Road","Ifeoma Collier","Nathan Potter"),
+  (124,"233120866","pellentesque,","Entrega en Punto de Recogida","BKH72LTF","concurrido",1,"794-3935 Vulputate St.","Tatiana Diaz","Robert Salazar"),
+  (125,"564328067","nulla. In tincidunt","Envío de Carga","EWM11QQQ","atasco",17,"Ap #514-6103 Rhoncus St.","Trevor Langley","Lawrence Arnold"),
+  (126,"519682613","auctor vitae, aliquet nec, imperdiet nec,","Entrega Express","KSQ82MXD","libre",5,"Ap #332-5471 Duis St.","Flynn Robinson","Martin Marshall"),
+  (127,"382052038","mauris sit amet lorem semper auctor. Mauris vel turpis.","Envío de Carga","EWI36QDE","concurrido",2,"Ap #128-9643 Et, Rd.","Nichole Mcmahon","Mufutau Coffey"),
+  (128,"034328454","sagittis placerat. Cras dictum ultricies ligula.","Envío de Carga","GQT63SND","concurrido",21,"Ap #223-6260 Vestibulum Av.","Honorato Williams","Troy Hart"),
+  (129,"438814051","leo. Cras vehicula aliquet libero. Integer","Logística Reversa","EYM07NOL","atasco",1,"7068 Aliquam St.","Jocelyn Walton","Hall Kidd"),
+  (130,"001633774","sem ut cursus luctus, ipsum leo elementum","Logística Reversa","CPL65LZP","libre",7,"P.O. Box 475, 8239 Gravida St.","Vladimir Fry","Ezekiel Kaufman");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (131,"199387881","Donec nibh. Quisque nonummy ipsum non","Entrega Express","ESB04KHA","concurrido",19,"Ap #865-7670 Scelerisque Avenue","Myra Cole","Jameson Carpenter"),
+  (132,"654594792","Duis a","Entrega por Aplicaciones o Plataformas Específicas","GKE48WCC","concurrido",5,"583-5785 Mattis. St.","Mariam Dunlap","Baxter Mckee"),
+  (133,"882879721","lobortis augue scelerisque mollis. Phasellus libero mauris, aliquam eu, accumsan","Entrega Express","MKM43BRJ","libre",9,"3568 Ut, St.","Carl Strong","Malachi Thomas"),
+  (134,"321676212","Integer vitae nibh.","Entrega por Aplicaciones o Plataformas Específicas","XRM57IQF","libre",8,"666-708 Arcu. Av.","Ora Mercer","Neil Slater"),
+  (135,"278026666","tortor, dictum eu, placerat eget, venenatis a,","Entrega en Punto de Recogida","QIN76YYS","atasco",4,"Ap #222-4087 Eu Avenue","Ian Petersen","Anika Burke"),
+  (136,"235176348","pede. Nunc sed orci lobortis augue","Envío de Carga","VEZ10EMM","libre",5,"4420 Primis St.","Cameron Elliott","Levi Cotton"),
+  (137,"455341528","dui lectus rutrum urna, nec luctus felis","Correo Postal","EEC72ZYX","libre",10,"Ap #170-4772 Faucibus Rd.","Jared Tyson","Palmer Cummings"),
+  (138,"880661710","nec tempus mauris erat eget ipsum. Suspendisse sagittis.","Entrega por Aplicaciones o Plataformas Específicas","FPM24YMQ","atasco",9,"P.O. Box 408, 1989 Amet Av.","Denton Joyner","Xaviera Blackwell"),
+  (139,"315860644","eget magna. Suspendisse","Servicios de Paquetería y Mensajería","SGB11IFD","concurrido",15,"168-9861 A, Av.","Caldwell Bullock","Ronan Hurst"),
+  (140,"711343423","Morbi metus. Vivamus euismod urna. Nullam lobortis","Entrega en Punto de Recogida","YLF98YLB","concurrido",18,"997-5123 Duis Rd.","Brian Cote","Jason Kramer");
+INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
+VALUES
+  (141,"220514570","lorem ut aliquam iaculis, lacus pede","Entrega por Aplicaciones o Plataformas Específicas","YNG57XHJ","concurrido",12,"189-2362 Nunc Avenue","Kitra Valentine","Alisa White"),
+  (142,"360632138","sed dictum eleifend, nunc risus varius","Envío de Carga","WNI08BAN","concurrido",12,"Ap #573-8003 Metus. St.","Amos Hurst","Samson Riggs"),
+  (143,"127546423","blandit enim consequat purus.","Servicios de Mensajería Local","FDS55GEB","libre",10,"4673 Mi, Road","Pamela Nelson","Kiona Reid"),
+  (144,"964584751","id, libero. Donec consectetuer","Logística Reversa","JFX16LLB","libre",19,"1732 Aliquet Avenue","Mason Oliver","TaShya Valencia"),
+  (145,"742242746","non massa non ante bibendum ullamcorper. Duis cursus, diam at","Envío de Carga","JHH96EOC","libre",20,"Ap #757-6281 Conubia Av.","Blythe Pollard","Merritt Duran"),
+  (146,"242559028","et, euismod et, commodo","Entrega Express","JUF24SBI","libre",22,"883-7827 Etiam Rd.","Portia Patel","Solomon Davenport"),
+  (147,"671786239","sit amet diam","Entrega en Punto de Recogida","NTQ48CCY","atasco",15,"197-4110 Donec Street","Daniel Rush","Noelani Powers"),
+  (148,"124585066","lectus","Envío de Carga","TXP05CII","libre",16,"715-7250 Molestie. St.","Gabriel Rivers","Gregory Jenkins"),
+  (149,"232724881","mauris.","Entrega en Punto de Recogida","ICG08UKR","libre",19,"727-8353 Tempor Rd.","Aline Gay","Jacqueline Montgomery"),
+  (150,"523813265","vulputate dui, nec tempus mauris erat eget ipsum.","Entrega por Aplicaciones o Plataformas Específicas","ELW77NLR","libre",12,"Ap #390-5268 Vitae, St.","Shellie Tyler","Joan May");
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (1,104,"Attack_on_Titan","FJ84176113418","traje",50,112,2),
+  (2,70,"Assassination_Classroom","WB52866627185","traje",1,271,4),
+  (3,99,"Mob_Psycho_100","NV68430217552","keycaps",33,212,3),
+  (4,97,"My_Hero_Academia","MH29952574128","poster",55,86,2),
+  (5,91,"Haikyuu","GY16071724961","figura",36,56,4),
+  (6,37,"One_Piece","GV16727242682","pulsera",54,41,3),
+  (7,91,"Vegeta_Prince","OQ62158518547","mosepad",54,226,4),
+  (8,79,"Light_Yagami","OF38849148875","figura",25,58,1),
+  (9,20,"Dragon_Ball_Z","DH41085110165","figura",38,34,1),
+  (10,92,"One_Punch_Man","PB65115326599","colla",3,93,4);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (11,129,"Sailor_Moon","AE23344638602","figura",49,97,3),
+  (12,42,"Mob_Psycho_100","WC51188564360","colla",70,128,2),
+  (13,26,"One_Punch_Man","SR65017677287","colla",57,213,2),
+  (14,88,"My_Hero_Academia","IS20004633211","mosepad",16,52,1),
+  (15,86,"Gon_Freecss","UO74558892522","figura",58,151,2),
+  (16,23,"Gon_Freecss","LX21422683234","pulsera",17,100,2),
+  (17,145,"Jotaro_Kujo","CX32189278385","keycaps",56,137,4),
+  (18,145,"One_Punch_Man","KT94285562196","colla",51,173,1),
+  (19,124,"Natsu_Dragneel","FD28555743146","keycaps",48,137,3),
+  (20,94,"Luffy_Monkey","QC36794738658","figura",13,295,1);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (21,58,"Haikyuu","MI13015675830","figura",49,243,4),
+  (22,57,"Natsu_Dragneel","SK48381354009","traje",4,251,3),
+  (23,8,"Kenshiro_Hokuto","AH62116835315","traje",25,94,3),
+  (24,121,"Kenshiro_Hokuto","XK89878481633","colla",59,28,3),
+  (25,89,"Gintoki_Sakata","QQ57684943636","pulsera",64,275,1),
+  (26,50,"Ichigo_Kurosaki","PD12385568801","pulsera",30,109,2),
+  (27,50,"Jotaro_Kujo","MC83376532158","traje",34,289,3),
+  (28,14,"Haikyuu","PM68680485835","pulsera",17,219,2),
+  (29,72,"Dragon_Ball_Z","XG78230202108","figura",43,25,4),
+  (30,85,"One_Punch_Man","QI38612415265","pulsera",41,217,3);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (31,110,"Bleach","WK08176973166","mosepad",46,50,2),
+  (32,119,"Parasyte_The_Maxim","JK46844108728","figura",3,184,2),
+  (33,28,"Cowboy_Bebop","KM63806173737","traje",39,260,2),
+  (34,63,"Fullmetal_Alchemist","XM36681245612","traje",50,117,2),
+  (35,65,"Tokyo_Ghoul","KB12756407150","colla",61,142,2),
+  (36,68,"Haikyuu","GX27750153282","mosepad",34,68,1),
+  (37,127,"Jotaro_Kujo","MV31481184666","mosepad",25,237,1),
+  (38,21,"Black_Clover","GN01750149701","figura",32,23,2),
+  (39,7,"Dragon_Ball_Super","GY45293373877","poster",31,136,3),
+  (40,67,"Violet_Evergarden","OX23568129154","pulsera",26,71,1);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (41,39,"Naruto","BE39550498179","poster",55,153,3),
+  (42,52,"Fullmetal_Alchemist","CC39379026462","traje",2,28,1),
+  (43,12,"Sailor_Moon","DB89522325481","colla",16,67,3),
+  (44,37,"Killua_Zoldyck","YS83855294254","colla",69,165,0),
+  (45,138,"Violet_Evergarden","JW31955923487","pulsera",53,271,1),
+  (46,77,"Gintoki_Sakata","VF38188786605","figura",37,124,4),
+  (47,117,"Bleach","CM31542429452","poster",6,184,1),
+  (48,4,"Tokyo_Ghoul","RR56984364446","poster",21,109,2),
+  (49,113,"Dragon_Ball_Z","LL35114228911","colla",24,49,1),
+  (50,3,"Code_Geass_Lelouch_of_the_Rebellion","NP08134766182","keycaps",69,110,3);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (51,34,"Code_Geass_Lelouch_of_the_Rebellion","ZU05853657355","mosepad",40,284,2),
+  (52,6,"My_Hero_Academia","XP84423543889","mosepad",14,201,3),
+  (53,146,"Luffy_Monkey","ZF56949335760","poster",67,2,2),
+  (54,7,"Demon_Slayer_Kimetsu_no_Yaiba","DJ75950765427","mosepad",8,47,1),
+  (55,129,"Sword_Art_Online","VQ58883447024","traje",46,176,3),
+  (56,68,"Mob_Psycho_100","YS38457565944","traje",14,141,2),
+  (57,105,"Demon_Slayer_Kimetsu_no_Yaiba","RS56584164394","traje",6,268,0),
+  (58,47,"Bleach","UJ64424786525","colla",54,123,0),
+  (59,16,"Yugi_Muto","CK51810532867","figura",20,235,2),
+  (60,29,"Light_Yagami","WW36153644436","colla",22,11,4);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (61,97,"Sailor_Moon","UD83282604620","figura",16,208,1),
+  (62,1,"Black_Clover","QI14712428917","traje",15,227,0),
+  (63,107,"Fullmetal_Alchemist","OM71544455530","keycaps",19,169,0),
+  (64,115,"Dragon_Ball_Super","OS65224258210","colla",24,267,3),
+  (65,102,"Rei_Ayanami","GG42178508157","mosepad",7,295,3),
+  (66,44,"Mikasa_Ackerman","UE36687628275","mosepad",19,128,0),
+  (67,94,"Haikyuu","FN82527753346","pulsera",10,226,1),
+  (68,85,"JoJos_Bizarre_Adventure","XN65064436151","figura",61,157,3),
+  (69,0,"Hunter_x_Hunter","UB75239246348","pulsera",27,248,3),
+  (70,106,"Gon_Freecss","FE49315576577","colla",65,123,3);
+INSERT INTO `color` (`id`,`id_producto`,`color`)
+VALUES
+  (1,25,"Cian"),
+  (2,56,"Púrpura"),
+  (3,50,"Amarillo"),
+  (4,47,"Magenta"),
+  (5,47,"Ámbar"),
+  (6,42,"Plata"),
+  (7,25,"Cian"),
+  (8,61,"Ámbar"),
+  (9,57,"Marfil"),
+  (10,31,"Lavanda");
+INSERT INTO `color` (`id`,`id_producto`,`color`)
+VALUES
+  (11,20,"Cian"),
+  (12,36,"Cian"),
+  (13,2,"Caqui"),
+  (14,63,"Melocotón"),
+  (15,66,"Turquesa"),
+  (16,42,"Negro"),
+  (17,2,"Celeste"),
+  (18,4,"Lavanda"),
+  (19,33,"Azul_Marino"),
+  (20,54,"Negro");
+INSERT INTO `color` (`id`,`id_producto`,`color`)
+VALUES
+  (21,51,"Cereza"),
+  (22,25,"Rosa_Fuerte"),
+  (23,9,"Coral"),
+  (24,16,"Beige"),
+  (25,12,"Mauve"),
+  (26,14,"Marfil"),
+  (27,68,"Teal"),
+  (28,48,"Lavanda"),
+  (29,64,"Violeta"),
+  (30,22,"Ámbar");
+INSERT INTO `color` (`id`,`id_producto`,`color`)
+VALUES
+  (31,46,"Púrpura"),
+  (32,0,"Índigo"),
+  (33,58,"Magenta"),
+  (34,13,"Verde_Esmeralda"),
+  (35,36,"Violeta"),
+  (36,67,"Marfil"),
+  (37,64,"Coral"),
+  (38,61,"Celeste"),
+  (39,68,"Rosa"),
+  (40,46,"Celeste");
+INSERT INTO `color` (`id`,`id_producto`,`color`)
+VALUES
+  (41,65,"Marrón"),
+  (42,1,"Naranja"),
+  (43,41,"Blanco"),
+  (44,9,"Marfil"),
+  (45,58,"Coral"),
+  (46,69,"Rojo"),
+  (47,51,"Azul_Marino"),
+  (48,39,"Borgoña"),
+  (49,39,"Mostaza"),
+  (50,29,"Verde_Esmeralda");
+INSERT INTO `color` (`id`,`id_producto`,`color`)
+VALUES
+  (51,56,"Azul"),
+  (52,26,"Rosa"),
+  (53,38,"Azul_Cielo"),
+  (54,30,"Beige"),
+  (55,46,"Oro"),
+  (56,43,"Naranja"),
+  (57,25,"Carmesí"),
+  (58,51,"Ciruela"),
+  (59,64,"Mauve"),
+  (60,4,"Negro");
+INSERT INTO `color` (`id`,`id_producto`,`color`)
+VALUES
+  (61,63,"Gris_Oscuro"),
+  (62,9,"Coral"),
+  (63,2,"Amarillo"),
+  (64,67,"Caqui"),
+  (65,1,"Rosa"),
+  (66,14,"Canela"),
+  (67,40,"Verde_Oscuro"),
+  (68,17,"Celeste"),
+  (69,60,"Ámbar"),
+  (70,68,"Oro");
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (1,141,33),
+  (2,150,90),
+  (3,55,1),
+  (4,119,85),
+  (5,64,47),
+  (6,7,53),
+  (7,53,55),
+  (8,33,59),
+  (9,20,148),
+  (10,149,124);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (11,31,48),
+  (12,68,149),
+  (13,92,144),
+  (14,114,101),
+  (15,17,46),
+  (16,134,35),
+  (17,90,80),
+  (18,72,4),
+  (19,6,10),
+  (20,114,39);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (21,28,82),
+  (22,42,35),
+  (23,87,67),
+  (24,1,72),
+  (25,62,71),
+  (26,129,145),
+  (27,21,127),
+  (28,27,94),
+  (29,120,140),
+  (30,6,46);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (31,30,149),
+  (32,70,31),
+  (33,121,59),
+  (34,148,59),
+  (35,101,22),
+  (36,123,35),
+  (37,69,109),
+  (38,60,15),
+  (39,145,68),
+  (40,138,35);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (41,2,38),
+  (42,133,140),
+  (43,73,104),
+  (44,57,145),
+  (45,102,34),
+  (46,133,31),
+  (47,68,22),
+  (48,39,107),
+  (49,55,126),
+  (50,50,85);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (51,87,84),
+  (52,76,140),
+  (53,35,5),
+  (54,12,141),
+  (55,18,43),
+  (56,79,127),
+  (57,85,40),
+  (58,130,18),
+  (59,104,46),
+  (60,147,98);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (61,137,15),
+  (62,61,115),
+  (63,21,1),
+  (64,3,97),
+  (65,26,127),
+  (66,140,6),
+  (67,33,67),
+  (68,41,137),
+  (69,72,127),
+  (70,133,81);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (71,72,83),
+  (72,102,103),
+  (73,139,45),
+  (74,5,13),
+  (75,86,89),
+  (76,120,121),
+  (77,75,133),
+  (78,110,146),
+  (79,130,27),
+  (80,104,72);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (81,71,113),
+  (82,23,57),
+  (83,72,77),
+  (84,105,2),
+  (85,124,83),
+  (86,122,99),
+  (87,27,37),
+  (88,25,145),
+  (89,148,100),
+  (90,126,57);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (91,144,18),
+  (92,126,25),
+  (93,137,83),
+  (94,47,51),
+  (95,28,16),
+  (96,15,51),
+  (97,54,79),
+  (98,40,146),
+  (99,107,46),
+  (100,41,71);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (101,60,54),
+  (102,5,31),
+  (103,8,51),
+  (104,99,24),
+  (105,121,39),
+  (106,123,60),
+  (107,73,19),
+  (108,60,125),
+  (109,87,94),
+  (110,72,100);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (111,54,97),
+  (112,70,97),
+  (113,127,2),
+  (114,128,80),
+  (115,70,82),
+  (116,102,91),
+  (117,18,95),
+  (118,135,88),
+  (119,116,86),
+  (120,128,80);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (121,81,33),
+  (122,117,72),
+  (123,59,118),
+  (124,34,72),
+  (125,60,36),
+  (126,66,51),
+  (127,145,109),
+  (128,106,37),
+  (129,46,63),
+  (130,95,11);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (131,128,111),
+  (132,88,22),
+  (133,146,99),
+  (134,37,106),
+  (135,69,132),
+  (136,66,54),
+  (137,132,27),
+  (138,15,76),
+  (139,110,148),
+  (140,137,84);
+INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
+VALUES
+  (141,35,35),
+  (142,23,97),
+  (143,96,132),
+  (144,58,85),
+  (145,41,146),
+  (146,15,2),
+  (147,11,132),
+  (148,108,136),
+  (149,132,83),
+  (150,66,110);
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (1,33,"IDC57CUP1PO","CZ4650644627302735872888"),
+  (2,3,"TPT42TFV7IT","PT73113384825284424137652"),
+  (3,42,"QHN81LHK8LQ","DE54651728182486780784"),
+  (4,91,"YCU09OVL1JO","LI5123418451283730472"),
+  (5,36,"GYK57VDF3TH","AL85392436680259346601168231"),
+  (6,78,"CGS62HBN2YR","GI85EZBK219198233228284"),
+  (7,50,"OOB75OGK3GF","AT285605925200155013"),
+  (8,3,"XEA53JIU2UL","AD5557111781762456536667"),
+  (9,62,"NMM94XDC4HJ","PK6924359522351927146159"),
+  (10,47,"ICU04HLJ6QQ","CH6262511862165557841");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (11,14,"LJD47FLM7NJ","MU8584241445677571725681916934"),
+  (12,73,"AUQ08PQW2DX","GL4431551053536191"),
+  (13,45,"AFT22SNS0NC","CZ0238287241625207118472"),
+  (14,56,"XLW51MSI6GS","VG9379348671667538421164"),
+  (15,4,"VLR18DCB1DV","MC3473453862889128848142627"),
+  (16,71,"EGD71BOF6BN","EE792572464645385323"),
+  (17,61,"PHY79CLZ2XE","AT182023028661950252"),
+  (18,74,"MHC96DJS4ER","FO4735332155362537"),
+  (19,45,"AAN73JVE9WE","GE26616877746182037817"),
+  (20,99,"SMB79GUE3RN","MC6201319858786587038338192");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (21,8,"MJD64CNX2QT","NL06INQP9628434357"),
+  (22,6,"DXO98QQP3LL","AL98442867919136251548263332"),
+  (23,29,"WWL14UMF7FP","MR3218293835130518464758644"),
+  (24,76,"AIQ89XSW5FN","AZ02965149537954424027542379"),
+  (25,25,"QUL65YPG3HH","AT265554757318376144"),
+  (26,8,"HXU14TYG8DP","SM9011075224638830121116350"),
+  (27,65,"XHU29IGH8RV","PL20197451562890611715047431"),
+  (28,27,"NXI51XXS3YK","LI5835686066423507757"),
+  (29,84,"UVX42LJV4UB","BE78782424182886"),
+  (30,81,"EKW62ISD5LD","AD7889141111187340678156");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (31,79,"PPO18ZNL3AD","TN5378184336259559566248"),
+  (32,13,"IGN56YGR5SV","SK7672787747353137811706"),
+  (33,73,"FHO32FMI0XV","AT444314965356530408"),
+  (34,93,"RVE62VRM4HE","MC9793508470289321903963684"),
+  (35,27,"ODX62FOM8CY","SK4476254446278838678123"),
+  (36,9,"GIK08EDT5GO","TN9799088527145001925432"),
+  (37,7,"BMQ49PMG3DF","TN6707532777070354113267"),
+  (38,58,"YJK74TII3SR","DE07885234377837184501"),
+  (39,37,"YTY81KSC7MI","TN7356868137812878076796"),
+  (40,69,"LBP67KTL5JW","CZ1057469838004626564862");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (41,98,"GXK11CEW8YF","CH7085700733637389571"),
+  (42,54,"VXP03ABP7YH","HU14871411581943294863608826"),
+  (43,39,"JAL10EYF1JL","PS952614297936804761672216784"),
+  (44,30,"FKU23XXT0CB","VG4239292281341502342154"),
+  (45,59,"OUW38SQX4OO","IS293292480181407967556184"),
+  (46,31,"QLD71OQH3YJ","GT17408455889161173474726645"),
+  (47,14,"SBI58JFZ8OY","CZ6247154871038647011757"),
+  (48,38,"YVB94OKI8HF","PK2386128249742131331531"),
+  (49,10,"DYL19RCY9XM","TN1231396058356295715353"),
+  (50,24,"JCJ58FQX5KC","IE97HCFU61541945073859");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (51,47,"WCL90UOT7KI","MT40FLKI64668188538832716781422"),
+  (52,46,"QGQ18DDF1RJ","PT72238576178365141952773"),
+  (53,93,"VOV72NDO3XO","LT026336027313413514"),
+  (54,19,"BQH62MSQ0JG","MD2955634842521571851724"),
+  (55,41,"VPB41OOS4PU","NO1753047338879"),
+  (56,68,"IQY46BNJ1UT","MC8337355666252620812007079"),
+  (57,82,"RDD33NBQ4CJ","LV53VALU3190378224742"),
+  (58,64,"TFY26QHM5MC","GB11BFEF14659231398050"),
+  (59,85,"VNO62ZUO5KB","PS578880838426310711592438643"),
+  (60,38,"DEL36DSM5LB","LU888646154143013638");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (61,52,"WHL91BCC2MO","GR8584650935114471432595118"),
+  (62,70,"WCN62KKN6CX","FI0209148965155842"),
+  (63,19,"VEI28SUT4WC","CZ9676376634161723568439"),
+  (64,55,"GNB70HDE8SJ","AE981035348364818487783"),
+  (65,34,"OYQ84WLK3EO","FI3584388808636360"),
+  (66,80,"EYM51NOT2CW","BH62556012661004447647"),
+  (67,45,"CQP55TNN4OH","GB73TIOY30743242224194"),
+  (68,72,"CDQ18POU5UR","FO3818616746872018"),
+  (69,28,"HAD35KJH2DO","LB32302496686533835053424642"),
+  (70,1,"MYS58STY0SI","GT93116237224330634487331625");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (71,21,"SFT17EMN3YK","TR767536859344406787863004"),
+  (72,26,"HIY41CCM1LQ","KW8239653281544311537375119616"),
+  (73,57,"URF04FXK3WQ","ES1646653288023952986063"),
+  (74,60,"RWH34NDH1JL","DO11504361472663336591411169"),
+  (75,34,"HDM61BKQ1YI","NL03BNWW1138761887"),
+  (76,98,"NTU58SVS4PB","PS962518624818122312728606563"),
+  (77,94,"HAE55XHU0BI","BE50086203726830"),
+  (78,47,"XAV18PTK6MF","PK7812098581248566086562"),
+  (79,4,"ZLW21YGW7OX","LT066377322224535685"),
+  (80,63,"KZW00TKS4SS","DK6885127277719865");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (81,18,"NDQ38MDA6CT","MC7970158173203154351227441"),
+  (82,53,"OEH84PNN4HF","GE32768979739758373138"),
+  (83,97,"KWE61UXD6FF","MD7106886837362658147538"),
+  (84,30,"VCC10WJW3FL","MK66344259175746536"),
+  (85,44,"OFM50QSY4PG","LU866456438109163518"),
+  (86,58,"MXH93NRU1SS","SE5510159856352784872286"),
+  (87,49,"OKK69CFI5OW","DK7575396223773758"),
+  (88,68,"TUA34BOF6EY","CZ1944413956173202684676"),
+  (89,45,"IGI51LYD5KI","GE96084377215840121287"),
+  (90,54,"IVQ11LXW6TD","CH9226531444117178154");
+INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
+VALUES
+  (91,47,"XDC75HOH5CI","GR4628519174135123645617795"),
+  (92,67,"IFL30CNC2CE","MK48210363391884745"),
+  (93,62,"TPE22JVO6SQ","SM8713879204912297464530269"),
+  (94,7,"XMO87SAS1KI","SK7083674644333881947453"),
+  (95,87,"XTR85QPC1PC","HU22433257260135526496228814"),
+  (96,82,"KRI98TWL3VE","MD2884339835252367943497"),
+  (97,80,"NEF72EHW9UH","SK1378175248486318666431"),
+  (98,64,"LPB96RIW4WD","GL9824845612379142"),
+  (99,24,"FPD63JCJ2QC","MD8232141113185511453270"),
+  (100,58,"SHU92GUY6RC","BA395643652675754061");
+  INSERT INTO `bizum` (`id`,`id_metodo_de_pago`,`numero_de_telefono`)
+VALUES
+  (1,37,"352010633"),
+  (21,73,"421618336"),
+  (41,56,"584299450"),
+  (61,0,"238326487"),
+  (81,81,"733708104"),
+  (101,87,"543274132"),
+  (121,53,"636365488"),
+  (141,81,"943159568"),
+  (161,93,"618730711"),
+  (181,19,"548350858");
+INSERT INTO `bizum` (`id`,`id_metodo_de_pago`,`numero_de_telefono`)
+VALUES
+  (201,17,"826939637"),
+  (221,10,"868175867"),
+  (241,49,"480629498"),
+  (261,20,"535675697"),
+  (281,43,"483176247"),
+  (301,90,"845960110"),
+  (321,85,"551377919"),
+  (341,12,"866528487"),
+  (361,26,"558578139"),
+  (381,89,"640517273");
+
