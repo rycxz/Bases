@@ -114,3 +114,6 @@ group by coalicion_cuerpo_celeste.id_coalicion;
 /*Socios que hayan tardado más de un año en devolver un préstamo*/
 
 /*Autores de los libros prestados desde hace 27+12+12 meses*/
+
+
+

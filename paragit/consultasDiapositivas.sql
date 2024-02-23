@@ -529,3 +529,175 @@ from (select especie.tipo_alimentacion,especie.id from especie where tipo_alimen
 join especie on especie.id = carnivoro.id
 join especie_cuerpo_celeste on especie_cuerpo_celeste.id_especie=especie.id
 right join cuerpo_celeste on especie_cuerpo_celeste.id_cuerpo_celeste=cuerpo_celeste.id;
+
+/*PARA EXAMEN*/
+use bibliotecastellar;
+/*Número de préstamos que tiene cada socio sin devolver*/
+select socio.nombre, count(socio.id) as 'numero de libros'
+from libro 
+join socio_libro on socio_libro.id_libro =libro.id
+right join  socio on socio.id = socio_libro.id_socio
+where fecha_devolucion is null
+group by socio.id;
+
+/*vistas*/
+use stellar;
+
+/*Vista de todos los cuerpos celestes que orbitan estrellas */
+create view cuerpos_celestes_orbitan_cosas
+as 
+select cuerpo_celeste.*
+from cuerpo_celeste
+join cuerpo_celeste_orbita_cuerpo_celeste on cuerpo_celeste_orbita_cuerpo_celeste.id_cuerpo_celeste_orbitador=cuerpo_celeste.id
+join estrella on cuerpo_celeste_orbita_cuerpo_celeste.id_cuerpo_celeste_orbitado=estrella.id;
+drop view cuerpos_celestes_orbitan_cosas;
+select * from cuerpos_celestes_orbitan_cosas;
+
+ /*Nombre de las personas que han nacido en cuerpos celestes que orbitan estrellas*/
+select persona.nombre
+from cuerpo_celeste
+join cuerpo_celeste_orbita_cuerpo_celeste on cuerpo_celeste_orbita_cuerpo_celeste.id_cuerpo_celeste_orbitador=cuerpo_celeste.id
+join estrella on cuerpo_celeste_orbita_cuerpo_celeste.id_cuerpo_celeste_orbitado=estrella.id
+join persona on persona.id_cuerpo_celeste =  cuerpo_celeste.id;
+drop view personas_nacidas_cuerpos_orbitan_estrellas;
+
+select persona.nombre
+from cuerpos_celestes_orbitan_cosas
+join  persona on persona.id_cuerpo_celeste = cuerpos_celestes_orbitan_cosas.id
+where persona.id_cuerpo_celeste=cuerpos_celestes_orbitan_cosas.id;
+
+
+/*Nombre del cuerpo_celeste con más personas nacidas en él (utilizando una vista que dice cuántas personas han nacido en cada cuerpo celeste)*/
+create view cuerpo_celeste_mas_personas
+as 
+select count(*) as 'persona_cuerpo',cuerpo_celeste.nombre
+from persona
+join cuerpo_celeste on cuerpo_celeste.id = persona.id_cuerpo_celeste
+group by cuerpo_celeste.id;
+drop view cuerpo_celeste_mas_personas;
+ 
+
+select cuerpo_celeste_mas_personas.nombre,cuerpo_celeste_mas_personas.persona_cuerpo as 'contador'
+ from cuerpo_celeste_mas_personas
+ having contador = (select max(cuerpo_celeste_mas_personas.persona_cuerpo) from cuerpo_celeste_mas_personas);
+
+/* Naves de coaliciones aparcadas en territorios de otra coalición (Utilizando una vista que dice a qué coalición pertenece cada nave)*/
+use stellar; 
+
+/*las naves que estan */
+create view naves_coalicion
+as
+select nave.*
+from nave
+join coalicion on coalicion.id = nave.id_coalicion;
+
+drop view naves_coalicion;
+
+/*scamos los cuerpos celestes de las cualiciones*/
+create view cuerpos_coalicion
+as
+select cuerpo_celeste.id  as 'id_cuerpo_celes', coalicion.id as 'id_coali'
+from coalicion
+join coalicion_cuerpo_celeste on coalicion_cuerpo_celeste.id_coalicion = coalicion.id
+join cuerpo_celeste on cuerpo_celeste.id = coalicion_cuerpo_celeste.id_cuerpo_celeste;
+
+drop view cuerpos_coalicion;
+/*
+select naves_coalicion.nombre , cuerpo_celeste.nombre as 'id_cuerpo'
+from naves_coalicion
+join coalicion_cuerpo_celeste on coalicion_cuerpo_celeste.id_cuerpo_celeste = naves_coalicion.id_cuerpo_celeste
+right join cuerpo_celeste on cuerpo_celeste.id = coalicion_cuerpo_celeste .id_cuerpo_celeste
+ join cuerpos_coalicion on cuerpos_coalicion.id_cuerpo_celes =cuerpo_celeste.id
+where  cuerpos_coalicion.id_cuerpo_celes <> naves_coalicion.id_cuerpo_celeste ;
+
+nose
+*/
+
+select naves_coalicion.nombre , cuerpo_celeste.nombre as 'id_cuerpo'
+from naves_coalicion
+/*tenemos las naves de cada coalicion y ahora queremos sacber si estan aparacadas en otro lado que no sea de sus territorios*/
+join coalicion_cuerpo_celeste on coalicion_cuerpo_celeste.id_coalicion = naves_coalicion.id_coalicion
+join cuerpo_celeste on coalicion_cuerpo_celeste.id_cuerpo_celeste = cuerpo_celeste.id
+;
+
+
+
+
+/*nave con el mayor nuemro de tripulantes*/
+select nave.nombre 
+from nave
+where n_tripulantes = (select max(n_tripulantes) from nave);
+
+
+use pokimon;
+/*93 : /*Nombre y tipos de la especie del pokimon con mayor ataque*/
+/*V1*/
+select especie.nombre as 'nombre_pokiomn' , especie.tipo1 as 'tipo1' , especie.tipo2 as 'tipo2' 
+from pokimon
+join especie on especie.id = pokimon.id_especie
+where ataque = (select max(ataque) from pokimon );
+
+
+/*Nombre del motivador que más pokimons tiene*/
+
+
+select motivador.nombre ,count(*) as 'numero_pokimons'
+from pokimon 
+join motivador on motivador.id = pokimon.id_motivador
+group by pokimon.id_motivador
+having count(*) = (select max(cantidad)
+from( select count(*) as 'cantidad'
+ from pokimon 
+ group by pokimon.id_motivador)
+ as numero_pokimon);
+ 
+/*Nombre del motivador que más pokimons de tipo unicornio tiene*/
+
+select motivador.nombre , count(*) as 'numero_pokimons'
+from pokimon 
+join motivador on motivador.id = pokimon.id_motivador
+join especie on especie.id = pokimon.id_especie
+where  especie.tipo1 = "unicornio" or especie.tipo2 = "unicornio" 
+group by pokimon.id_motivador
+having count(*) = (select max(cantidad) from (select count(*) AS 'cantidad' 
+from pokimon 
+join motivador on motivador.id = pokimon.id_motivador
+join especie on especie.id = pokimon.id_especie
+where especie.tipo1 = "unicornio" or especie.tipo2 = "unicornio"
+group by pokimon.id_motivador) as numero_uni);
+
+
+
+/*Motivadores sin pokimon tipo planeo*/
+
+select motivador.nombre 
+from (select motivador.id  as 'id_motivador_sub'
+from pokimon 
+join motivador on motivador.id = pokimon.id_motivador
+join especie on especie.id = pokimon.id_especie
+where especie.tipo1 = "planeo" or especie.tipo2 = "planeo")
+as motivaodres_planeo
+right join motivador on motivador.id = motivaodres_planeo.id_motivador_sub
+where motivaodres_planeo.id_motivador_sub <> pokimon.id_motivador;
+/*motivadores que SI tienen los pokimons esos*/
+select motivador.id  as 'id_motivador_sub'
+from pokimon 
+join motivador on motivador.id = pokimon.id_motivador
+join especie on especie.id = pokimon.id_especie
+where especie.tipo1 = "planeo" or especie.tipo2 = "planeo";
+
+
+/*todo los motivaodres que si tiene pokimons*/
+select motivador.nombre 
+from pokimon
+join motivador on motivador.id = pokimon.id_motivador
+/*y juntamos las especie*/
+join especie on especie.id = pokimon.id_especie
+/*queiremos hacer que las ids de los motivadores sea diferente a la de lo que si los tienen*/
+where motivador.id <> (select motivador.id  as 'id_motivador_sub'
+from pokimon 
+join motivador on motivador.id = pokimon.id_motivador
+join especie on especie.id = pokimon.id_especie
+);
+/*diapositivas 68..*/
+

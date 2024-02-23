@@ -3712,4 +3712,245 @@ VALUES
   (341,12,"866528487"),
   (361,26,"558578139"),
   (381,89,"640517273");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (1,6,"Vash_the_Stampede",83,111,"M"),
+  (21,5,"Kagome_Higurashi",934,105,"H"),
+  (41,2,"Natsu_Dragneel",867,49,"M"),
+  (61,4,"Genma_Saotome",822,78,"H"),
+  (81,2,"Emilia",185,134,"M"),
+  (101,2,"Gonzo_Tarukane",77,149,"M"),
+  (121,8,"Eren_Yeager",543,187,"M"),
+  (141,4,"Nagisa_Shota",385,155,"H"),
+  (161,7,"Tenya_Iida",892,176,"H"),
+  (181,10,"Shoto_Todoroki",540,87,"M");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (201,0,"Rei_Ayanami",3,174,"M"),
+  (221,4,"Nezuko_Kamado",617,70,"M"),
+  (241,7,"Shoto_Todoroki",830,187,"H"),
+  (261,2,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",662,194,"M"),
+  (281,7,"Issei_Hyoudou",303,153,"H"),
+  (301,10,"Misa_Amane",758,152,"M"),
+  (321,3,"Jean_Kirstein",5,85,"H"),
+  (341,6,"Homura_Akemi",694,97,"M"),
+  (361,2,"Ichigo_Kurosaki",756,183,"H"),
+  (381,3,"Ram",453,21,"M");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (401,6,"Historia_Reiss",576,70,"M"),
+  (421,10,"Shoto_Todoroki",293,58,"H"),
+  (441,6,"Bakugo_Katsuki",608,192,"M"),
+  (461,10,"Natsu_Dragneel",485,134,"H"),
+  (481,7,"Emilia",129,53,"H"),
+  (501,5,"Ram",908,136,"H"),
+  (521,5,"Saitama",994,103,"H"),
+  (541,3,"Kagome_Higurashi",535,140,"M"),
+  (561,3,"Ryuko_Matoi",429,4,"H"),
+  (581,1,"Maka_Albarn",646,70,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (601,0,"Armin_Arlert",525,15,"H"),
+  (621,5,"Dio_Brando",394,136,"M"),
+  (641,4,"Hotaru_Tomoe",564,36,"H"),
+  (661,1,"Lelouch_Lamperouge",852,113,"M"),
+  (681,9,"Rias_Gremory",154,33,"M"),
+  (701,3,"Jotaro_Kujo",305,93,"H"),
+  (721,5,"Tanjiro_Kamado",389,168,"M"),
+  (741,7,"Jotaro_Kujo",676,65,"M"),
+  (761,7,"Gohan_Son",476,195,"M"),
+  (781,9,"Monkey_D_Garp",521,158,"M");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (801,0,"Rei_Hino",408,16,"M"),
+  (821,3,"Endeavor",594,19,"H"),
+  (841,8,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",530,17,"M"),
+  (861,2,"Mikasa_Ackerman",174,183,"H"),
+  (881,3,"Ram",329,43,"H"),
+  (901,3,"Asuka_Langley_Sohryu",20,51,"H"),
+  (921,5,"Bakugo_Katsuki",731,88,"H"),
+  (941,3,"Mikasa_Ackerman",141,12,"H"),
+  (961,7,"Lucy_Heartfilia",82,156,"M"),
+  (981,2,"Haruka_Tenoh",225,132,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (1001,6,"Historia_Reiss",161,176,"M"),
+  (1021,0,"Vash_the_Stampede",997,77,"M"),
+  (1041,8,"Griffith",629,145,"H"),
+  (1061,4,"Roy_Mustang",615,121,"M"),
+  (1081,9,"Historia_Reiss",289,31,"H"),
+  (1101,4,"Kenshin_Himura",795,75,"M"),
+  (1121,9,"Holo_the_Wise_Wolf",291,2,"H"),
+  (1141,4,"Light_Yagami",377,119,"H"),
+  (1161,10,"Yukiteru_Amano",963,167,"H"),
+  (1181,0,"Yukiteru_Amano",891,65,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (1201,9,"Shoto_Todoroki",255,131,"M"),
+  (1221,9,"Tanjiro_Kamado",892,142,"H"),
+  (1241,3,"Alucard",820,153,"H"),
+  (1261,6,"Gon_Freecss",627,74,"H"),
+  (1281,1,"Mamoru_Chiba",266,77,"H"),
+  (1301,3,"Endeavor",262,42,"H"),
+  (1321,3,"Lawrence_Kraft",176,98,"M"),
+  (1341,1,"Eren_Yeager",52,149,"H"),
+  (1361,6,"Kagome_Higurashi",526,11,"M"),
+  (1381,6,"Levi_Ackerman",260,155,"M");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (1401,4,"Jotaro_Kujo",171,46,"M"),
+  (1421,9,"Goku_Son",322,19,"M"),
+  (1441,9,"Vash_the_Stampede",652,65,"M"),
+  (1461,8,"Nodoka_Saotome",598,71,"H"),
+  (1481,4,"Jotaro_Kujo",241,72,"H"),
+  (1501,9,"Holo_the_Wise_Wolf",791,90,"M"),
+  (1521,0,"Riza_Hawkeye",368,122,"H"),
+  (1541,6,"Mamoru_Chiba",683,15,"M"),
+  (1561,2,"Madoka_Kaname",83,94,"M"),
+  (1581,1,"Kagome_Higurashi",262,173,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (1601,3,"Spike_Spiegel",883,114,"M"),
+  (1621,5,"Saitama",665,106,"H"),
+  (1641,7,"Vegeta",694,140,"M"),
+  (1661,5,"Kyoko_Kirigiri",798,198,"H"),
+  (1681,3,"Levi_Ackerman",62,7,"H"),
+  (1701,4,"Ochaco_Uraraka",241,174,"M"),
+  (1721,3,"Hotaru_Tomoe",625,60,"M"),
+  (1741,4,"Nezuko_Kamado",121,22,"M"),
+  (1761,4,"Nezuko_Kamado",853,41,"H"),
+  (1781,9,"Mamoru_Chiba",252,75,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (1801,7,"Faye_Valentine",639,61,"M"),
+  (1821,7,"Seras_Victoria",132,68,"M"),
+  (1841,0,"Tenya_Iida",325,128,"M"),
+  (1861,5,"Rem",718,160,"H"),
+  (1881,0,"Faye_Valentine",324,163,"H"),
+  (1901,6,"Rei_Hino",425,189,"H"),
+  (1921,1,"Faye_Valentine",422,44,"H"),
+  (1941,8,"Maka_Albarn",844,68,"M"),
+  (1961,1,"Armin_Arlert",166,154,"H"),
+  (1981,3,"Asuka_Langley_Sohryu",903,11,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (2001,8,"Usagi_Tsukino",219,171,"H"),
+  (2021,1,"Goku_Son",486,175,"H"),
+  (2041,6,"Tanjiro_Kamado",581,183,"H"),
+  (2061,5,"Yusuke_Urameshi",808,32,"M"),
+  (2081,3,"Subaru_Natsuki",948,126,"H"),
+  (2101,1,"Rintarou_Okabe",307,170,"H"),
+  (2121,8,"Eren_Yeager",345,45,"H"),
+  (2141,7,"Rem",414,177,"H"),
+  (2161,7,"Tatewaki_Kuno",735,112,"M"),
+  (2181,7,"Makoto_Naegi",337,29,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (2201,8,"Tsukasa_Shishio",872,197,"H"),
+  (2221,9,"Saitama",659,133,"H"),
+  (2241,5,"Ichigo_Kurosaki",126,3,"M"),
+  (2261,10,"Ichigo_Kurosaki",383,137,"H"),
+  (2281,8,"Lucy_Heartfilia",712,122,"H"),
+  (2301,7,"Kagome_Higurashi",103,110,"M"),
+  (2321,4,"Dio_Brando",5,72,"H"),
+  (2341,9,"Bakugo_Katsuki",427,81,"M"),
+  (2361,3,"Gourry_Gabriev",40,196,"H"),
+  (2381,1,"Gon_Freecss",882,123,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (2401,2,"Levi_Ackerman",485,140,"H"),
+  (2421,3,"Makoto_Naegi",427,199,"M"),
+  (2441,9,"Emilia",525,6,"M"),
+  (2461,4,"Rei_Ayanami",279,153,"M"),
+  (2481,7,"Satsuki_Kiryuin",335,76,"M"),
+  (2501,5,"Rem",429,121,"H"),
+  (2521,3,"Endeavor",521,8,"H"),
+  (2541,2,"Nezuko_Kamado",303,183,"H"),
+  (2561,6,"Satsuki_Kiryuin",92,124,"M"),
+  (2581,2,"Eren_Yeager",742,17,"M");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (2601,6,"Lina_Inverse",75,74,"H"),
+  (2621,4,"Asuka_Langley_Sohryu",646,148,"H"),
+  (2641,2,"Seras_Victoria",578,2,"M"),
+  (2661,3,"Edward_Elric",604,6,"H"),
+  (2681,7,"Spike_Spiegel",688,100,"M"),
+  (2701,8,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",156,192,"H"),
+  (2721,5,"Emilia",996,46,"M"),
+  (2741,3,"Satsuki_Kiryuin",964,156,"M"),
+  (2761,7,"Eren_Yeager",520,46,"H"),
+  (2781,3,"Dio_Brando",917,109,"M");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (2801,4,"Soul_Eater",116,198,"H"),
+  (2821,5,"Hinata_Hyuga",777,105,"M"),
+  (2841,0,"Nagisa_Shota",918,195,"H"),
+  (2861,3,"Griffith",882,80,"M"),
+  (2881,7,"Maka_Albarn",438,192,"M"),
+  (2901,7,"Shoto_Todoroki",365,35,"H"),
+  (2921,10,"Bakugo_Katsuki",703,121,"H"),
+  (2941,1,"Seras_Victoria",362,145,"H"),
+  (2961,8,"Miroku",770,30,"M"),
+  (2981,4,"Miroku",599,127,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (3001,1,"Naruto_Uzumaki",397,22,"M"),
+  (3021,3,"Emilia",25,172,"H"),
+  (3041,7,"Makoto_Kino",391,24,"H"),
+  (3061,6,"Soul_Eater",913,161,"M"),
+  (3081,8,"Subaru_Natsuki",324,190,"H"),
+  (3101,3,"Nagisa_Shota",958,187,"M"),
+  (3121,10,"Lawrence_Kraft",347,89,"M"),
+  (3141,7,"Soul_Eater",857,52,"M"),
+  (3161,1,"Endeavor",92,59,"H"),
+  (3181,2,"Homura_Akemi",968,124,"M");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (3201,10,"Yuno_Gasai",835,124,"H"),
+  (3221,4,"Kurisu_Makise",730,90,"M"),
+  (3241,9,"Trunks_Briefs",750,53,"M"),
+  (3261,10,"Seras_Victoria",710,69,"M"),
+  (3281,7,"Eren_Yeager",730,90,"M"),
+  (3301,2,"Kagome_Higurashi",67,0,"H"),
+  (3321,5,"Kurisu_Makise",387,42,"M"),
+  (3341,2,"Yuno_Gasai",529,116,"H"),
+  (3361,10,"Makoto_Naegi",218,131,"H"),
+  (3381,4,"Shinji_Ikari",906,56,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (3401,8,"Monkey_D_Garp",155,62,"M"),
+  (3421,9,"Levi_Ackerman",995,124,"H"),
+  (3441,4,"Subaru_Natsuki",267,194,"M"),
+  (3461,2,"Sakura_Haruno",512,57,"M"),
+  (3481,5,"Rei_Ayanami",977,168,"H"),
+  (3501,6,"Asuka_Langley_Sohryu",189,167,"H"),
+  (3521,5,"Sailor_Moon",843,162,"H"),
+  (3541,3,"Homura_Akemi",526,11,"H"),
+  (3561,3,"Yagami_Light",231,52,"H"),
+  (3581,1,"All_Might",411,58,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (3601,2,"Genma_Saotome",450,70,"M"),
+  (3621,3,"Homura_Akemi",318,174,"H"),
+  (3641,6,"Sailor_Moon",943,156,"H"),
+  (3661,8,"Riza_Hawkeye",411,198,"H"),
+  (3681,5,"Tsukasa_Shishio",248,18,"M"),
+  (3701,0,"Levi_Ackerman",766,26,"H"),
+  (3721,0,"All_Might",152,60,"M"),
+  (3741,3,"Ram",601,168,"M"),
+  (3761,8,"Yagami_Light",865,68,"H"),
+  (3781,4,"Kenshiro",688,93,"H");
+INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
+VALUES
+  (3801,5,"Seras_Victoria",182,55,"H"),
+  (3821,10,"Makoto_Naegi",603,92,"M"),
+  (3841,4,"Madoka_Kaname",627,179,"M"),
+  (3861,3,"Nodoka_Saotome",472,91,"M"),
+  (3881,9,"Yukiteru_Amano",214,132,"M"),
+  (3901,2,"Genma_Saotome",344,33,"M"),
+  (3921,6,"Nezuko_Kamado",267,182,"M"),
+  (3941,1,"Trunks_Briefs",14,164,"H"),
+  (3961,0,"All_Might",657,179,"M"),
+  (3981,2,"Genos",598,49,"M");
+
 
