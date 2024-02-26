@@ -28,6 +28,8 @@ select  proveedor.nombre , proveedor.telefono
 from proveedor
 join lote on lote.id_proveedor = proveedor.id
 join bano on bano.id_lote = lote.id
+join bano_capibara on bano_capibara.id_bano = bano.id
+join capibara on capibara.id =bano_capibara.id_capibara
 where date_sub(curdate(), interval 375 day)
 group by proveedor.id;
 

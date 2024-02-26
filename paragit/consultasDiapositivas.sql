@@ -285,7 +285,7 @@ from autor
 join autor_libro on autor_libro.id_autor = autor.id
 join libro on libro.id = autor_libro.id_autor
 join socio_libro on socio_libro.id_libro = libro.id 
-where  socio_libro.fecha_prestamo > date_sub(curdate(),interval 51 month)
+where  socio_libro.fecha_prestamo >   date_sub(curdate(),interval 51 month)
 group by autor.id;
 
 use pokimon;

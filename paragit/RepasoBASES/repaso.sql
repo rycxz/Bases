@@ -117,3 +117,4 @@ group by coalicion_cuerpo_celeste.id_coalicion;
 
 
 
+ 
