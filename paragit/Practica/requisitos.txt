@@ -1,7 +1,10 @@
 
-2. Al menos 5 consultas utilizaran ́ funciones de fecha no repetidas 	1/5   				5/15
+2. Al menos 5 consultas utilizaran ́ funciones de fecha no repetidas 	2/5   		(date_sub)		
 4. Al menos 5 consultas deberan trabajar  ́ sobre 3 tablas 		2/5
-5. Al menos 5 consultas deberan trabajar  ́ sobre 4 tablas		 3/5
-6. Al menos 5 consultas utilizaran ́ vistas
-8. Al menos 2 consultas utilizaran ́ OUTER JOIN
-9. Al menos 4 consultas utilizaran ́ GROUP BY / HAVING 			2/4
+5. Al menos 5 consultas deberan trabajar  ́ sobre 4 tablas		 5/5
+6. Al menos 5 consultas utilizaran ́ vistas				0/5
+8. Al menos 2 consultas utilizaran ́ OUTER JOIN				0/2
+Al menos 2 consultas contendran ́ subconsultas 				3/2
+9. Al menos 4 consultas utilizaran ́ GROUP BY / HAVING 			4/4
+
+				7/15

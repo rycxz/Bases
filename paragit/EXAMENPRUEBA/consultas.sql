@@ -3,17 +3,17 @@ use experimento;
 /*1 capibaras hembra que pesen más de 42kg (0,5pts)*/
 select capibara.nombre 
 from capibara
-where sexo = "m" and peso>45;
+where sexo = "m" and peso>42;
 
 /*2 id, temperatura del agua, código de piscina y fecha de cada baño*/
 select id,t_agua as 'temperatura_agua', codigo_piscina,fecha 
 from bano;
 
 /*3 ¿Cuántos baños ha preparado cada becario?*/
-select count(*) as 'numero de baños preparados' , becario.id
+select count(bano.id_becario) as 'numero de baños preparados' , becario.id
 from bano
-join becario  on bano.id_becario= becario.id
-group by bano.id_becario;
+right join  becario  on bano.id_becario= becario.id
+group by becario.id; 
 
 /*4 ¿Cuál es la edad media de los capibaras por sexo?*/
 select avg(edad) as 'edad_hombres' ,(select avg(edad) as 'edad_mujeres ' 
@@ -30,7 +30,7 @@ join lote on lote.id_proveedor = proveedor.id
 join bano on bano.id_lote = lote.id
 join bano_capibara on bano_capibara.id_bano = bano.id
 join capibara on capibara.id =bano_capibara.id_capibara
-where date_sub(curdate(), interval 375 day)
+where bano.fecha >date_sub(curdate(), interval 375 day)
 group by proveedor.id;
 
 /*repasadr depues*/
@@ -41,7 +41,7 @@ select capibara.nombre ,count(*)
 from capibara
  join bano_capibara on bano_capibara.id_capibara = capibara.id
  join bano on bano.id = bano_capibara.id_bano
-where date_sub(curdate(), interval 730 day)
+where year (bano.fecha) like year ( date_sub(curdate(), interval 2 year))
 group by bano_capibara.id_capibara;
 
 /*7 Nombre de todos los doctores y cuántos informes rellenaron sobre baños en los dos últimos meses*/
