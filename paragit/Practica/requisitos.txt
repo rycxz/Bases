@@ -1,8 +1,7 @@
-1. No se admitiran consultas que act  ́ uen sobre una tabla  ́
-2. Al menos 5 consultas utilizaran ́ funciones de fecha no repetidas
-4. Al menos 5 consultas deberan trabajar  ́ sobre 3 tablas
-5. Al menos 5 consultas deberan trabajar  ́ sobre 4 tablas
+
+2. Al menos 5 consultas utilizaran ́ funciones de fecha no repetidas 	1/5   				5/15
+4. Al menos 5 consultas deberan trabajar  ́ sobre 3 tablas 		2/5
+5. Al menos 5 consultas deberan trabajar  ́ sobre 4 tablas		 3/5
 6. Al menos 5 consultas utilizaran ́ vistas
-7. Al menos 2 consultas contendran ́ subconsultas
 8. Al menos 2 consultas utilizaran ́ OUTER JOIN
-9. Al menos 4 consultas utilizaran ́ GROUP BY / HAVING
+9. Al menos 4 consultas utilizaran ́ GROUP BY / HAVING 			2/4

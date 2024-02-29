@@ -198,7 +198,7 @@ create table genero(
          create table personaje(
          id int unsigned primary key auto_increment,
          id_manga int unsigned,
-         nombre varchar(20),
+         nombre varchar(40),
          numero_de_seguidores int unsigned,
          estatura float unsigned,
          sexo varchar(10)
@@ -224,7 +224,7 @@ create table genero(
 		nº_de_factura varchar(60) not null,
 		categoria varchar(30),
 		precio int unsigned,
-         tamaño int unsigned,
+         tamaño varchar(20),
          peso int unsigned
          );
          
@@ -3220,90 +3220,6 @@ VALUES
   (148,"124585066","lectus","Envío de Carga","TXP05CII","libre",16,"715-7250 Molestie. St.","Gabriel Rivers","Gregory Jenkins"),
   (149,"232724881","mauris.","Entrega en Punto de Recogida","ICG08UKR","libre",19,"727-8353 Tempor Rd.","Aline Gay","Jacqueline Montgomery"),
   (150,"523813265","vulputate dui, nec tempus mauris erat eget ipsum.","Entrega por Aplicaciones o Plataformas Específicas","ELW77NLR","libre",12,"Ap #390-5268 Vitae, St.","Shellie Tyler","Joan May");
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
-VALUES
-  (1,104,"Attack_on_Titan","FJ84176113418","traje",50,112,2),
-  (2,70,"Assassination_Classroom","WB52866627185","traje",1,271,4),
-  (3,99,"Mob_Psycho_100","NV68430217552","keycaps",33,212,3),
-  (4,97,"My_Hero_Academia","MH29952574128","poster",55,86,2),
-  (5,91,"Haikyuu","GY16071724961","figura",36,56,4),
-  (6,37,"One_Piece","GV16727242682","pulsera",54,41,3),
-  (7,91,"Vegeta_Prince","OQ62158518547","mosepad",54,226,4),
-  (8,79,"Light_Yagami","OF38849148875","figura",25,58,1),
-  (9,20,"Dragon_Ball_Z","DH41085110165","figura",38,34,1),
-  (10,92,"One_Punch_Man","PB65115326599","colla",3,93,4);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
-VALUES
-  (11,129,"Sailor_Moon","AE23344638602","figura",49,97,3),
-  (12,42,"Mob_Psycho_100","WC51188564360","colla",70,128,2),
-  (13,26,"One_Punch_Man","SR65017677287","colla",57,213,2),
-  (14,88,"My_Hero_Academia","IS20004633211","mosepad",16,52,1),
-  (15,86,"Gon_Freecss","UO74558892522","figura",58,151,2),
-  (16,23,"Gon_Freecss","LX21422683234","pulsera",17,100,2),
-  (17,145,"Jotaro_Kujo","CX32189278385","keycaps",56,137,4),
-  (18,145,"One_Punch_Man","KT94285562196","colla",51,173,1),
-  (19,124,"Natsu_Dragneel","FD28555743146","keycaps",48,137,3),
-  (20,94,"Luffy_Monkey","QC36794738658","figura",13,295,1);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
-VALUES
-  (21,58,"Haikyuu","MI13015675830","figura",49,243,4),
-  (22,57,"Natsu_Dragneel","SK48381354009","traje",4,251,3),
-  (23,8,"Kenshiro_Hokuto","AH62116835315","traje",25,94,3),
-  (24,121,"Kenshiro_Hokuto","XK89878481633","colla",59,28,3),
-  (25,89,"Gintoki_Sakata","QQ57684943636","pulsera",64,275,1),
-  (26,50,"Ichigo_Kurosaki","PD12385568801","pulsera",30,109,2),
-  (27,50,"Jotaro_Kujo","MC83376532158","traje",34,289,3),
-  (28,14,"Haikyuu","PM68680485835","pulsera",17,219,2),
-  (29,72,"Dragon_Ball_Z","XG78230202108","figura",43,25,4),
-  (30,85,"One_Punch_Man","QI38612415265","pulsera",41,217,3);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
-VALUES
-  (31,110,"Bleach","WK08176973166","mosepad",46,50,2),
-  (32,119,"Parasyte_The_Maxim","JK46844108728","figura",3,184,2),
-  (33,28,"Cowboy_Bebop","KM63806173737","traje",39,260,2),
-  (34,63,"Fullmetal_Alchemist","XM36681245612","traje",50,117,2),
-  (35,65,"Tokyo_Ghoul","KB12756407150","colla",61,142,2),
-  (36,68,"Haikyuu","GX27750153282","mosepad",34,68,1),
-  (37,127,"Jotaro_Kujo","MV31481184666","mosepad",25,237,1),
-  (38,21,"Black_Clover","GN01750149701","figura",32,23,2),
-  (39,7,"Dragon_Ball_Super","GY45293373877","poster",31,136,3),
-  (40,67,"Violet_Evergarden","OX23568129154","pulsera",26,71,1);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
-VALUES
-  (41,39,"Naruto","BE39550498179","poster",55,153,3),
-  (42,52,"Fullmetal_Alchemist","CC39379026462","traje",2,28,1),
-  (43,12,"Sailor_Moon","DB89522325481","colla",16,67,3),
-  (44,37,"Killua_Zoldyck","YS83855294254","colla",69,165,0),
-  (45,138,"Violet_Evergarden","JW31955923487","pulsera",53,271,1),
-  (46,77,"Gintoki_Sakata","VF38188786605","figura",37,124,4),
-  (47,117,"Bleach","CM31542429452","poster",6,184,1),
-  (48,4,"Tokyo_Ghoul","RR56984364446","poster",21,109,2),
-  (49,113,"Dragon_Ball_Z","LL35114228911","colla",24,49,1),
-  (50,3,"Code_Geass_Lelouch_of_the_Rebellion","NP08134766182","keycaps",69,110,3);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
-VALUES
-  (51,34,"Code_Geass_Lelouch_of_the_Rebellion","ZU05853657355","mosepad",40,284,2),
-  (52,6,"My_Hero_Academia","XP84423543889","mosepad",14,201,3),
-  (53,146,"Luffy_Monkey","ZF56949335760","poster",67,2,2),
-  (54,7,"Demon_Slayer_Kimetsu_no_Yaiba","DJ75950765427","mosepad",8,47,1),
-  (55,129,"Sword_Art_Online","VQ58883447024","traje",46,176,3),
-  (56,68,"Mob_Psycho_100","YS38457565944","traje",14,141,2),
-  (57,105,"Demon_Slayer_Kimetsu_no_Yaiba","RS56584164394","traje",6,268,0),
-  (58,47,"Bleach","UJ64424786525","colla",54,123,0),
-  (59,16,"Yugi_Muto","CK51810532867","figura",20,235,2),
-  (60,29,"Light_Yagami","WW36153644436","colla",22,11,4);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
-VALUES
-  (61,97,"Sailor_Moon","UD83282604620","figura",16,208,1),
-  (62,1,"Black_Clover","QI14712428917","traje",15,227,0),
-  (63,107,"Fullmetal_Alchemist","OM71544455530","keycaps",19,169,0),
-  (64,115,"Dragon_Ball_Super","OS65224258210","colla",24,267,3),
-  (65,102,"Rei_Ayanami","GG42178508157","mosepad",7,295,3),
-  (66,44,"Mikasa_Ackerman","UE36687628275","mosepad",19,128,0),
-  (67,94,"Haikyuu","FN82527753346","pulsera",10,226,1),
-  (68,85,"JoJos_Bizarre_Adventure","XN65064436151","figura",61,157,3),
-  (69,0,"Hunter_x_Hunter","UB75239246348","pulsera",27,248,3),
-  (70,106,"Gon_Freecss","FE49315576577","colla",65,123,3);
 INSERT INTO `color` (`id`,`id_producto`,`color`)
 VALUES
   (1,25,"Cian"),
@@ -3714,243 +3630,423 @@ VALUES
   (381,89,"640517273");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (1,6,"Vash_the_Stampede",83,111,"M"),
-  (21,5,"Kagome_Higurashi",934,105,"H"),
-  (41,2,"Natsu_Dragneel",867,49,"M"),
-  (61,4,"Genma_Saotome",822,78,"H"),
-  (81,2,"Emilia",185,134,"M"),
-  (101,2,"Gonzo_Tarukane",77,149,"M"),
-  (121,8,"Eren_Yeager",543,187,"M"),
-  (141,4,"Nagisa_Shota",385,155,"H"),
-  (161,7,"Tenya_Iida",892,176,"H"),
-  (181,10,"Shoto_Todoroki",540,87,"M");
+  (1,30,"Genos",10,197,"M"),
+  (2,236,"Gonzo_Tarukane",619,108,"M"),
+  (3,98,"Emilia",479,58,"H"),
+  (4,249,"Miroku",903,85,"H"),
+  (5,270,"Makoto_Kino",991,197,"H"),
+  (6,122,"Natsu_Dragneel",750,37,"M"),
+  (7,87,"Emilia",998,162,"H"),
+  (8,66,"Tanjiro_Kamado",471,25,"H"),
+  (9,129,"Dio_Brando",715,175,"H"),
+  (10,55,"Spike_Spiegel",370,117,"M");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (201,0,"Rei_Ayanami",3,174,"M"),
-  (221,4,"Nezuko_Kamado",617,70,"M"),
-  (241,7,"Shoto_Todoroki",830,187,"H"),
-  (261,2,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",662,194,"M"),
-  (281,7,"Issei_Hyoudou",303,153,"H"),
-  (301,10,"Misa_Amane",758,152,"M"),
-  (321,3,"Jean_Kirstein",5,85,"H"),
-  (341,6,"Homura_Akemi",694,97,"M"),
-  (361,2,"Ichigo_Kurosaki",756,183,"H"),
-  (381,3,"Ram",453,21,"M");
+  (11,54,"Saitama",80,23,"H"),
+  (12,257,"Ryoga_Hibiki",976,158,"M"),
+  (13,155,"Kagome_Higurashi",929,111,"H"),
+  (14,179,"Armin_Arlert",683,127,"M"),
+  (15,245,"Spike_Spiegel",504,170,"H"),
+  (16,215,"Ram",307,107,"H"),
+  (17,160,"Setsuna_Meiou",784,40,"M"),
+  (18,82,"Kurapika",79,105,"M"),
+  (19,44,"Miroku",953,12,"H"),
+  (20,207,"Rei_Ayanami",535,67,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (401,6,"Historia_Reiss",576,70,"M"),
-  (421,10,"Shoto_Todoroki",293,58,"H"),
-  (441,6,"Bakugo_Katsuki",608,192,"M"),
-  (461,10,"Natsu_Dragneel",485,134,"H"),
-  (481,7,"Emilia",129,53,"H"),
-  (501,5,"Ram",908,136,"H"),
-  (521,5,"Saitama",994,103,"H"),
-  (541,3,"Kagome_Higurashi",535,140,"M"),
-  (561,3,"Ryuko_Matoi",429,4,"H"),
-  (581,1,"Maka_Albarn",646,70,"H");
+  (21,286,"Kurisu_Makise",381,118,"H"),
+  (22,248,"Subaru_Natsuki",46,130,"H"),
+  (23,218,"Nezuko_Kamado",121,127,"M"),
+  (24,279,"Mikasa_Ackerman",331,7,"H"),
+  (25,79,"Rukia_Kuchiki",654,32,"M"),
+  (26,30,"Holo_the_Wise_Wolf",598,94,"M"),
+  (27,244,"Senku_Ishigami",906,80,"H"),
+  (28,86,"Hiei",588,127,"M"),
+  (29,110,"Rukia_Kuchiki",82,69,"H"),
+  (30,80,"Guts",641,52,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (601,0,"Armin_Arlert",525,15,"H"),
-  (621,5,"Dio_Brando",394,136,"M"),
-  (641,4,"Hotaru_Tomoe",564,36,"H"),
-  (661,1,"Lelouch_Lamperouge",852,113,"M"),
-  (681,9,"Rias_Gremory",154,33,"M"),
-  (701,3,"Jotaro_Kujo",305,93,"H"),
-  (721,5,"Tanjiro_Kamado",389,168,"M"),
-  (741,7,"Jotaro_Kujo",676,65,"M"),
-  (761,7,"Gohan_Son",476,195,"M"),
-  (781,9,"Monkey_D_Garp",521,158,"M");
+  (31,90,"Kenshiro",764,45,"H"),
+  (32,203,"Holo_the_Wise_Wolf",458,169,"H"),
+  (33,56,"Senku_Ishigami",894,53,"M"),
+  (34,275,"Senku_Ishigami",502,92,"M"),
+  (35,229,"Faye_Valentine",98,191,"H"),
+  (36,145,"Lawrence_Kraft",539,155,"M"),
+  (37,72,"Bulma_Briefs",883,1,"M"),
+  (38,42,"L",404,77,"H"),
+  (39,96,"Emilia",250,13,"H"),
+  (40,61,"Lawrence_Kraft",174,93,"M");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (801,0,"Rei_Hino",408,16,"M"),
-  (821,3,"Endeavor",594,19,"H"),
-  (841,8,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",530,17,"M"),
-  (861,2,"Mikasa_Ackerman",174,183,"H"),
-  (881,3,"Ram",329,43,"H"),
-  (901,3,"Asuka_Langley_Sohryu",20,51,"H"),
-  (921,5,"Bakugo_Katsuki",731,88,"H"),
-  (941,3,"Mikasa_Ackerman",141,12,"H"),
-  (961,7,"Lucy_Heartfilia",82,156,"M"),
-  (981,2,"Haruka_Tenoh",225,132,"H");
+  (41,30,"Nezuko_Kamado",413,181,"H"),
+  (42,21,"Haruka_Tenoh",304,122,"M"),
+  (43,80,"Kagome_Higurashi",304,43,"M"),
+  (44,88,"Madoka_Kaname",778,15,"H"),
+  (45,216,"Faye_Valentine",539,18,"H"),
+  (46,259,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",581,45,"H"),
+  (47,146,"Dio_Brando",829,70,"M"),
+  (48,45,"Korosensei",953,176,"M"),
+  (49,96,"Kagome_Higurashi",646,5,"H"),
+  (50,1,"Genos",780,191,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (1001,6,"Historia_Reiss",161,176,"M"),
-  (1021,0,"Vash_the_Stampede",997,77,"M"),
-  (1041,8,"Griffith",629,145,"H"),
-  (1061,4,"Roy_Mustang",615,121,"M"),
-  (1081,9,"Historia_Reiss",289,31,"H"),
-  (1101,4,"Kenshin_Himura",795,75,"M"),
-  (1121,9,"Holo_the_Wise_Wolf",291,2,"H"),
-  (1141,4,"Light_Yagami",377,119,"H"),
-  (1161,10,"Yukiteru_Amano",963,167,"H"),
-  (1181,0,"Yukiteru_Amano",891,65,"H");
+  (51,152,"Lawrence_Kraft",204,154,"M"),
+  (52,235,"Yagami_Light",866,140,"H"),
+  (53,39,"Naruto_Uzumaki",805,116,"M"),
+  (54,65,"Zero_Kiryu",936,123,"H"),
+  (55,119,"Homura_Akemi",823,103,"H"),
+  (56,70,"Sailor_Moon",322,189,"M"),
+  (57,94,"Levi_Ackerman",888,5,"H"),
+  (58,172,"Bakugo_Katsuki",647,162,"H"),
+  (59,184,"Asuka_Langley_Sohryu",378,19,"M"),
+  (60,148,"Bakugo_Katsuki",850,106,"M");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (1201,9,"Shoto_Todoroki",255,131,"M"),
-  (1221,9,"Tanjiro_Kamado",892,142,"H"),
-  (1241,3,"Alucard",820,153,"H"),
-  (1261,6,"Gon_Freecss",627,74,"H"),
-  (1281,1,"Mamoru_Chiba",266,77,"H"),
-  (1301,3,"Endeavor",262,42,"H"),
-  (1321,3,"Lawrence_Kraft",176,98,"M"),
-  (1341,1,"Eren_Yeager",52,149,"H"),
-  (1361,6,"Kagome_Higurashi",526,11,"M"),
-  (1381,6,"Levi_Ackerman",260,155,"M");
+  (61,58,"Yuno_Gasai",335,56,"H"),
+  (62,295,"Monkey_D_Garp",725,7,"H"),
+  (63,85,"Satsuki_Kiryuin",875,149,"M"),
+  (64,46,"Kyoko_Kirigiri",413,153,"M"),
+  (65,294,"Trunks_Briefs",207,99,"M"),
+  (66,203,"Rintarou_Okabe",227,24,"H"),
+  (67,149,"Yuno_Gasai",401,18,"H"),
+  (68,296,"Yuno_Gasai",912,131,"H"),
+  (69,283,"Kenshin_Himura",152,55,"H"),
+  (70,36,"Mamoru_Chiba",364,56,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (1401,4,"Jotaro_Kujo",171,46,"M"),
-  (1421,9,"Goku_Son",322,19,"M"),
-  (1441,9,"Vash_the_Stampede",652,65,"M"),
-  (1461,8,"Nodoka_Saotome",598,71,"H"),
-  (1481,4,"Jotaro_Kujo",241,72,"H"),
-  (1501,9,"Holo_the_Wise_Wolf",791,90,"M"),
-  (1521,0,"Riza_Hawkeye",368,122,"H"),
-  (1541,6,"Mamoru_Chiba",683,15,"M"),
-  (1561,2,"Madoka_Kaname",83,94,"M"),
-  (1581,1,"Kagome_Higurashi",262,173,"H");
+  (71,296,"Faye_Valentine",834,37,"H"),
+  (72,138,"Madoka_Kaname",903,193,"M"),
+  (73,267,"Saitama",33,158,"H"),
+  (74,239,"Emilia",242,18,"H"),
+  (75,126,"Maka_Albarn",499,13,"M"),
+  (76,129,"Homura_Akemi",623,28,"H"),
+  (77,92,"Yuno_Gasai",861,70,"H"),
+  (78,181,"Satsuki_Kiryuin",929,20,"M"),
+  (79,114,"Eren_Yeager",429,28,"M"),
+  (80,112,"Rukia_Kuchiki",381,104,"M");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (1601,3,"Spike_Spiegel",883,114,"M"),
-  (1621,5,"Saitama",665,106,"H"),
-  (1641,7,"Vegeta",694,140,"M"),
-  (1661,5,"Kyoko_Kirigiri",798,198,"H"),
-  (1681,3,"Levi_Ackerman",62,7,"H"),
-  (1701,4,"Ochaco_Uraraka",241,174,"M"),
-  (1721,3,"Hotaru_Tomoe",625,60,"M"),
-  (1741,4,"Nezuko_Kamado",121,22,"M"),
-  (1761,4,"Nezuko_Kamado",853,41,"H"),
-  (1781,9,"Mamoru_Chiba",252,75,"H");
+  (81,296,"Hisoka_Morow",547,1,"M"),
+  (82,283,"Spike_Spiegel",159,57,"H"),
+  (83,246,"Ichigo_Kurosaki",851,182,"H"),
+  (84,8,"Rei_Ayanami",860,47,"H"),
+  (85,129,"Homura_Akemi",866,81,"M"),
+  (86,132,"Shoto_Todoroki",375,74,"M"),
+  (87,241,"Armin_Arlert",113,8,"M"),
+  (88,293,"Ranma_Saotome",889,165,"M"),
+  (89,76,"Issei_Hyoudou",860,150,"M"),
+  (90,219,"All_Might",567,185,"M");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (1801,7,"Faye_Valentine",639,61,"M"),
-  (1821,7,"Seras_Victoria",132,68,"M"),
-  (1841,0,"Tenya_Iida",325,128,"M"),
-  (1861,5,"Rem",718,160,"H"),
-  (1881,0,"Faye_Valentine",324,163,"H"),
-  (1901,6,"Rei_Hino",425,189,"H"),
-  (1921,1,"Faye_Valentine",422,44,"H"),
-  (1941,8,"Maka_Albarn",844,68,"M"),
-  (1961,1,"Armin_Arlert",166,154,"H"),
-  (1981,3,"Asuka_Langley_Sohryu",903,11,"H");
+  (91,190,"Inuyasha",78,17,"M"),
+  (92,257,"Homura_Akemi",945,180,"M"),
+  (93,299,"Makoto_Naegi",124,109,"M"),
+  (94,59,"Kyoko_Kirigiri",223,16,"H"),
+  (95,274,"Kurisu_Makise",652,113,"H"),
+  (96,42,"Genos",388,60,"M"),
+  (97,142,"Gohan_Son",648,175,"H"),
+  (98,187,"Senku_Ishigami",589,184,"M"),
+  (99,272,"Tsukasa_Shishio",83,146,"M"),
+  (100,77,"Yuno_Gasai",752,32,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (2001,8,"Usagi_Tsukino",219,171,"H"),
-  (2021,1,"Goku_Son",486,175,"H"),
-  (2041,6,"Tanjiro_Kamado",581,183,"H"),
-  (2061,5,"Yusuke_Urameshi",808,32,"M"),
-  (2081,3,"Subaru_Natsuki",948,126,"H"),
-  (2101,1,"Rintarou_Okabe",307,170,"H"),
-  (2121,8,"Eren_Yeager",345,45,"H"),
-  (2141,7,"Rem",414,177,"H"),
-  (2161,7,"Tatewaki_Kuno",735,112,"M"),
-  (2181,7,"Makoto_Naegi",337,29,"H");
+  (101,166,"Kagome_Higurashi",88,45,"M"),
+  (102,273,"Yagami_Light",936,178,"M"),
+  (103,245,"Rem",65,108,"H"),
+  (104,60,"All_Might",700,183,"H"),
+  (105,159,"Naruto_Uzumaki",602,180,"M"),
+  (106,49,"Historia_Reiss",198,115,"M"),
+  (107,48,"Tenya_Iida",364,111,"H"),
+  (108,177,"Winry_Rockbell",552,100,"M"),
+  (109,294,"Endeavor",183,164,"M"),
+  (110,260,"Vash_the_Stampede",405,89,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (2201,8,"Tsukasa_Shishio",872,197,"H"),
-  (2221,9,"Saitama",659,133,"H"),
-  (2241,5,"Ichigo_Kurosaki",126,3,"M"),
-  (2261,10,"Ichigo_Kurosaki",383,137,"H"),
-  (2281,8,"Lucy_Heartfilia",712,122,"H"),
-  (2301,7,"Kagome_Higurashi",103,110,"M"),
-  (2321,4,"Dio_Brando",5,72,"H"),
-  (2341,9,"Bakugo_Katsuki",427,81,"M"),
-  (2361,3,"Gourry_Gabriev",40,196,"H"),
-  (2381,1,"Gon_Freecss",882,123,"H");
+  (111,222,"Shoto_Todoroki",840,176,"M"),
+  (112,258,"Ochaco_Uraraka",662,70,"H"),
+  (113,171,"Shampoo",561,4,"M"),
+  (114,112,"Kenshiro",830,181,"H"),
+  (115,3,"Maka_Albarn",328,137,"M"),
+  (116,241,"L",236,17,"H"),
+  (117,108,"Lina_Inverse",618,20,"M"),
+  (118,54,"Korosensei",514,53,"M"),
+  (119,245,"Haruka_Tenoh",873,162,"H"),
+  (120,220,"Lelouch_Lamperouge",359,33,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (2401,2,"Levi_Ackerman",485,140,"H"),
-  (2421,3,"Makoto_Naegi",427,199,"M"),
-  (2441,9,"Emilia",525,6,"M"),
-  (2461,4,"Rei_Ayanami",279,153,"M"),
-  (2481,7,"Satsuki_Kiryuin",335,76,"M"),
-  (2501,5,"Rem",429,121,"H"),
-  (2521,3,"Endeavor",521,8,"H"),
-  (2541,2,"Nezuko_Kamado",303,183,"H"),
-  (2561,6,"Satsuki_Kiryuin",92,124,"M"),
-  (2581,2,"Eren_Yeager",742,17,"M");
+  (121,70,"Shoto_Todoroki",895,42,"H"),
+  (122,200,"Goku_Son",786,146,"M"),
+  (123,25,"Yusuke_Urameshi",609,103,"H"),
+  (124,228,"Jotaro_Kujo",665,77,"H"),
+  (125,53,"All_Might",424,83,"H"),
+  (126,95,"Guts",439,26,"M"),
+  (127,112,"Hisoka_Morow",431,123,"H"),
+  (128,219,"Gon_Freecss",772,107,"H"),
+  (129,207,"Riza_Hawkeye",881,176,"H"),
+  (130,174,"Soul_Eater",352,168,"M");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (2601,6,"Lina_Inverse",75,74,"H"),
-  (2621,4,"Asuka_Langley_Sohryu",646,148,"H"),
-  (2641,2,"Seras_Victoria",578,2,"M"),
-  (2661,3,"Edward_Elric",604,6,"H"),
-  (2681,7,"Spike_Spiegel",688,100,"M"),
-  (2701,8,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",156,192,"H"),
-  (2721,5,"Emilia",996,46,"M"),
-  (2741,3,"Satsuki_Kiryuin",964,156,"M"),
-  (2761,7,"Eren_Yeager",520,46,"H"),
-  (2781,3,"Dio_Brando",917,109,"M");
+  (131,177,"Bulma_Briefs",736,7,"H"),
+  (132,264,"Winry_Rockbell",89,169,"M"),
+  (133,84,"Issei_Hyoudou",302,194,"H"),
+  (134,187,"Ochaco_Uraraka",663,127,"H"),
+  (135,123,"Killua_Zoldyck",408,129,"M"),
+  (136,245,"Rem",966,25,"M"),
+  (137,100,"Jean_Kirstein",524,174,"M"),
+  (138,86,"Winry_Rockbell",126,37,"M"),
+  (139,76,"Spike_Spiegel",466,155,"M"),
+  (140,290,"Bakugo_Katsuki",884,171,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (2801,4,"Soul_Eater",116,198,"H"),
-  (2821,5,"Hinata_Hyuga",777,105,"M"),
-  (2841,0,"Nagisa_Shota",918,195,"H"),
-  (2861,3,"Griffith",882,80,"M"),
-  (2881,7,"Maka_Albarn",438,192,"M"),
-  (2901,7,"Shoto_Todoroki",365,35,"H"),
-  (2921,10,"Bakugo_Katsuki",703,121,"H"),
-  (2941,1,"Seras_Victoria",362,145,"H"),
-  (2961,8,"Miroku",770,30,"M"),
-  (2981,4,"Miroku",599,127,"H");
+  (141,229,"Genos",191,188,"H"),
+  (142,135,"Tenya_Iida",862,9,"H"),
+  (143,123,"Gourry_Gabriev",74,113,"M"),
+  (144,24,"Yukiteru_Amano",581,92,"H"),
+  (145,15,"Shoto_Todoroki",373,80,"H"),
+  (146,84,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",692,19,"M"),
+  (147,113,"Faye_Valentine",294,173,"M"),
+  (148,261,"Shinji_Ikari",604,158,"M"),
+  (149,155,"Levi_Ackerman",118,155,"M"),
+  (150,104,"Satsuki_Kiryuin",380,146,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (3001,1,"Naruto_Uzumaki",397,22,"M"),
-  (3021,3,"Emilia",25,172,"H"),
-  (3041,7,"Makoto_Kino",391,24,"H"),
-  (3061,6,"Soul_Eater",913,161,"M"),
-  (3081,8,"Subaru_Natsuki",324,190,"H"),
-  (3101,3,"Nagisa_Shota",958,187,"M"),
-  (3121,10,"Lawrence_Kraft",347,89,"M"),
-  (3141,7,"Soul_Eater",857,52,"M"),
-  (3161,1,"Endeavor",92,59,"H"),
-  (3181,2,"Homura_Akemi",968,124,"M");
+  (151,126,"Nezuko_Kamado",565,115,"H"),
+  (152,186,"Spike_Spiegel",406,10,"M"),
+  (153,161,"Dio_Brando",485,130,"M"),
+  (154,130,"Miroku",2,96,"M"),
+  (155,144,"Ryuko_Matoi",643,87,"H"),
+  (156,73,"Shinji_Ikari",39,197,"M"),
+  (157,187,"Jotaro_Kujo",491,33,"M"),
+  (158,290,"Winry_Rockbell",960,64,"M"),
+  (159,300,"Hotaru_Tomoe",369,152,"M"),
+  (160,240,"Usagi_Tsukino",437,149,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (3201,10,"Yuno_Gasai",835,124,"H"),
-  (3221,4,"Kurisu_Makise",730,90,"M"),
-  (3241,9,"Trunks_Briefs",750,53,"M"),
-  (3261,10,"Seras_Victoria",710,69,"M"),
-  (3281,7,"Eren_Yeager",730,90,"M"),
-  (3301,2,"Kagome_Higurashi",67,0,"H"),
-  (3321,5,"Kurisu_Makise",387,42,"M"),
-  (3341,2,"Yuno_Gasai",529,116,"H"),
-  (3361,10,"Makoto_Naegi",218,131,"H"),
-  (3381,4,"Shinji_Ikari",906,56,"H");
+  (161,15,"Shampoo",444,107,"H"),
+  (162,117,"Natsu_Dragneel",651,77,"H"),
+  (163,200,"Bulma_Briefs",49,103,"H"),
+  (164,250,"Shoto_Todoroki",607,123,"H"),
+  (165,137,"All_Might",768,64,"H"),
+  (166,135,"Seras_Victoria",911,141,"H"),
+  (167,47,"Light_Yagami",474,98,"M"),
+  (168,149,"Genos",97,97,"M"),
+  (169,175,"Ryoga_Hibiki",736,109,"H"),
+  (170,23,"Maka_Albarn",103,180,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (3401,8,"Monkey_D_Garp",155,62,"M"),
-  (3421,9,"Levi_Ackerman",995,124,"H"),
-  (3441,4,"Subaru_Natsuki",267,194,"M"),
-  (3461,2,"Sakura_Haruno",512,57,"M"),
-  (3481,5,"Rei_Ayanami",977,168,"H"),
-  (3501,6,"Asuka_Langley_Sohryu",189,167,"H"),
-  (3521,5,"Sailor_Moon",843,162,"H"),
-  (3541,3,"Homura_Akemi",526,11,"H"),
-  (3561,3,"Yagami_Light",231,52,"H"),
-  (3581,1,"All_Might",411,58,"H");
+  (171,26,"Senku_Ishigami",5,164,"M"),
+  (172,204,"Natsu_Dragneel",881,172,"H"),
+  (173,48,"Asuka_Langley_Sohryu",623,191,"M"),
+  (174,49,"Kenshiro",342,114,"M"),
+  (175,56,"Maka_Albarn",759,190,"M"),
+  (176,23,"Setsuna_Meiou",365,127,"M"),
+  (177,210,"Satsuki_Kiryuin",94,110,"H"),
+  (178,184,"Asuka_Langley_Sohryu",806,86,"M"),
+  (179,110,"Eren_Yeager",942,129,"H"),
+  (180,194,"Ram",485,88,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (3601,2,"Genma_Saotome",450,70,"M"),
-  (3621,3,"Homura_Akemi",318,174,"H"),
-  (3641,6,"Sailor_Moon",943,156,"H"),
-  (3661,8,"Riza_Hawkeye",411,198,"H"),
-  (3681,5,"Tsukasa_Shishio",248,18,"M"),
-  (3701,0,"Levi_Ackerman",766,26,"H"),
-  (3721,0,"All_Might",152,60,"M"),
-  (3741,3,"Ram",601,168,"M"),
-  (3761,8,"Yagami_Light",865,68,"H"),
-  (3781,4,"Kenshiro",688,93,"H");
+  (181,48,"Sailor_Moon",659,19,"M"),
+  (182,72,"Winry_Rockbell",49,131,"H"),
+  (183,116,"Holo_the_Wise_Wolf",296,64,"H"),
+  (184,64,"Satsuki_Kiryuin",468,174,"H"),
+  (185,47,"Endeavor",1,66,"H"),
+  (186,172,"Spike_Spiegel",572,199,"H"),
+  (187,68,"Spike_Spiegel",366,146,"M"),
+  (188,267,"Kenshin_Himura",584,165,"M"),
+  (189,275,"Bulma_Briefs",600,66,"H"),
+  (190,67,"Vash_the_Stampede",53,68,"H");
 INSERT INTO `personaje` (`id`,`id_manga`,`nombre`,`numero_de_seguidores`,`estatura`,`sexo`)
 VALUES
-  (3801,5,"Seras_Victoria",182,55,"H"),
-  (3821,10,"Makoto_Naegi",603,92,"M"),
-  (3841,4,"Madoka_Kaname",627,179,"M"),
-  (3861,3,"Nodoka_Saotome",472,91,"M"),
-  (3881,9,"Yukiteru_Amano",214,132,"M"),
-  (3901,2,"Genma_Saotome",344,33,"M"),
-  (3921,6,"Nezuko_Kamado",267,182,"M"),
-  (3941,1,"Trunks_Briefs",14,164,"H"),
-  (3961,0,"All_Might",657,179,"M"),
-  (3981,2,"Genos",598,49,"M");
+  (191,167,"Minako_Aino",987,110,"H"),
+  (192,251,"Kagome_Higurashi",709,11,"H"),
+  (193,52,"Winry_Rockbell",479,67,"H"),
+  (194,252,"Chi-Chi",744,33,"H"),
+  (195,130,"Gon_Freecss",293,176,"H"),
+  (196,88,"Saitama",900,121,"H"),
+  (197,2,"Tenya_Iida",824,2,"H"),
+  (198,137,"Armin_Arlert",703,118,"M"),
+  (199,186,"Kagome_Higurashi",956,50,"M"),
+  (200,26,"Edward_Wong_Hau_Pepelu_Tivrusky_IV",561,109,"H");
 
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (1,35,110,"QVR97DQC8293PS","espada",265,"XS",30),
+  (2,140,178,"ROR32VCQ2184GM","poster",137,"L",41),
+  (3,87,67,"DDD43CTI9775YQ","figura",91,"L",7),
+  (4,142,81,"XRW69MBO2379FD","cojin",175,"L",3),
+  (5,105,52,"TAI40ESC1837EY","espada",252,"XL",20),
+  (6,95,107,"FPN05DFP9168QX","poster",32,"M",28),
+  (7,41,191,"NZG86VMH2764WF","cojin",95,"XXL",52),
+  (8,50,167,"PEN96PYO4368LP","pulsera",23,"XL",0),
+  (9,23,41,"GIO25FAP5333LF","artefacto",54,"L",33),
+  (10,122,75,"MHY74ETI9674VD","cojin",99,"XL",34);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (11,22,93,"DQX77GJI4955CB","artefacto",10,"L",47),
+  (12,45,31,"HIS58VDA1845TY","poster",97,"L",33),
+  (13,98,132,"GCL47GSP4934PZ","poster",164,"XXL",18),
+  (14,113,111,"MKE55PDQ8433GC","artefacto",191,"Custom",43),
+  (15,11,18,"CWE17GXY3707TL","sudadera",99,"Custom",33),
+  (16,8,115,"ERQ65VCR1102FL","cojin",36,"XL",42),
+  (17,11,158,"GHF56SOJ4812YV","poster",12,"M",23),
+  (18,44,119,"XFM39NDX0791MI","espada",23,"XS",58),
+  (19,25,162,"SHV81PHJ9623GD","espada",50,"S",4),
+  (20,30,123,"IIB13EZR3326LN","artefacto",280,"XS",10);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (21,68,8,"YBV57SSZ8612WM","espada",79,"L",32),
+  (22,31,108,"UWG44ALH7451KE","poster",163,"Custom",51),
+  (23,139,136,"BFG41KTQ3583QM","poster",59,"L",3),
+  (24,65,17,"DSK38RGH1744ON","sudadera",219,"L",41),
+  (25,120,79,"OHT46QMJ4680SC","figura",232,"XXL",31),
+  (26,93,26,"XLY65FHW6392EG","poster",290,"XXXL",1),
+  (27,39,83,"JMH17CFF5284QM","figura",4,"XL",33),
+  (28,18,73,"XHH23HQX7772YE","poster",219,"S",13),
+  (29,50,88,"EJU47QFC8831WM","poster",250,"XL",45),
+  (30,50,61,"XHQ86HTZ8351VH","sudadera",206,"XXXL",55);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (31,119,112,"AMC94FQM0715FU","cojin",271,"Custom",42),
+  (32,49,21,"PNJ22UMS1717KM","cojin",288,"S",49),
+  (33,102,23,"NZC03HQY3850CQ","poster",175,"Custom",45),
+  (34,75,102,"JSS44SYM6431UN","espada",199,"S",33),
+  (35,71,26,"RCI60QUM4317NS","artefacto",178,"XXL",52),
+  (36,140,43,"PIP66DDX5051RP","cojin",101,"Custom",3),
+  (37,75,138,"IBA58MHN8575OU","cosplay",126,"XXL",42),
+  (38,128,36,"WWE53CVR5563KA","cosplay",3,"XXL",1),
+  (39,5,62,"BMV58FKQ6773HI","pulsera",286,"XXL",2),
+  (40,105,14,"UXE82OQE7237RI","cojin",186,"S",8);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (41,5,185,"BUD42UOI2671DF","espada",93,"XS",46),
+  (42,26,15,"IRN93TIG6129PX","espada",260,"S",48),
+  (43,12,163,"UOQ35RAZ8456VZ","sudadera",249,"XXL",50),
+  (44,113,117,"JBQ85COZ7095VQ","espada",291,"M",45),
+  (45,32,107,"QNQ98NHM4138DR","pulsera",126,"XXL",13),
+  (46,52,119,"SKT79OFY0336PT","cojin",247,"L",19),
+  (47,42,43,"VLH86CWI8767LU","figura",152,"XL",39),
+  (48,143,50,"CMS44CFN5185BW","cosplay",78,"M",42),
+  (49,126,161,"DIT71EPI6262YH","pulsera",130,"S",37),
+  (50,144,44,"ONR25EIL3790ZX","cojin",207,"XS",32);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (51,87,18,"DOR03JRI1757JU","sudadera",48,"L",54),
+  (52,105,17,"NJV78EEC6438AW","sudadera",156,"XS",33),
+  (53,135,67,"CZM86RCR7305IO","figura",156,"XXXL",26),
+  (54,137,20,"WIP32JGV7532JI","cojin",7,"L",0),
+  (55,130,75,"BQX21OJL4013HJ","artefacto",238,"XL",12),
+  (56,37,115,"TTC68SCL7174DF","artefacto",241,"XS",39),
+  (57,57,178,"GKF07GLC8142LU","cosplay",182,"S",51),
+  (58,140,80,"MYS98IEL8785BE","cojin",158,"Custom",31),
+  (59,76,44,"VKI25ZBH7135QY","cosplay",99,"XXL",13),
+  (60,106,140,"LBI62YIR1166PL","sudadera",53,"XS",12);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (61,32,31,"UDD68ICT3400FQ","figura",105,"XL",40),
+  (62,29,189,"PSO41UWT3530IZ","artefacto",230,"S",15),
+  (63,109,5,"IQJ17HCG2232EU","cosplay",136,"L",46),
+  (64,102,163,"EBT81YSK6284RL","artefacto",178,"S",7),
+  (65,141,173,"FKS34QOM2136KC","artefacto",82,"S",41),
+  (66,38,47,"VTR32SDA9781FH","artefacto",3,"Custom",32),
+  (67,42,153,"MIN67VRQ4415RY","cosplay",42,"XL",43),
+  (68,92,103,"GOJ23GCG7168PB","artefacto",45,"S",50),
+  (69,47,85,"LTK58SYP2951PC","figura",219,"XXXL",32),
+  (70,120,47,"FFT40GSW2501TE","cosplay",144,"Custom",57);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (71,1,142,"JCY26NLW9380CN","poster",53,"Custom",53),
+  (72,84,200,"YSQ62QYT2793XT","poster",209,"XL",35),
+  (73,134,102,"UDS89QFL1508CR","artefacto",96,"M",13),
+  (74,132,159,"RCS19GJE9380TK","pulsera",36,"M",50),
+  (75,122,117,"WHS62RPN3771BU","cojin",212,"M",13),
+  (76,52,126,"JKK85NRG6422DM","sudadera",204,"XXL",40),
+  (77,19,53,"IFP24KXO2651WV","pulsera",171,"L",10),
+  (78,98,2,"PFL81CLM5623CF","cosplay",291,"XS",55),
+  (79,34,32,"XES15BVJ0661RD","sudadera",240,"Custom",50),
+  (80,34,166,"RBJ45IJY4068FP","poster",16,"L",26);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (81,19,72,"ESM34GBS3882BM","cosplay",36,"XS",35),
+  (82,26,135,"TZP07VDC1367KN","cosplay",234,"Custom",5),
+  (83,145,33,"GUK16CLR8942YL","poster",234,"XS",27),
+  (84,7,75,"QBX75IWG7667GX","poster",130,"Custom",31),
+  (85,150,183,"AYV58WVF4627LQ","figura",212,"L",41),
+  (86,134,91,"XCG26IRV9663MV","cojin",227,"XXXL",27),
+  (87,44,185,"QNL56LOU3346RL","espada",83,"Custom",6),
+  (88,93,35,"FRP67ISM4223JF","cosplay",150,"XXL",15),
+  (89,129,161,"REC09QKO4311OD","espada",292,"L",26),
+  (90,100,11,"ZGY17KHJ2083OD","artefacto",97,"S",44);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (91,140,103,"XCE12QRW4837MF","artefacto",143,"S",17),
+  (92,64,148,"UOR82VKF4655YE","cosplay",210,"XL",42),
+  (93,24,55,"DJF25VFZ1633TB","poster",104,"XXL",14),
+  (94,3,80,"BGN28BRB4746QZ","cojin",8,"XXL",55),
+  (95,3,7,"GSN71JQX1250RP","artefacto",169,"Custom",1),
+  (96,57,26,"UEJ12QGD4212TA","pulsera",251,"M",20),
+  (97,6,125,"ZGV10QRO3236TB","cojin",7,"XL",25),
+  (98,138,83,"JGE73JDK9784AK","artefacto",276,"Custom",50),
+  (99,98,60,"LJE48HQR4449TP","cosplay",205,"S",14),
+  (100,88,124,"WLR69BQS3733MJ","espada",168,"XS",1);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (101,144,88,"ENG19VQS5032ZD","pulsera",117,"L",31),
+  (102,78,144,"PDM94YBB2388YN","figura",97,"L",47),
+  (103,117,189,"GVR66YLU4587ZG","cosplay",185,"S",2),
+  (104,84,179,"NSS43VDT3548DT","figura",138,"Custom",6),
+  (105,115,156,"AEX22MIB4660VE","espada",46,"Custom",24),
+  (106,93,173,"XXQ57ANX8538MF","cojin",199,"XS",31),
+  (107,106,94,"XMM42JEN1376LU","cosplay",119,"Custom",24),
+  (108,73,61,"ZOY67VFI5726PY","sudadera",29,"XXL",13),
+  (109,112,81,"GJV47RAQ6376LV","cojin",178,"XS",51),
+  (110,99,163,"PUI21PRT5876VC","cosplay",52,"XS",48);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (111,118,126,"DHC29JZP1510YM","figura",273,"XXXL",47),
+  (112,22,181,"DEK72DWT4423BF","cosplay",274,"XL",33),
+  (113,124,140,"ERR13FSZ8124VO","sudadera",210,"Custom",53),
+  (114,86,191,"HEP36VEO3162VJ","figura",10,"XL",52),
+  (115,88,185,"MMY21YFR0629WU","sudadera",95,"XXL",51),
+  (116,113,104,"YYE45EOQ6234KV","espada",220,"XL",12),
+  (117,95,94,"RSK91OYG6637NC","espada",56,"Custom",29),
+  (118,48,139,"CVB05OIH1593DT","sudadera",161,"S",21),
+  (119,84,40,"QQJ96LGM8886UP","pulsera",117,"L",18),
+  (120,40,100,"YCL38URK6459HG","cosplay",78,"XS",6);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (121,140,124,"FDO22DLP7693AF","espada",112,"S",56),
+  (122,101,54,"TYF47RKW5388WA","artefacto",79,"Custom",1),
+  (123,27,136,"EUW56KIY8562FM","espada",252,"S",13),
+  (124,23,149,"XSI72XWX3440OT","figura",72,"XXXL",43),
+  (125,9,194,"XTP20VQZ4116CT","espada",203,"S",15),
+  (126,1,168,"CDV31PNT6157UT","cojin",222,"Custom",27),
+  (127,10,71,"QHY64JEX1053RX","figura",284,"L",2),
+  (128,113,136,"AHR88SGK8038NK","cojin",271,"M",28),
+  (129,31,46,"QUH31MCP6383XL","figura",137,"XXXL",41),
+  (130,54,10,"UDW66DPS8257AM","sudadera",111,"XL",18);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (131,106,133,"TOU12VSD6762BQ","cojin",149,"Custom",7),
+  (132,150,179,"HIQ34HAL2213RX","figura",273,"XS",43),
+  (133,44,35,"IPJ53XYV6258FF","poster",191,"S",50),
+  (134,60,11,"QWS13OCS2748MQ","sudadera",98,"L",55),
+  (135,73,130,"BEI99XEJ5082JQ","cosplay",2,"XXXL",54),
+  (136,149,166,"HUW53NTH5711YN","cosplay",159,"XXL",45),
+  (137,39,170,"GRG59KVJ6937VJ","sudadera",247,"M",45),
+  (138,131,82,"ZYA36WIN1480ZN","figura",4,"S",37),
+  (139,149,148,"PIQ87KIJ8866CK","sudadera",131,"M",14),
+  (140,48,116,"EWP52UCZ7340JM","cojin",277,"Custom",37);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (141,124,143,"KEU37HVQ1701XF","cosplay",140,"XS",42),
+  (142,10,154,"KGS75QGC2551WQ","pulsera",260,"XXL",46),
+  (143,22,7,"ANA93SKL1576CL","cosplay",185,"M",4),
+  (144,13,47,"PDV60BRO4740PN","poster",49,"M",46),
+  (145,11,104,"AQN02JPE3254IU","pulsera",100,"XS",34),
+  (146,126,126,"SYJ79QFD1558JB","espada",159,"L",9),
+  (147,60,129,"FCD21VTM9269QY","pulsera",152,"XL",32),
+  (148,54,19,"MRP30KZF9338WU","cojin",74,"XXXL",46),
+  (149,113,100,"BOP75GTJ3611NG","sudadera",149,"Custom",23),
+  (150,85,132,"ZZU41FNF7101GI","espada",78,"XXL",16);
 
