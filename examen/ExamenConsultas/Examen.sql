@@ -35,12 +35,12 @@ group by month(fecha_entrada) ;
 
 /*5 Nombre de los avatares con más de 4 herramientas */
 
-select avatar.nombre , count(*) as 'numero_herramientas'
+select avatar.nombre , count(objeto.id) as 'numero_herramientas'
 from avatar
 join avatar_objeto on avatar_objeto.id_avatar = avatar.id
 join objeto on objeto.id = avatar_objeto.id_objeto
 where objeto.tipo = 'herramienta'
-group by objeto.id
+group by avatar.id
 having numero_herramientas>4;
 
 /*6 ¿Quiénes se casaron durante los últimos 40 meses? */
@@ -88,7 +88,7 @@ from( select count(*) as 'numero_objetos'
 from avatar
 join avatar_objeto on avatar_objeto.id_avatar = avatar.id
 join objeto on objeto.id = avatar_objeto.id_objeto
-group by  avatar.id) as numero_objetos_max;
+group by  avatar_objeto.id_avatar) as numero_objetos_max;
 
 select count(*) , avatar.nombre
 from avatar
@@ -104,11 +104,6 @@ group by  avatar.id) as numero_objetos_max);
 
 
 /*10 Media de objetos por casa*/
-
-
-
-
-/*saco los objetos por habitacion*/
 select avg(contador) as 'media de objetos por casa ' ,casa.nombre
 from(
 select count(*)  as 'contador', casa.id as 'id_casa'
