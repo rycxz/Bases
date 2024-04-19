@@ -1,0 +1,3 @@
+Procedmiento    	  0/5
+Funcion			  0/3
+Transaccion		  0/3
