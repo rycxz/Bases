@@ -234,6 +234,11 @@ create table genero(
           id_producto int unsigned,
           color varchar(20)
           );
+          create table usuario_personaje(
+id_usuario int references usuario,
+id_personaje int references personaje,
+primary key(id_usuario,id_personaje));
+
          
          
 INSERT INTO `usuario` (`id`,`id_plan_mensual`,`nickname`,`correo`,`episodios_vistos`,`contraseña`,`estado_animo`,`numero_de_cuenta_bancaria`,`tiempo_de_uso`,`direccion`)
@@ -3945,4 +3950,88 @@ VALUES
   (148,5,0,82,"XCF21FRVUWFKBCJJ","pulsera","XXXL",37),
   (149,109,89,135,"SFW20HBQLEGIVHJM","cosplay","S",24),
   (150,131,34,15,"OBJ95CFVKCMLZPJF","figura","XS",40);
+INSERT INTO `usuario_personaje` (`id_usuario`,`id_personaje`)
+VALUES
+  (135,99),
+  (21,25),
+  (75,50),
+  (51,109),
+  (69,98),
+  (108,23),
+  (88,18),
+  (125,5),
+  (60,37),
+  (83,3);
+INSERT INTO `usuario_personaje` (`id_usuario`,`id_personaje`)
+VALUES
+  (65,15),
+  (87,67),
+  (132,50),
+  (86,36),
+  (69,36),
+  (28,35),
+  (98,24),
+  (147,80),
+  (28,51),
+  (3,18);
+INSERT INTO `usuario_personaje` (`id_usuario`,`id_personaje`)
+VALUES
+  (19,60),
+  (97,53),
+  (122,29),
+  (113,94),
+  (50,66),
+  (141,28),
+  (32,38),
+  (32,39),
+  (55,30),
+  (118,33);
+INSERT INTO `usuario_personaje` (`id_usuario`,`id_personaje`)
+VALUES
+  (118,52),
+  (71,88),
+  (13,76),
+  (68,79),
+  (13,22),
+  (75,38),
+  (109,39),
+  (38,60),
+  (129,17),
+  (25,62);
+INSERT INTO `usuario_personaje` (`id_usuario`,`id_personaje`)
+VALUES
+  (24,106),
+  (74,15),
+  (74,104),
+  (21,54),
+  (24,51),
+  (69,95),
+  (39,63),
+  (25,12),
+  (141,60),
+  (41,79);
+INSERT INTO `usuario_personaje` (`id_usuario`,`id_personaje`)
+VALUES
+  (79,61),
+  (56,85),
+  (56,9),
+  (13,51),
+  (61,17),
+  (79,93),
+  (139,3),
+  (41,5),
+  (78,98),
+  (105,34);
+INSERT INTO `usuario_personaje` (`id_usuario`,`id_personaje`)
+VALUES
+  (116,103),
+  (24,48),
+  (128,31),
+  (23,53),
+  (89,60),
+  (118,100),
+  (56,2),
+  (85,96),
+  (124,73),
+  (59,55);
 
