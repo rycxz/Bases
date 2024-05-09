@@ -535,10 +535,11 @@ end ;
 |
 delimiter ;
 /*Procedimiento llamado robo que recibe el id de dos avatares y asigna todos los objetos y casas del primer avatar al segundo*/ 
+use cute_examen;
 drop procedure robo;
 delimiter | 
 
-create procedure robo(ide_avatar int,ide_avatar_robo int)
+create procedure robo(ide_avatar_robado int,ide_avatar_roba int)
 begin
 declare exit handler 
 for sqlexception
@@ -546,16 +547,118 @@ begin
 rollback;
 end;
 start transaction;
-insert into avatar(nombre,modelo,color,expresion_facial) values(pnombre,ptipo,ptamaño,pdescripcion);
+		UPDATE avatar_casa SET id_avatar = id_avatar_ladron WHERE id_avatar = id_avatar_robado;
+        UPDATE avatar_objeto SET id_avatar = id_avatar_ladron WHERE id_avatar = id_avatar_robado;
+    commit;
 
-insert into  avatar(id_avatar,id_objeto,fecha_adquisicion) values(ide_avatar,last_insert_id(),curdate());
+
+end ;
+|
+delimiter ;
+
+/*Función que devuelve el número de objetos que tiene un avatar, (recibe el nombre del avatar). Si el avatar no existe, devolverá -1*/
+drop function numeroObjetos;
+delimiter | 
+create function numeroObjetos( nombreAvatar varchar(50))
+returns int
+begin
+if(select count(*) from avatar  where nombre=nombreAvatar)>0 then
+ return (select count(*) from avatar_objeto
+ join avatar on avatar.id = avatar_objeto.id_avatar 
+where nombre=nombreAvatar
+ group by id_avatar);
+else  
+return -1;
+end if;
+end ;
+|
+delimiter ;
+select numeroObjetos('DarkSlateBlue');
+
+
+/*Crea un procedimiento llamado justicia_social mediante el que si un avatar dado (con nombre) tiene más de X objetos, se le quitan todas sus casas*/
+ 
+drop procedure robo;
+delimiter | 
+
+create procedure justicia_social(nombreAvatar varchar(50),numeroObjetos int)
+begin
+declare exit handler 
+for sqlexception
+begin
+rollback;
+end;
+start transaction;
+
+if(select count(*) from avatar  where nombre=nombreAvatar)>0 then
+		if(select count(*) from avatar_objeto
+			join avatar on avatar.id = avatar_objeto.id_avatar 
+			where avatar.nombre=nombreAvatar
+			group by id_avatar )>=numeroObjetos	 then 
+	delete from avatar_objeto where (select id from avatar where nombreAvatar=nombre)=id_avatar;	
+    end if;
+    end if;
+
 commit;
 end ;
 |
 delimiter ;
 
-
-/*Función que devuelve el número de objetos que tiene un avatar, (recibe el nombre del avatar). Si el avatar no existe, devolverá -1*/
-/*Crea un procedimiento llamado justicia_social mediante el que si un avatar dado (con nombre) tiene más de X objetos, se le quitan todas sus casas*/
 /*Crea una función que devuelva 1 si un avatar está casado y 0 si no lo está. La función recibirá el nombre del avatar.*/
+delimiter |
+create function casados(pnombre_avatar varchar(100))
+returns int
+begin
+if (select count(avatar.id)
+from avatar where avatar.nombre=pnombre_avatar)>0
+then if ( select count(avatar.id)
+from avatar join avatar_relacion_avatar on avatar.id=avatar_relacion_avatar.id_avatar_ejerce
+where avatar_relacion_avatar.tipo='matrimonio' and avatar.nombre=pnombre_avatar)>0 
+or ( select count(avatar.id)
+from avatar join avatar_relacion_avatar on avatar.id=avatar_relacion_avatar.id_avatar_recibe
+where avatar_relacion_avatar.tipo='matrimonio' and avatar.nombre=pnombre_avatar)>0 
+then return 1;
+else return 0;
+end if;
+else return -1;
+end if;
+end;
+|
+delimiter ;
+select * from avatar;
+select * from avatar_relacion_avatar;
+select casados('DarkSlateBlue');
+select casados('Ms. AliceBlue');
+
 /*Crea un procedimiento que dado el nombre de dos avatares los case solo si ninguno de ellos está casado. Utiliza la función del ejercicio anterior*/
+
+drop procedure if exists casar;
+
+delimiter |
+
+create procedure casar(pnombre_avatar1 varchar(100),pnombre_avatar2 varchar(100))
+begin
+declare pid_avatar1 int;
+declare pid_avatar2 int;
+set pid_avatar1=(select avatar.id  from avatar 
+where avatar.nombre=pnombre_avatar1);
+set pid_avatar2=(select avatar.id  from avatar 
+where avatar.nombre=pnombre_avatar2);
+if (select count(avatar.id)
+from avatar where avatar.nombre=pnombre_avatar1) then 
+if (select count(avatar.id)
+from avatar where avatar.nombre=pnombre_avatar2)then 
+if (select casados(pnombre_avatar1))=0 and (select casados(pnombre_avatar2))=0 then 
+insert into avatar_relacion_avatar(id_avatar_ejerce,id_avatar_recibe,fecha,tipo)
+values (pid_avatar1,pid_avatar2,curdate(),'matrimonio');
+else (select 'alguno de los 2 ya esta casado');
+end if;
+else (select 'El avatar 2 no existe');
+end if;
+else (select 'El avatar 1 no existe');
+end if;
+end;
+|
+delimiter ;
+select * from avatar;
+call casar ('Desmodus','Sr. Trent');
