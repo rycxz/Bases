@@ -65,8 +65,8 @@ primary key(id_plan_mensual, id_usuario)
 );
 create table usuario_comparte_plan_mensual(
 id_plan_mensual  int unsigned,
-id_usuario_paga  int unsigned,
-id_usuario_ratea  int unsigned,
+id_usuario_paga  int unsigned unique,
+id_usuario_ratea  int unsigned unique,
 foreign key ( id_plan_mensual) references plan_mensual(id),
 foreign key ( id_usuario_paga) references usuario(id),
 foreign key ( id_usuario_ratea) references usuario(id),
@@ -1701,7 +1701,7 @@ VALUES
   (67,44,"Feel","Sword_Art_Online One_Piece One_Punch_Man","Black_Clover JoJos_Bizarre_Adventure Your_Lie_in_April","Assassination_Classroom"),
   (68,43,"Bones","Violet_Evergarden Erased Mob_Psycho_100","Erased Mob_Psycho_100 Clannad","Code_Geass_Lelouch_of_the_Rebellion"),
   (69,42,"Production_I.G","My_Hero_Academia Attack_on_Titan Death_Note","Sword_Art_Online One_Piece One_Punch_Man","K-On!"),
-  (70,41,"Kyoto_Animation","One_Punch_Man Naruto Fairy_Tail","Black_Clover JoJos_Bizarre_Adventure Your_Lie_in_April","Parasyte_The_Maxim");
+  (70,41,"Kyoto_Animation","One_Punch_Man Naruto Fairy_Tail","Black_Clover JoJos_Bizarre_Adventure Your_Lie_in_April","Parasyte_The_Mal,xim");
 INSERT INTO `anime` (`id`,`id_genero`,`compañia_animadora`,`mas_gustados`,`mas_vistos`,`nombre`)
 VALUES
   (71,40,"Gainax","My_Hero_Academia Attack_on_Titan Death_Note","Anohana Dragon_Ball_Z Haikyuu","Hunter_x_Hunter"),
@@ -3312,28 +3312,28 @@ VALUES
   (70,68,"Oro");
 INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
 VALUES
-  (1,141,33),
+  (1,141,3),
   (2,150,90),
   (3,55,1),
   (4,119,85),
   (5,64,47),
   (6,7,53),
   (7,53,55),
-  (8,33,59),
+  (8,33,54),
   (9,20,148),
   (10,149,124);
 INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
 VALUES
   (11,31,48),
-  (12,68,149),
+  (12,68,129),
   (13,92,144),
   (14,114,101),
-  (15,17,46),
-  (16,134,35),
+  (15,17,49),
+  (16,134,37),
   (17,90,80),
   (18,72,4),
-  (19,6,10),
-  (20,114,39);
+  (19,142,10),
+  (20,115,39);
 INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
 VALUES
   (21,28,82),
@@ -3350,146 +3350,16 @@ INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`
 VALUES
   (31,30,149),
   (32,70,31),
-  (33,121,59),
+  (33,121,60),
   (34,148,59),
   (35,101,22),
-  (36,123,35),
+  (36,123,84),
   (37,69,109),
   (38,60,15),
   (39,145,68),
-  (40,138,35);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (41,2,38),
-  (42,133,140),
-  (43,73,104),
-  (44,57,145),
-  (45,102,34),
-  (46,133,31),
-  (47,68,22),
-  (48,39,107),
-  (49,55,126),
-  (50,50,85);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (51,87,84),
-  (52,76,140),
-  (53,35,5),
-  (54,12,141),
-  (55,18,43),
-  (56,79,127),
-  (57,85,40),
-  (58,130,18),
-  (59,104,46),
-  (60,147,98);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (61,137,15),
-  (62,61,115),
-  (63,21,1),
-  (64,3,97),
-  (65,26,127),
-  (66,140,6),
-  (67,33,67),
-  (68,41,137),
-  (69,72,127),
-  (70,133,81);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (71,72,83),
-  (72,102,103),
-  (73,139,45),
-  (74,5,13),
-  (75,86,89),
-  (76,120,121),
-  (77,75,133),
-  (78,110,146),
-  (79,130,27),
-  (80,104,72);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (81,71,113),
-  (82,23,57),
-  (83,72,77),
-  (84,105,2),
-  (85,124,83),
-  (86,122,99),
-  (87,27,37),
-  (88,25,145),
-  (89,148,100),
-  (90,126,57);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (91,144,18),
-  (92,126,25),
-  (93,137,83),
-  (94,47,51),
-  (95,28,16),
-  (96,15,51),
-  (97,54,79),
-  (98,40,146),
-  (99,107,46),
-  (100,41,71);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (101,60,54),
-  (102,5,31),
-  (103,8,51),
-  (104,99,24),
-  (105,121,39),
-  (106,123,60),
-  (107,73,19),
-  (108,60,125),
-  (109,87,94),
-  (110,72,100);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (111,54,97),
-  (112,70,97),
-  (113,127,2),
-  (114,128,80),
-  (115,70,82),
-  (116,102,91),
-  (117,18,95),
-  (118,135,88),
-  (119,116,86),
-  (120,128,80);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (121,81,33),
-  (122,117,72),
-  (123,59,118),
-  (124,34,72),
-  (125,60,36),
-  (126,66,51),
-  (127,145,109),
-  (128,106,37),
-  (129,46,63),
-  (130,95,11);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (131,128,111),
-  (132,88,22),
-  (133,146,99),
-  (134,37,106),
-  (135,69,132),
-  (136,66,54),
-  (137,132,27),
-  (138,15,76),
-  (139,110,148),
-  (140,137,84);
-INSERT INTO `usuario_comparte_plan_mensual` (`id_plan_mensual`,`id_usuario_paga`,`id_usuario_ratea`)
-VALUES
-  (141,35,35),
-  (142,23,97),
-  (143,96,132),
-  (144,58,85),
-  (145,41,146),
-  (146,15,2),
-  (147,11,132),
-  (148,108,136),
-  (149,132,83),
-  (150,66,110);
+  (40,138,97);
+ 
+
 INSERT INTO `metodo_de_pago` (`id`,`id_plan_mensual`,`factura`,`numero_de_cuenta_bancaria`)
 VALUES
   (1,33,"IDC57CUP1PO","CZ4650644627302735872888"),
