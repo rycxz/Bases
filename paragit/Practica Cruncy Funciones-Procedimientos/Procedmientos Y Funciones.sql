@@ -93,26 +93,7 @@ delimiter ;
 
 select tiempoConaLaPlataforma(1);
 
-/*usarios que tengan mas de 10 animes vistos si tiene 10 o mas 1 si teiene menos 0 */
-drop function densidadCuerpo;
-delimiter | 
-create function densidadCuerpo(ide_personaje int)
-returns int
-begin
 
-end ;
-|
-delimiter ;
-/*funcion que me duveulve el numero de productos comprados por un  usuario*/
-drop function densidadCuerpo;
-delimiter | 
-create function densidadCuerpo(ide_personaje int)
-returns int
-
-begin
-end ;
-|
-delimiter ;
 /*--------------------------------------Procedimientos-------------------------------------------------------*/
 
 /*creamos una columna en la tabla usuario donde le asignamos el tiempo que llevan en la plataforma   !!!! puede haber alguno negativo ya que esto no estuvo controlado al hacer la base*/
@@ -138,10 +119,12 @@ delimiter ;
 call actualizarTablaUsoUsuario(1);
 drop procedure actualizarTablaUsoUsuario;
 select * from usuario ;
-/*procedimientop que añade una columna a la tbala usuario en la que  pondra estado_plan_mneusal y si lo compare pondra compartido y si no pondra no compartido*/
-alter table usuario  add estado_plan_mneusal tinyint  default 0 ;
+/*procedimientop que añade una columna a la tbala usuario en la que  pondra estado_plan_mneusal y si lo compare pondra 1 y si no pondra no 0*/
+alter table usuario  add estado_plan_mensual tinyint  default 0 ;
+
+
  delimiter |
-create procedure compartenPlanMenusal(ide_personaje int)
+create procedure compartenPlanMenusal(ide_usuario int,ide_usario_recibe int)
 begin
 declare exit handler 
 for sqlexception
@@ -149,14 +132,22 @@ begin
 rollback;
 end;
 start transaction;
-
-
+if( (select id from usuario where id=ide_usuario)) >0 then   
+	if( (select id from usuario where id=ide_usario_recibe)) >0 then   
+    if(usuarioComparte(ide_usuario,ide_usario_recibe) = 1 or usuarioComparte(ide_usuario,ide_usario_recibe) = 0 ) then
+	update usuario 
+    set estado_plan_mensual = (select 1 from usuario where id = ide_usuario );
+    	update usuario 
+    set estado_plan_mensual =(select 1 from usuario where id = ide_usario_recibe );
+    end if;
+       end if;
+          end if;
 commit;
 end ;
 |
 delimiter ;
-
-drop procedure a;
+call compartenPlanMenusal(5,1);
+drop procedure compartenPlanMenusal;
 
 /*dada una id de personaje funcion(personajesVendidos), si no se ha vendido ninguna vez le vamos a subir los seguidores en 1000 y 
  si tiene mas de 2 figuras vendidas le aumentaremos el numero de seguiodres en +100*/
@@ -180,7 +171,7 @@ call actualizarSeguidoresPersonaje(60);
 select * from personaje where id = 60;
 
 drop procedure actualizarSeguidoresPersonaje;
-/*mangakas que han escrito mas de 3 mangas*/
+/*procediemiento que lleva la cuenta de cuantos mangas a escrito cada magaka y lo añade a la tabla*/
 
  delimiter |
 create procedure a(ide_personaje int)
@@ -196,7 +187,7 @@ end ;
 |
 delimiter ;
 
-drop procedure a;
+/*procedmiento que actualiza el estado de animo de un usuario a triste */
 
  
 
