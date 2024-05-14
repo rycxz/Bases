@@ -12,9 +12,9 @@ begin
 declare id_plan_usuario1 int;
 declare id_plan_usuario2 int ;
 
-if((select id from usuario where id=ide_usuario)) >0 then  
+if((select count(*) from usuario where id=ide_usuario)) >0 then  
 set id_plan_usuario1 = (select id_plan_mensual from usuario_comparte_plan_mensual where id_usuario_paga= ide_usuario );
-	 if((select id from usuario where id=ide_usario_recibe)) >0 then  
+	 if((select count(*)  from usuario where id=ide_usario_recibe)) >0 then  
      set id_plan_usuario2 = (select id_plan_mensual from usuario_comparte_plan_mensual where id_usuario_ratea= ide_usario_recibe );
 /*vemos si comparten los dos el plan menusal */
 			if(id_plan_usuario1 = id_plan_usuario2)>0 then 
@@ -73,7 +73,7 @@ begin
 declare fecha_inicio1 date;
 declare fecha_final1 date;
  
-
+if( (select count(*)  from usuario where id=ide_usuario)) >0 then 
 set fecha_inicio1=(select fecha_inicio from plan_mensual 
 join plan_menusal_usuario on plan_menusal_usuario.id_plan_mensual =plan_mensual.id
 join usuario on usuario.id =  plan_menusal_usuario.id_usuario 
@@ -85,7 +85,7 @@ join usuario on usuario.id =  plan_menusal_usuario.id_usuario
 where usuario.id = ide_usuario);
 
 return (select  datediff(fecha_inicio1,fecha_final1));
-
+end if;
 
 end ;
 |
@@ -108,20 +108,22 @@ begin
 rollback;
 end;
 start transaction;
-if( (select id from usuario where id=ide_usuario)) >0 then                             	
+if( (select count(*)  from usuario where id=ide_usuario)) >0 then                             	
 update usuario
-set tiempo_de_uso = (select tiempoConaLaPlataforma(ide_usuario));
+set tiempo_de_uso = (select tiempoConaLaPlataforma(ide_usuario))
+      where id = ide_usuario;
 end if;
 commit;
 end ;
 |
 delimiter ;
 call actualizarTablaUsoUsuario(1);
+select * from usuario where id =1;
 drop procedure actualizarTablaUsoUsuario;
 select * from usuario ;
 /*procedimientop que añade una columna a la tbala usuario en la que  pondra estado_plan_mneusal y si lo compare pondra 1 y si no pondra no 0*/
-alter table usuario  add estado_plan_mensual tinyint  default 0 ;
-
+alter table usuario  add tiempo_de_uso int  default 0 ;
+alter table usuario  drop  tiempo_de_uso ;
 
  delimiter |
 create procedure compartenPlanMenusal(ide_usuario int,ide_usario_recibe int)
@@ -132,13 +134,15 @@ begin
 rollback;
 end;
 start transaction;
-if( (select id from usuario where id=ide_usuario)) >0 then   
-	if( (select id from usuario where id=ide_usario_recibe)) >0 then   
+if( (select  count(*)  from usuario where id=ide_usuario)) >0 then   
+	if( (select  count(*)  from usuario where id=ide_usario_recibe)) >0 then   
     if(usuarioComparte(ide_usuario,ide_usario_recibe) = 1 or usuarioComparte(ide_usuario,ide_usario_recibe) = 0 ) then
 	update usuario 
-    set estado_plan_mensual = (select 1 from usuario where id = ide_usuario );
+    set estado_plan_mensual = (select 1 from usuario where id = ide_usuario )
+      where id = ide_usuario;
     	update usuario 
-    set estado_plan_mensual =(select 1 from usuario where id = ide_usario_recibe );
+    set estado_plan_mensual =(select 1 from usuario where id = ide_usario_recibe )
+      where id = ide_usario_recibe;
     end if;
        end if;
           end if;
@@ -147,6 +151,8 @@ end ;
 |
 delimiter ;
 call compartenPlanMenusal(5,1);
+select * from usuario where id =1;
+select * from usuario where id =5;
 drop procedure compartenPlanMenusal;
 
 /*dada una id de personaje funcion(personajesVendidos), si no se ha vendido ninguna vez le vamos a subir los seguidores en 1000 y 
@@ -171,10 +177,9 @@ call actualizarSeguidoresPersonaje(60);
 select * from personaje where id = 60;
 
 drop procedure actualizarSeguidoresPersonaje;
-/*procediemiento que lleva la cuenta de cuantos mangas a escrito cada magaka y lo añade a la tabla*/
-
+/*procediemiento que cambia el estado de animo de un usuario a feliz*/
  delimiter |
-create procedure a(ide_personaje int)
+create procedure cambairEstadoAnimo(ide_usuario int)
 begin
 declare exit handler 
 for sqlexception
@@ -182,14 +187,51 @@ begin
 rollback;
 end;
 start transaction;
+	if( (select  count(*)  from usuario where id=ide_usuario)) >0 then   
+		if(((select estado_animo from usuario where id = ide_usuario )= 'feliz'  ))>0 then 
+        select 'ya es feliz';
+        else 
+        update usuario  
+        set estado_animo = 'feliz'
+        where id = ide_usuario;
+        
+    end if;
+    
+    end if;
 commit;
 end ;
 |
 delimiter ;
+drop procedure cambairEstadoAnimo;
+call cambairEstadoAnimo(15);
+select * from usuario where id =15;
 
-/*procedmiento que actualiza el estado de animo de un usuario a triste */
 
- 
+/*procedimeinto que añade una fecha de creacion a los mangas*/
+alter table mangas  add fecha_creacion date  default '2000-03-13' ;
+ delimiter |
+create procedure fechaCreacionManga(ide_manga int,fecha_creacion_manga date)
+begin
+declare exit handler 
+for sqlexception
+begin
+rollback;
+end;
+start transaction;
+if( (select  count(*)  from mangas where id=ide_manga)) >0 then   
+	update mangas
+    set fecha_creacion = fecha_creacion_manga
+    where id = ide_manga;
+    else 
+    select 'fecha no existe';
+	end if;
+commit;
+end ;
+|
+delimiter ;
+call fechaCreacionManga(1,curdate());
+SELECT * FROM crunchy.mangas;
+
 
 
 

@@ -1,3 +1,0 @@
-Procedmiento    	  5/5
-Funcion			  5/3
-Transaccion		  0/3
