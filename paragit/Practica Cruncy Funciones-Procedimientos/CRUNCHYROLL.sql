@@ -191,6 +191,7 @@ create table genero(
          );
          
          create table traduccion_manga(
+            id int unsigned primary key auto_increment,
          id_manga int unsigned,
          id_traduccion int unsigned
          );
@@ -2957,90 +2958,56 @@ VALUES
   (68,12,"(Shanghainés) Uigur"),
   (69,129,"Neerlandés Yavanés"),
   (70,42,"Vietnamita Coreano Javanés");
-INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+  
+  INSERT INTO `traduccion_manga` (`id`,`id_manga`,`id_traduccion`)
 VALUES
-  (245,1),
-  (103,2),
-  (234,3),
-  (90,4),
-  (207,5),
-  (198,6),
-  (250,7),
-  (170,8),
-  (74,9),
-  (49,10);
-INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+  (1,84,110),
+  (2,227,183),
+  (3,159,270),
+  (4,249,147),
+  (5,47,110),
+  (6,27,20),
+  (7,120,164),
+  (8,202,183),
+  (9,153,75),
+  (10,134,85);
+INSERT INTO `traduccion_manga` (`id`,`id_manga`,`id_traduccion`)
 VALUES
-  (14,11),
-  (217,12),
-  (249,13),
-  (120,14),
-  (99,15),
-  (23,16),
-  (6,17),
-  (39,18),
-  (72,19),
-  (115,20);
-INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+  (11,116,184),
+  (12,21,170),
+  (13,171,141),
+  (14,20,206),
+  (15,289,245),
+  (16,283,52),
+  (17,212,210),
+  (18,10,77),
+  (19,41,2),
+  (20,111,177);
+INSERT INTO `traduccion_manga` (`id`,`id_manga`,`id_traduccion`)
 VALUES
-  (186,21),
-  (208,22),
-  (59,23),
-  (240,24),
-  (158,25),
-  (71,26),
-  (231,27),
-  (138,28),
-  (232,29),
-  (286,30);
-INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
+  (21,75,233),
+  (22,174,275),
+  (23,158,250),
+  (24,25,187),
+  (25,12,194),
+  (26,139,133),
+  (27,261,175),
+  (28,88,220),
+  (29,61,268),
+  (30,290,173);
+INSERT INTO `traduccion_manga` (`id`,`id_manga`,`id_traduccion`)
 VALUES
-  (262,31),
-  (79,32),
-  (206,33),
-  (289,34),
-  (59,35),
-  (224,36),
-  (90,37),
-  (35,38),
-  (129,39),
-  (7,40);
-INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
-VALUES
-  (15,41),
-  (300,42),
-  (165,43),
-  (41,44),
-  (205,45),
-  (64,46),
-  (219,47),
-  (266,48),
-  (119,49),
-  (136,50);
-INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
-VALUES
-  (168,51),
-  (22,52),
-  (198,53),
-  (48,54),
-  (60,55),
-  (158,56),
-  (265,57),
-  (99,58),
-  (41,59),
-  (219,60);
-INSERT INTO `traduccion_manga` (`id_manga`,`id_traduccion`)
-VALUES
-  (274,61),
-  (53,62),
-  (1,63),
-  (165,64),
-  (64,65),
-  (129,66),
-  (117,67),
-  (82,68),
-  (259,69),
-  (149,70);
+  (31,26,11),
+  (32,34,245),
+  (33,249,136),
+  (34,107,281),
+  (35,215,101),
+  (36,61,234),
+  (37,132,76),
+  (38,252,142),
+  (39,62,106),
+  (40,231,114);
+
 INSERT INTO `compañia_de_envio` (`id`,`codigo_rastreo`,`indicaciones_del_usuario`,`metodo`,`codigo_del_paquete`,`estado_del_trafico`,`tiempo_estimado_de_entrega`,`destino`,`nombre`,`nombre_del_repartidor`)
 VALUES
   (1,"337770864","amet ornare lectus justo eu arcu. Morbi sit","Envío de Carga","UWE52XKH","concurrido",0,"Ap #738-6473 Diam Avenue","Nasim Rocha","Cameron Riggs"),
@@ -3764,185 +3731,112 @@ VALUES
   (108,220,"Rika_Amanai",627,162,"M"),
   (109,190,"Zoro",498,180,"H"),
   (110,105,"Zenitus",712,160,"M");
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (1,3,3,51,"OXZ96XOE2FY","cosplay",21,"S",4),
+  (2,69,59,61,"XID78WIK1SQ","figura",13,"S",14),
+  (3,87,97,12,"SOG71EDI2TH","brazalete",11,"XXL",3),
+  (4,1,13,105,"BCU10HNN4SD","cartel",6,"XXL",4),
+  (5,124,3,92,"JPO49RZE5QV","poster",6,"XXL",10),
+  (6,117,35,132,"QUY46EGV6WJ","poster",23,"XXL",10),
+  (7,1,87,80,"BSB74TBV6JE","brazalete",24,"L",10),
+  (8,80,34,96,"FTJ88JRW2CL","brazalete",29,"S",10),
+  (9,25,34,33,"EJI71MAK4YY","poster",13,"L",5),
+  (10,35,55,113,"AWR46YMH8YN","cosplay",22,"S",13);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (11,87,38,145,"GIY19YNO8DY","cosplay",13,"S",12),
+  (12,134,59,14,"UDQ45BLY5FB","cosplay",27,"XXL",4),
+  (13,107,92,112,"FXF42EIY2KL","cartel",7,"M",12),
+  (14,17,50,32,"BUL10TQQ6BB","cartel",27,"L",6),
+  (15,78,46,28,"ENW23WXQ4RZ","cartel",23,"XXL",14),
+  (16,25,46,55,"HWV18BTB0YL","brazalete",12,"XL",11),
+  (17,15,83,114,"NNR21UCP4EN","poster",19,"L",4),
+  (18,130,68,95,"NNI24VEY6DO","cosplay",11,"S",4),
+  (19,114,86,2,"XTJ48GCK8VQ","figura",12,"XS",12),
+  (20,28,81,7,"EFF43ELR2VL","figura",25,"S",8);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (21,77,6,61,"IUW10GOV2CT","cosplay",21,"XS",8),
+  (22,77,74,80,"EWW17KZM9XQ","cartel",8,"M",6),
+  (23,123,43,2,"WVL13NID6EL","cartel",26,"XL",15),
+  (24,62,96,138,"THK74WNJ4UR","brazalete",21,"S",11),
+  (25,2,97,116,"WOR55HBF2OU","poster",23,"XS",12),
+  (26,74,37,64,"UMX74EDO5SY","brazalete",7,"M",4),
+  (27,50,51,9,"VAT21AKK1BY","cosplay",10,"M",12),
+  (28,26,57,17,"EGH35AKB9UM","cosplay",24,"XL",10),
+  (29,67,109,67,"YHU70OXS5KL","cartel",16,"XL",6),
+  (30,22,11,125,"CBF84HBR8TT","figura",26,"L",1);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (31,90,40,67,"MHW12HVB0KJ","cartel",21,"XS",9),
+  (32,102,63,148,"HQO56EOW1UM","figura",9,"XXL",10),
+  (33,116,107,58,"QBP88FPT4TJ","figura",24,"XL",2),
+  (34,36,44,146,"EBL74SDM1VB","brazalete",19,"XL",3),
+  (35,116,19,94,"TIL38KVK8DP","brazalete",14,"M",14),
+  (36,89,62,12,"QBC35AQY8EW","figura",9,"S",1),
+  (37,102,54,42,"CXX42COI2DO","cartel",9,"S",1),
+  (38,92,11,133,"DZF10BHJ8MW","figura",26,"XL",7),
+  (39,144,83,61,"QBK54JNL5EI","cosplay",24,"XS",6),
+  (40,51,85,87,"FYX12SAD7RO","poster",8,"S",9);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (41,123,4,78,"VDF48ETY1SQ","cartel",24,"M",9),
+  (42,95,37,69,"QQY21XVH5PN","poster",12,"XS",5),
+  (43,74,46,29,"AAP78DSS3PY","cartel",27,"XXL",1),
+  (44,11,41,91,"QAV35CSJ8KX","cartel",19,"M",0),
+  (45,55,25,94,"XPF84LPS4CW","cosplay",20,"L",11),
+  (46,51,70,92,"HMO50XZT5KG","brazalete",29,"L",4),
+  (47,103,34,142,"URU16SVF0FU","poster",18,"M",3),
+  (48,77,20,133,"WQW29FVL2KY","figura",11,"L",10),
+  (49,103,14,66,"PWW53OMT8CL","brazalete",5,"M",5),
+  (50,139,81,18,"LCO09RVI5YC","poster",24,"XL",6);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (51,128,85,137,"IHF15NWH4GK","brazalete",21,"L",11),
+  (52,123,97,63,"JVP74MXJ3EM","cartel",8,"XS",15),
+  (53,142,27,143,"XQF14EQL7IK","cartel",14,"XS",12),
+  (54,31,62,5,"QRO48COJ3ZO","cosplay",29,"L",15),
+  (55,142,59,101,"QCB00SNV1WY","poster",14,"L",6),
+  (56,61,72,35,"OGP82XTJ7UN","cartel",8,"L",5),
+  (57,133,34,54,"UKW92ZRA8JS","poster",10,"XXL",12),
+  (58,10,97,94,"CGD65RNW5WC","cosplay",13,"XXL",7),
+  (59,35,77,146,"YHE44JFH1YJ","poster",9,"L",10),
+  (60,13,4,17,"RWV36PQP1MG","poster",17,"M",5);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (61,141,6,45,"TFF17JRQ7NW","cosplay",30,"XS",11),
+  (62,47,28,51,"FGJ37NSF2IX","cartel",8,"L",7),
+  (63,87,93,35,"HLB42NYO5MU","poster",7,"XS",11),
+  (64,73,104,141,"HJW27EJO7TB","cosplay",19,"M",7),
+  (65,33,73,99,"MDK47EUK8NO","cosplay",12,"M",14),
+  (66,144,25,32,"JZS07RFY3YT","cosplay",20,"M",7),
+  (67,7,32,136,"DRG87VID2EY","cartel",16,"XS",2),
+  (68,73,8,71,"HIG86MWS6IT","cartel",25,"XL",0),
+  (69,7,98,37,"DKS96LLG3QQ","figura",24,"XL",3),
+  (70,34,16,12,"DCQ46KTE2KY","cosplay",22,"L",3);
+INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`precio`,`tamaño`,`peso`)
+VALUES
+  (71,93,109,14,"CYA53DTI2NF","figura",23,"XXL",6),
+  (72,93,27,83,"WXO98DCM9PS","poster",23,"XXL",4),
+  (73,35,90,147,"QSN83SUC0NQ","cartel",10,"M",2),
+  (74,60,101,85,"KOZ45BOI7WI","figura",21,"XL",2),
+  (75,28,28,103,"EBU78NKJ1VN","brazalete",21,"XL",8),
+  (76,110,63,85,"HNL72STP8PR","cartel",23,"S",12),
+  (77,72,37,110,"FLO12EYM3MB","cartel",14,"M",14),
+  (78,2,94,95,"TKE10QTQ8VQ","cosplay",21,"L",5),
+  (79,26,19,79,"TCH12SDK7FY","cartel",7,"XXL",7),
+  (80,69,106,22,"VJL21POI6YK","figura",15,"XL",7);
 
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (1,115,90,7,"PSK39BAHMMGKNMOC","acsesorio","XS",25),
-  (2,54,50,29,"WYI57HJBPXDJBLCY","cosplay","XXL",44),
-  (3,117,68,147,"ILT51LGNTGWUNTWS","artefacto","XXL",2),
-  (4,40,44,136,"KCM22ZZCNGEOHKXS","acsesorio","XL",14),
-  (5,133,56,127,"CKN91FIJQQPTYSGG","pulsera","XS",49),
-  (6,85,49,106,"GXO12IOKTIGDMVYY","artefacto","XXXL",41),
-  (7,38,87,123,"GCX70IDWKNXNONKX","arma","XL",26),
-  (8,135,11,68,"PES64LEVPDKBYOIU","cosplay","XS",43),
-  (9,119,41,11,"UPS77OQKHQXJLTXW","cosplay","L",10),
-  (10,58,95,24,"KUS86KCMBTNXMCYG","poster","XXL",30);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (11,38,73,19,"MWL34TXXQPZEJRXQ","artefacto","M",1),
-  (12,101,82,50,"JND29OCHZCBPXJWG","arma","L",8),
-  (13,149,77,114,"AFY02YHQLKUXGYLQ","figura","XXXL",5),
-  (14,19,48,52,"PXO18RBDDTJJWBLW","figura","XL",29),
-  (15,34,71,17,"XST32UGIYXQJACYL","arma","M",10),
-  (16,10,17,99,"MZW22YPCZUQPHTQA","poster","XXXL",38),
-  (17,15,34,73,"HRM65LNDJRTDGNWP","poster","S",0),
-  (18,103,23,21,"YDR18YAPHLGNBPUP","artefacto","L",29),
-  (19,66,51,149,"IPD30SRYUFGQDYLR","cosplay","L",30),
-  (20,50,64,7,"PJP44UPIPORRIJVE","arma","XL",27);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (21,53,18,31,"VHH63YGXCYVTCBMI","poster","S",32),
-  (22,10,12,29,"TJJ73OYTMQDDRZLV","pulsera","M",18),
-  (23,13,61,7,"VRZ23WZYHHPLLBBZ","figura","S",25),
-  (24,27,104,48,"RPC38GQGUWYOZVKG","acsesorio","M",43),
-  (25,140,27,73,"WLR13LIMQPUMCLKA","figura","S",48),
-  (26,20,42,7,"DMT53OLRTHKSACOW","figura","XXL",9),
-  (27,97,88,141,"VVC71FBIGKTNSCLZ","cosplay","XL",36),
-  (28,123,107,18,"NUX24FTGMHAGYTXJ","poster","S",15),
-  (29,69,16,56,"KHX00LXZEOMVBIXE","pulsera","XXL",3),
-  (30,102,12,116,"QPK81DHKFQJRHEOQ","pulsera","XXL",17);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (31,28,98,78,"HTT15PVLUVFCMSJB","figura","M",40),
-  (32,59,52,120,"AEH54QWYUYNVROMA","poster","XXXL",48),
-  (33,29,16,47,"UMO59OCFUDSSBMFA","pulsera","XXL",12),
-  (34,59,94,136,"PND16NTRQDRTPQRX","cosplay","L",39),
-  (35,58,6,12,"GRU42LJZZCHKJRCY","figura","XXXL",15),
-  (36,145,90,140,"FTG45YNCRJCOXLWF","acsesorio","XL",37),
-  (37,56,89,21,"XJL54RDAAJWNPTWD","artefacto","XXXL",36),
-  (38,17,92,131,"DZN83WXXSBYEVDPX","figura","XXXL",12),
-  (39,13,19,107,"UYE64PVRIVAZWRGJ","figura","XXL",10),
-  (40,135,9,10,"UCO92PXMLVDCEKGP","artefacto","S",12);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (41,47,59,18,"STY54IIHWRIUJNWG","cosplay","L",35),
-  (42,129,25,67,"HLP13APDIIFRJCDD","cosplay","M",16),
-  (43,100,102,46,"CEQ59MOVZLBOXIEG","pulsera","XL",12),
-  (44,31,93,90,"YRB10IHOEIRXFATE","figura","M",4),
-  (45,44,51,134,"RIK28JSNQUFCHDXE","pulsera","XS",8),
-  (46,109,58,116,"ITI71RUYFEGDNHVD","poster","XL",11),
-  (47,74,84,41,"JOB31LOWJRHHWOCY","arma","S",19),
-  (48,84,99,148,"DUC42RJUEHHIDPMH","arma","L",2),
-  (49,27,69,77,"JLK44LJOARRCRNES","arma","XL",44),
-  (50,20,19,129,"ZQG48MPJANLNPATI","cosplay","L",37);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (51,30,107,106,"REO37EKUZQYHEKKR","poster","XS",4),
-  (52,59,60,106,"JGT22TSOEHBQIFPY","pulsera","XXXL",45),
-  (53,45,88,105,"KAS52LPPRIUEEZAB","figura","L",13),
-  (54,22,69,8,"ZBQ34QQRVNDWAKLX","figura","XXL",41),
-  (55,74,67,13,"HJV95LGRBXAPFRDD","pulsera","S",15),
-  (56,127,64,102,"LBI66SPVYWQSRECQ","cosplay","S",1),
-  (57,138,36,28,"BAB95RJWRXWRSVOX","poster","XXL",10),
-  (58,22,40,28,"CNH25CSNWTCXLJLE","cosplay","L",19),
-  (59,143,44,115,"MNG40AMCVGMWUAIY","acsesorio","XXXL",35),
-  (60,94,61,116,"CMX21SDEFWQESKOO","arma","M",26);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (61,3,71,10,"MLG26EVBBESOPEBC","figura","XXL",2),
-  (62,97,71,9,"SKJ99CSFHRNSURJA","acsesorio","XXXL",8),
-  (63,105,97,70,"LRR71SPJOOHZZKHT","artefacto","XXL",38),
-  (64,114,84,140,"LUY74CMJBMUOEPMF","cosplay","S",6),
-  (65,40,36,111,"VGY71KPUDSWJVSLP","acsesorio","XS",49),
-  (66,91,35,23,"HPQ30OWLAEDRRPVX","poster","XXL",10),
-  (67,144,76,102,"YLU11OWMGIVBEEUN","poster","S",36),
-  (68,148,25,7,"GXR13UKNWDRHIKVQ","cosplay","L",33),
-  (69,29,91,46,"HKH44MJEHTFPHSOQ","arma","S",34),
-  (70,62,2,70,"PEO98VLJFDPQEUES","poster","XL",18);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (71,87,99,107,"KNS26YQMJXYBUSPK","figura","L",16),
-  (72,47,10,33,"VOF53YEROYSZOCPB","acsesorio","L",49),
-  (73,73,87,37,"PSG13YLKUSQQEWFR","pulsera","XXL",26),
-  (74,147,84,105,"RFJ74FNEXXLOHLVZ","poster","S",48),
-  (75,47,93,76,"HOB14VNHJDOEPACJ","figura","L",13),
-  (76,45,28,60,"MHP60EYSIGVZXSEG","figura","S",15),
-  (77,13,86,92,"FXR39GWGPYCIUHXD","figura","S",16),
-  (78,19,43,21,"KDY24FGQIGXASWVM","pulsera","XXXL",29),
-  (79,5,5,107,"OOC39LQYJHDXQRND","poster","XS",8),
-  (80,137,58,75,"EBL33WNHBAOBMFRX","poster","XXXL",6);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (81,85,13,11,"RMD63XSMYZEHRSGG","pulsera","XL",35),
-  (82,42,108,108,"QGM07LPOZJWVQNIQ","figura","XXXL",17),
-  (83,32,2,26,"LQM04ALFYEOXESOC","cosplay","XXL",25),
-  (84,89,26,132,"EPQ23OHONBCOIMCD","cosplay","XXXL",22),
-  (85,19,28,9,"PFZ29EYJWXIOPGXC","cosplay","S",41),
-  (86,31,36,79,"YEE77LUGGWZSPOKC","artefacto","M",34),
-  (87,150,98,148,"YQT44NPSCEGPESQF","pulsera","M",42),
-  (88,2,15,12,"SPI82WLRUYQHVOKM","artefacto","XXL",10),
-  (89,44,98,1,"HXR21WGHUKRSGPPH","figura","XXL",25),
-  (90,54,21,26,"IMJ55HNITKEQEKWR","artefacto","L",29);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (91,51,67,97,"JNI31WITMYZMNNLA","acsesorio","M",25),
-  (92,47,91,93,"EFZ27EWWTNLTCVPA","figura","L",23),
-  (93,55,88,147,"VAB72YIESIRFJYKE","pulsera","S",32),
-  (94,83,19,93,"KEL58XQSORQFSUJQ","arma","S",3),
-  (95,63,62,96,"LAI41ZWAFHESHNBY","cosplay","S",44),
-  (96,16,27,147,"RJT37DKVLVWIEJWM","figura","S",3),
-  (97,52,95,79,"RHD74ZNQITZBTYML","arma","M",42),
-  (98,148,4,56,"XPW93EJDDSECTCFD","arma","M",41),
-  (99,120,46,28,"LNY56PEWLSHQJDUA","pulsera","XXXL",20),
-  (100,134,49,44,"PEW41RLKSFWTVNAK","acsesorio","XL",0);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (101,19,13,93,"NEV05SXEGOFOJRWK","poster","XXL",37),
-  (102,58,11,95,"RMO08IJWWKKSGKPD","pulsera","XS",39),
-  (103,39,40,132,"ITE71JNZZGBXYRZZ","figura","M",37),
-  (104,139,30,55,"VRK63HJOOXGRSTUA","artefacto","S",12),
-  (105,3,53,81,"OBJ47JVTPZHTUCEW","acsesorio","XXL",36),
-  (106,125,105,121,"PCE72RBVXLRPNZGG","acsesorio","XXXL",6),
-  (107,103,15,114,"PVR87DPJSCCOSPZI","acsesorio","XXXL",7),
-  (108,123,69,110,"LPK13OPHSDREYBQH","poster","M",3),
-  (109,121,35,106,"IUX42DYKRUTUPJLN","figura","L",19),
-  (110,74,1,1,"RMO45PUWXPVHKIHV","pulsera","S",39);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (111,70,44,63,"ZTE47TSCWSDQGFGH","pulsera","XXL",26),
-  (112,26,18,46,"FTY43TTJMMLRBBWK","poster","XXXL",7),
-  (113,63,59,107,"DXN84HDFPJGLYOWI","acsesorio","XXL",16),
-  (114,16,37,113,"ONY26DHHBWZRUIUB","pulsera","S",45),
-  (115,117,102,79,"XOK76WFFJZXCIJOF","pulsera","XXL",43),
-  (116,12,50,8,"YWX91YOCADHZBWPY","cosplay","L",24),
-  (117,89,68,41,"UOV47BWEUHCRTDST","arma","S",33),
-  (118,138,86,35,"URZ45LCQUGUMCFOQ","cosplay","XXXL",1),
-  (119,143,22,24,"SRR85FRUCXQRGECH","pulsera","S",44),
-  (120,145,24,57,"FGR07GVEFNKGNGUL","poster","XS",45);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (121,141,39,73,"FPF63YBVGVDHITJC","acsesorio","L",4),
-  (122,123,84,33,"CSZ59LITOSCPTYCK","poster","L",35),
-  (123,103,6,94,"HMW13JROCCEJBVRM","acsesorio","S",7),
-  (124,88,83,93,"LWR72XBCCHHQQGBF","cosplay","XS",28),
-  (125,74,21,74,"TUC37SVRNMXUUMGZ","pulsera","XL",35),
-  (126,68,28,62,"ZRY58HDRUYFPAWXD","pulsera","XXL",14),
-  (127,3,84,96,"XQY63LYHLIVGCCBA","artefacto","XS",19),
-  (128,18,45,70,"ISW42LNJNCRFYHGH","artefacto","XXXL",17),
-  (129,110,60,64,"MSJ47WCXOLDOPYKU","poster","S",22),
-  (130,28,1,116,"KXF55MIXWZUEPBWU","cosplay","XL",18);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (131,43,77,128,"LLQ70DWIXMVBKMCT","poster","XXXL",9),
-  (132,26,22,150,"ROI71BNFYVBAIUHR","cosplay","XL",10),
-  (133,134,102,143,"UGI03BERBMZGJYKO","figura","M",31),
-  (134,139,39,90,"JTH73PDLVMVNBXVJ","cosplay","M",47),
-  (135,60,80,127,"KZP01TETRZDMCKUZ","figura","XL",26),
-  (136,129,57,82,"PJI94IIHITQELOLP","cosplay","XL",31),
-  (137,6,67,148,"PQS13XWGXJLRNXNP","artefacto","XL",44),
-  (138,48,95,127,"TEQ40DNYSSQQGBEX","poster","XXL",39),
-  (139,147,74,71,"AIV25WKKANKJEPLC","cosplay","M",8),
-  (140,149,99,95,"UZJ66DAKSJEAQBVK","cosplay","S",46);
-INSERT INTO `producto` (`id`,`id_compañia_de_envio`,`id_personaje`,`id_usuario`,`nº_de_factura`,`categoria`,`tamaño`,`peso`)
-VALUES
-  (141,149,76,142,"RFE68YNGKSQLHSMW","poster","S",3),
-  (142,37,7,32,"QYA31IQPLIRERLHM","pulsera","M",41),
-  (143,139,65,15,"VLC82AOSKBPJEUUE","cosplay","XXXL",8),
-  (144,81,72,9,"HPP44PILRVFDYKKF","cosplay","M",2),
-  (145,41,41,123,"WSE74FXMDLGPXWHM","arma","L",50),
-  (146,16,36,146,"KLQ27SDEGMBHRTUP","artefacto","XXL",10),
-  (147,52,99,0,"JWH77OCKVSACYCDN","cosplay","XL",34),
-  (148,5,0,82,"XCF21FRVUWFKBCJJ","pulsera","XXXL",37),
-  (149,109,89,135,"SFW20HBQLEGIVHJM","cosplay","S",24),
-  (150,131,34,15,"OBJ95CFVKCMLZPJF","figura","XS",40);
+
+
+
+
+
+
+
+
+
+
+
 
